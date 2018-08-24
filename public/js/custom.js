@@ -21,6 +21,7 @@ function getFilters(){
 
 function pagination(current_page, total){
 
+
     if (total > 20){
 
         var html = "";
@@ -56,7 +57,7 @@ function pagination(current_page, total){
         $(".pagination").html(html);
 
     } else {
-
+        $(".pagination").html("");
     }
 }
 
