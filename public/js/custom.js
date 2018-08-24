@@ -4,6 +4,8 @@ $.ajaxSetup({
     }
 });
 
+
+
 // Load Default Product Listings Table
 if ($("#product-listings").length){
     $.ajax({

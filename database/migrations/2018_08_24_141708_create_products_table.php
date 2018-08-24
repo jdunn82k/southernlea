@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantityInStock');
             $table->decimal('price', 8, 2);
             $table->integer('discount')->default(0);
+            $table->integer('color');
             $table->timestamps();
         });
     }
