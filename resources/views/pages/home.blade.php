@@ -100,42 +100,42 @@
                 </div>
             </div>
             <div class="col">
-                <div class="d-flex flex-row flex-wrap justify-content-start mb-3 p-2">
-                    <div class="product-block">
-                        <a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>
-                        <div class="special-info grid_1 simpleCart_shelfItem">
-                            <h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>
-                            <div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>
-                        </div>
-                    </div>
-                    <div class="product-block">
-                        <a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>
-                        <div class="special-info grid_1 simpleCart_shelfItem">
-                            <h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>
-                            <div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>
-                        </div>
-                    </div>
-                    <div class="product-block">
-                        <a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>
-                        <div class="special-info grid_1 simpleCart_shelfItem">
-                            <h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>
-                            <div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>
-                        </div>
-                    </div>
-                    <div class="product-block">
-                        <a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>
-                        <div class="special-info grid_1 simpleCart_shelfItem">
-                            <h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>
-                            <div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>
-                        </div>
-                    </div>
-                    <div class="product-block">
-                        <a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>
-                        <div class="special-info grid_1 simpleCart_shelfItem">
-                            <h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>
-                            <div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>
-                        </div>
-                    </div>
+                <div class="d-flex flex-row flex-wrap justify-content-start mb-3 p-2" id="product-listings">
+                    {{--<div class="product-block">--}}
+                        {{--<a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>--}}
+                        {{--<div class="special-info grid_1 simpleCart_shelfItem">--}}
+                            {{--<h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>--}}
+                            {{--<div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-block">--}}
+                        {{--<a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>--}}
+                        {{--<div class="special-info grid_1 simpleCart_shelfItem">--}}
+                            {{--<h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>--}}
+                            {{--<div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-block">--}}
+                        {{--<a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>--}}
+                        {{--<div class="special-info grid_1 simpleCart_shelfItem">--}}
+                            {{--<h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>--}}
+                            {{--<div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-block">--}}
+                        {{--<a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>--}}
+                        {{--<div class="special-info grid_1 simpleCart_shelfItem">--}}
+                            {{--<h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>--}}
+                            {{--<div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-block">--}}
+                        {{--<a href="details.html"><img src="img/Picture2.png" class="img-responsive product-image" alt=""></a>--}}
+                        {{--<div class="special-info grid_1 simpleCart_shelfItem">--}}
+                            {{--<h5 class="product-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</h5>--}}
+                            {{--<div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
 
             </div>

@@ -15,3 +15,5 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/product_table/{sort}', 'ProductController@getProductTable');
