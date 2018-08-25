@@ -78,9 +78,6 @@ function loadProducts(page=1, viewall=false){
         data: {filters: filters, page: page, view_all: viewall}
     }).done(function(cb){
 
-
-
-
         var products = cb.products;
         var images   = cb.images;
         var product_count = Object.keys(products).length;
@@ -99,7 +96,7 @@ function loadProducts(page=1, viewall=false){
                 }
 
                 var html = "<div class=\"product-block\">\n" +
-                    "          <a href=\"details.html\"><img src=\""+url+"\" class=\"img-responsive product-image\" alt=\"\"></a>\n" +
+                    "          <a href=\"/product/"+val.id+"\"><img src=\""+url+"\" class=\"img-responsive product-image\" alt=\"\"></a>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
                     "              <h5 class=\"product-description\">\""+val.name+"\"</h5>\n" +
                     "               <div class=\"item_add\"><span class=\"item_price\"><h6>ONLY $"+val.price+"</h6></span></div>\n" +
@@ -113,9 +110,7 @@ function loadProducts(page=1, viewall=false){
         }
         $("#product-listings").fadeIn('slow');
 
-
-
-    })
+    });
 
 }
 

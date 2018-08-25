@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Products;
 use App\ProductImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,15 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
 
+    public function showProduct($id)
+    {
+        $product = Products::findOrFail($id);
+        $images  = ProductImages::where('product_id', $id)->get();
+
+        return view('pages.product')
+                    ->with('product', $product)
+                    ->with('images', $images);
+    }
     public function getProducts(Request $request)
     {
         //Declared Variables

@@ -22,104 +22,56 @@
         <div class="col-md-12 clearfix">
             <div class="float-right">
                 <ul class="pagination">
-                    {{--<li class="page-item"><a class="page-link" href="#">Previous Page</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">4</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">Next Page</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">View All</a></li>--}}
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container product-listing">
+    <div class="container">
         <div class="row">
-            <div class="col-md-3 sidebar-offset">
-                <div class="sidebar-item">
-                    <div class="panel">
-                        <div class="panel-header">
-                            COLOR
-                        </div>
-                        <div class="panel-body">
-                            <div class="d-flex flex-row flex-wrap justify-content-start mb-3 p-2">
-                            @foreach($colors as $color)
-                                    <div class="color-block" data-id="{{$color->id}}" style="background-color: {{$color->hex}}"></div>
-                            @endforeach
-                            </div>
 
+
+        <div class="col-md-3 s-d">
+            <div class="w_sidebar">
+                <section class="sky-form">
+                    <h4>color</h4>
+                    <ul class="w_nav2">
+
+                        @foreach($colors as $color)
+                            <li><div class="color-block" data-id="{{$color->id}}" style="background-color: {{$color->hex}}"></div></li>
+                        @endforeach
+
+                    </ul>
+                </section>
+                <section class="sky-form">
+                    <h4>discount</h4>
+                    <div class="row1 scroll-pane">
+                        <div class="col">
+                            <label class="radio"><input type="radio" name="discount" value="60"><i></i>60 % and above</label>
+                            <label class="radio"><input type="radio" name="discount" value="50"><i></i>50 % and above</label>
+                            <label class="radio"><input type="radio" name="discount" value="40"><i></i>40 % and above</label>
+                        </div>
+                        <div class="col">
+                            <label class="radio"><input type="radio" name="discount" value="30"><i></i>30 % and above</label>
+                            <label class="radio"><input type="radio" name="discount" value="20"><i></i>20 % and above</label>
+                            <label class="radio"><input type="radio" name="discount" value="10"><i></i>10 % and above</label>
                         </div>
                     </div>
-                </div>
-                <div class="sidebar-item">
-                    <div class="panel">
-                        <div class="panel-header">
-                            DISCOUNT
-                        </div>
-                        <div class="panel-body">
-                            <ul class="discount-list">
-                                <li>
-                                    <div>
-                                        <input type="radio" name="discount" value="60">
-                                        60% and below
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <input type="radio" name="discount" value="50">
-                                        50% and below
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <input type="radio" name="discount" value="40">
-                                        40% and below
-                                    </div>
-                                </li>
-                                <li>
-                                   <div>
-                                       <input type="radio" name="discount" value="30">
-                                       30% and below
-                                   </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <input type="radio" name="discount" value="20">
-                                        20% and below
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <input type="radio" name="discount" value="10">
-                                        10% and below
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                </section>
             </div>
-            <div class="col">
+        </div>
+
+            <div class="col-md-9 w_content">
                 <input type="hidden" id="page" value="1">
-                <div class="d-flex flex-row flex-wrap justify-content-start mb-3 p-2" id="product-listings">
-
-                </div>
-
+                <div class="d-flex flex-row flex-wrap justify-content-start mb-3 p-2" id="product-listings"></div>
             </div>
          </div>
     </div>
+
 
     <div class="container">
         <div class="col-md-12 clearfix">
             <div class="float-right">
                 <ul class="pagination">
-                    {{--<li class="page-item"><a class="page-link" href="#">Previous Page</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">4</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">Next Page</a></li>--}}
-                    {{--<li class="page-item"><a class="page-link" href="#">View All</a></li>--}}
                 </ul>
             </div>
         </div>
