@@ -74,8 +74,11 @@ function loadProducts(page=1, viewall=false){
         var products = cb.products;
         var images   = cb.images;
         var product_count = Object.keys(products).length;
-        pagination(page, cb.products_count);
-
+        if (!viewall){
+            pagination(page, cb.products_count);
+        } else {
+            $(".pagination").hide();
+        }
         $("#product-count").text(cb.products_count);
         if (product_count > 0){
             $.each(products, function(key, val){
@@ -116,6 +119,10 @@ if ($("#product-listings").length){
 // Discount Filter
 $(document).on("click", "input[name='discount']", function(){
     loadProducts();
+});
+
+$(document).on("click", "#view_all", function(){
+   loadProducts(1, true);
 });
 
 //Color Block Filter

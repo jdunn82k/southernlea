@@ -66,7 +66,6 @@ class ProductController extends Controller
             })->count();
 
         //If more than 20 results are present, paginate and determine results to obtain
-
         if ($products_count > 20 && $request->view_all == "false") {
             if ($request->page > 1) {
                 $skip = (($request->page - 1) * 20);
