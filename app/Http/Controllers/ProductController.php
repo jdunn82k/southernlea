@@ -62,7 +62,7 @@ class ProductController extends Controller
                 return $query->orderBy('price', $sort_by);
             })
             ->when($discount, function ($query, $discount) {
-                return $query->where('discount', '<', $discount);
+                return $query->where('discount', '>=', $discount);
             })->count();
 
         //If more than 20 results are present, paginate and determine results to obtain
@@ -80,7 +80,7 @@ class ProductController extends Controller
             })->when($sort_by, function ($query, $sort_by) {
                 return $query->orderBy('price', $sort_by);
             })->when($discount, function ($query, $discount) {
-                return $query->where('discount', '<', $discount);
+                return $query->where('discount', '>=', $discount);
             })->when($skip, function ($query, $skip) {
                 return $query->skip($skip);
             })->when($take, function ($query, $take) {

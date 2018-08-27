@@ -60,15 +60,8 @@ function pagination(current_page, total){
         $(".pagination").html("");
     }
 }
-
-$(document).on("click", ".product-page", function(e){
-    e.preventDefault();
-    loadProducts($(this).data("page-num"), false);
-});
-
 function loadProducts(page=1, viewall=false){
 
-    $("#product-listings").fadeOut('slow');
     $("#product-listings").html("");
     var filters = getFilters();
 
@@ -114,15 +107,34 @@ function loadProducts(page=1, viewall=false){
 
 }
 
-//Color Block Filter
-$(document).on("click", ".color-block", function(){
-   $(".color-block-active").css('box-shadow', 'none').removeClass('color-block-active');
-   $(this).addClass('color-block-active');
-   $(this).css('box-shadow', '0px 0px 3px 2px '+$(this).css('background-color'));
-   loadProducts();
-});
 
 // Load Default Product Listings Table
 if ($("#product-listings").length){
     loadProducts();
 }
+
+// Discount Filter
+$(document).on("click", "input[name='discount']", function(){
+    loadProducts();
+});
+
+//Color Block Filter
+$(document).on("click", ".color-block", function(){
+    if ($(this).hasClass('color-block-active')){
+        $(this).removeClass('color-block-active');
+        $(this).css('box-shadow', 'none');
+        loadProducts();
+    } else {
+        $(".color-block-active").css('box-shadow', 'none').removeClass('color-block-active');
+        $(this).addClass('color-block-active');
+        $(this).css('box-shadow', '0px 0px 3px 2px '+$(this).css('background-color'));
+        loadProducts();
+    }
+
+});
+
+$(document).on("click", ".product-page", function(e){
+    e.preventDefault();
+    loadProducts($(this).data("page-num"), false);
+});
+

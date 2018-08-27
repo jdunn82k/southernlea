@@ -54,6 +54,7 @@
                             <label class="radio"><input type="radio" name="discount" value="30"><i></i>30 % and above</label>
                             <label class="radio"><input type="radio" name="discount" value="20"><i></i>20 % and above</label>
                             <label class="radio"><input type="radio" name="discount" value="10"><i></i>10 % and above</label>
+                            <label class="radio"><input type="radio" name="discount" value="0" checked><i></i>Any</label>
                         </div>
                     </div>
                 </section>
