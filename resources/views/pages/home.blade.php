@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col-md-12 clearfix mt-3">
+        <div class="col-md-12 clearfix mt-3 product-count">
             <div class="product-num float-left">
                 Product (Total Items: <span id="product-count">0</span>)
             </div>
@@ -20,8 +20,8 @@
 
     <div class="container">
         <div class="col-md-12 clearfix">
-            <div class="float-right">
-                <ul class="pagination">
+            <div class="float-right pagination1">
+                <ul class="pagination ">
                 </ul>
             </div>
         </div>
@@ -61,7 +61,13 @@
             </div>
         </div>
 
-            <div class="col-md-9 w_content">
+            <div class="col w_content">
+                <div class="col-md-12 clearfix">
+                    <div class="float-right pagination2">
+                        <ul class="pagination">
+                        </ul>
+                    </div>
+                </div>
                 <input type="hidden" id="page" value="1">
                 <div class="d-flex flex-row flex-wrap justify-content-start mb-3 p-2" id="product-listings"></div>
             </div>
@@ -69,7 +75,7 @@
     </div>
 
 
-    <div class="container">
+    <div class="container mb-5">
         <div class="col-md-12 clearfix">
             <div class="float-right">
                 <ul class="pagination">

@@ -4,6 +4,16 @@ $.ajaxSetup({
     }
 });
 
+//Update Cart Total
+function updateCart(){
+    $.ajax({
+        url: "/cart/stats",
+        type: "get"
+    }).done(function(cb){
+        $(".simpleCart_total").text("$"+cb.total);
+        $("#simpleCart_quantity").text(cb.count);
+    });
+}
 //Get Filters from Product Listings Page
 function getFilters(){
     var filters = {};
@@ -110,6 +120,39 @@ function loadProducts(page=1, viewall=false){
 
 }
 
+//Empty Cart button handler
+$(".simpleCart_empty").on("click", function(e){
+    e.preventDefault();
+    $.ajax({
+        url: "/cart",
+        type: "delete"
+    }) .done(function(){
+        $(".simpleCart_total").text("$0.00");
+        $("#simpleCart_quantity").text("0");
+    })
+});
+
+//Add To Cart button handler
+$("#add_to_cart").on("click", function(){
+    var product_id      = $(this).data('product-id');
+    var size_checked    = $("input[name='size-picker-radio']:checked").val();
+    var qty             = $("#quantity").val();
+
+    $.ajax({
+        url: "/cart/add",
+        type: "put",
+        data: {product: product_id, size: size_checked, quantity: qty}
+    }).done(function(cb){
+
+        console.log(cb);
+        updateCart();
+    });
+});
+
+//Change Main Product Details Photo
+$(document).on("click", ".preview-photo > img", function(){
+    $(".main-photo > img").attr('src', $(this).attr("src"));
+});
 
 // Load Default Product Listings Table
 if ($("#product-listings").length){
@@ -124,6 +167,11 @@ $(document).on("click", "input[name='discount']", function(){
 $(document).on("click", "#view_all", function(){
    loadProducts(1, true);
 });
+
+$(document).on("change", "#sort-filter", function(){
+    loadProducts();
+});
+
 
 //Color Block Filter
 $(document).on("click", ".color-block", function(){
@@ -140,8 +188,13 @@ $(document).on("click", ".color-block", function(){
 
 });
 
+//Pagination Link handling
 $(document).on("click", ".product-page", function(e){
     e.preventDefault();
     loadProducts($(this).data("page-num"), false);
 });
+
+
+//Update Shopping Cart stats on load
+updateCart();
 

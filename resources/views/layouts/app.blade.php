@@ -99,17 +99,7 @@
                 </div>
                 <div class="col-md-5 our-st">
                     <div class="our-left">
-                        <h4>OUR STORES</h4>
-                    </div>
-                    <div class="our-left1">
-                        <div class="cr_btn">
-                            <a href="#">SOLO</a>
-                        </div>
-                    </div>
-                    <div class="our-left1">
-                        <div class="cr_btn1">
-                            <a href="#">BOGOR</a>
-                        </div>
+                        <h4>OUR STORE</h4>
                     </div>
                     <div class="clearfix"> </div>
                     <li><i class="add"> </i>Royse City, Texas</li>
