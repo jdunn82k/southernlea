@@ -172,6 +172,11 @@ $(document).on("change", "#sort-filter", function(){
     loadProducts();
 });
 
+$('#list-tab a').on('click', function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+});
+
 
 //Color Block Filter
 $(document).on("click", ".color-block", function(){
@@ -193,8 +198,4 @@ $(document).on("click", ".product-page", function(e){
     e.preventDefault();
     loadProducts($(this).data("page-num"), false);
 });
-
-
-//Update Shopping Cart stats on load
-updateCart();
 
