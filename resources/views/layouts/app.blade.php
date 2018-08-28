@@ -118,7 +118,6 @@
     <script src="{{URL::to('js/megamenu.js')}}"></script>
     <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
     <script src="{{URL::to('js/menu_jquery.js')}}"></script>
-    <script src="{{URL::to('js/simpleCart.min.js')}}"> </script>
     <script src="{{URL::to('js/custom.js')}}"></script>
     <script>updateCart();</script>
     <script> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
