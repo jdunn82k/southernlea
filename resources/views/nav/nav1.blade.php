@@ -55,14 +55,14 @@
                             {{--<a href="register.html">REGISTER</a>--}}
                         {{--</div>--}}
                         <div class="cart box_1">
-                            <a href="checkout.html">
+                            <a href="{{URL::to('/cart')}}">
                                 <h3> <span class="simpleCart_total">$0.00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">0</span> items)<img src="{{URL::to('img/bag.png')}}" alt=""></h3>
                             </a>
                             <p><a href="javascript:;" class="simpleCart_empty">(empty cart)</a></p>
                             <div class="clearfix"> </div>
                         </div>
                         <div class="create_btn">
-                            <a href="checkout.html">CHECKOUT</a>
+                            <a href="{{URL::to('/cart')}}">CHECKOUT</a>
                         </div>
                         <div class="clearfix"> </div>
                     </div>

@@ -23,3 +23,6 @@ Route::post('/product_table', 'ProductController@getProducts');
 Route::put('/cart/add', 'CartController@addToCart');
 Route::get('/cart/stats', 'CartController@getStats');
 Route::delete('/cart/', 'CartController@emptyCart');
+
+Route::get('/cart', 'CartController@showCart');
+Route::post('/cart/delete', 'CartController@removeCartItem');

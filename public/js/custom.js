@@ -143,10 +143,20 @@ $("#add_to_cart").on("click", function(){
         type: "put",
         data: {product: product_id, size: size_checked, quantity: qty}
     }).done(function(cb){
-
-        console.log(cb);
         updateCart();
+        $("#add_to_cart").text("added to cart").prop("disabled", true).css('background-color', '#f5f5f5').css('color', '#8c8585');
     });
+});
+
+$(document).on("click", ".remove-cart-item", function(){
+   var row_id = $(this).data('row-id');
+   $.ajax({
+       url: "/cart/delete",
+       type: "post",
+       data: {rowId: row_id}
+   }).done(function(cb){
+      window.location.reload();
+   });
 });
 
 //Change Main Product Details Photo
@@ -175,6 +185,10 @@ $(document).on("change", "#sort-filter", function(){
 $('#list-tab a').on('click', function (e) {
     e.preventDefault()
     $(this).tab('show')
+});
+
+$(".size-picker-item").on("click", function(){
+   $(this).find('input')[0].click();
 });
 
 

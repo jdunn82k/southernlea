@@ -28,9 +28,30 @@ class CartController extends Controller
         return Cart::destroy();
     }
 
+    public function getCartTax()
+    {
+        return Cart::tax();
+    }
+
+    public function removeCartItem(Request $request)
+    {
+        return Cart::remove($request->rowId);
+    }
+
     public function getStats()
     {
         return response()->json(["count" => self::getCartCount(), "total" => self::getCartSubTotal()]);
+    }
+
+    public function showCart()
+    {
+
+        return view('pages.checkout')
+            ->with('cartContent', self::getCartContent())
+            ->with('cartCount', self::getCartCount())
+            ->with('cartSubTotal', self::getCartSubTotal())
+            ->with('cartTax', self::getCartTax())
+            ->with('taxRate', \Config::get('cart.tax'));
     }
 
     public function addToCart(Request $request)
