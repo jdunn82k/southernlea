@@ -26,3 +26,17 @@ Route::delete('/cart/', 'CartController@emptyCart');
 
 Route::get('/cart', 'CartController@showCart');
 Route::post('/cart/delete', 'CartController@removeCartItem');
+
+Route::get('/admin', 'AdminController@index');
+Route::post('/admin', 'AdminController@adminAuth');
+
+
+
+Route::group(['middleware' => 'auth.admin'], function()
+{
+    Route::get('/admin/dashboard', 'AdminController@dashboard');
+    Route::get('/admin/logout', 'AdminController@logout');
+
+    Route::get('/admin/products', 'AdminController@products');
+
+});
