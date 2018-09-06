@@ -104,7 +104,8 @@ function loadProducts(page=1, viewall=false){
                 }
 
                 var html = "<div class=\"product-block\">\n" +
-                    "          <a href=\"/product/"+val.id+"\"><img src=\""+url+"\" class=\"img-responsive product-image\" alt=\"\"></a>\n" +
+                    "          <a href=\"/product/"+val.id+"\">" +
+                    "<div style='background: url(\""+(url)+"\");background-size:contain;background-repeat:no-repeat;height:400px;width:200px;'></div>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
                     "              <h5 class=\"product-description\">"+val.name+"</h5>\n" +
                     "              <h5 class=\"product-description\">"+val.desc+"</h5>\n" +
