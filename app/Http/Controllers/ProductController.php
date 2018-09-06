@@ -92,6 +92,7 @@ class ProductController extends Controller
             $data = [];
             $data['id'] = $product->id;
             $data['name'] = $product->description1;
+            $data['desc'] = $product->description2;
             $data['price'] = $product->price;
             $data['discount'] = $product->discount;
 

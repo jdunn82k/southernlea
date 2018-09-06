@@ -81,7 +81,11 @@ class CartController extends Controller
 
         if ($size)
         {
-            $data['options'] = ['size' => $size];
+            $data['options'] = ['size' => $size, 'desc' => $product->description2];
+        }
+        else
+        {
+            $data['options'] = ['desc' => $product->description2];
         }
 
         return Cart::add($data);

@@ -31,39 +31,39 @@
 
                     <p class="float-right font-size-13">Only <span class="font-weight-bold">{{$product->quantityInStock}}</span> Left</p>
                 </div>
-                <p class="mt-5 font-weight-bold">{{$product->description1}}</p>
+                <h3 class="mt-5 font-weight-bold">{{$product->description1}}</h3>
                 <p class="mt-5 price-color clearfix">
                     @if ($product->discount > 0)
                         <span>${{ number_format( ($product->price - ($product->price * ($product->discount / 100)) ),2) }}</span>
                     @else
-                        {{$product->price}}
+                        ${{$product->price}}
                     @endif
                 </p>
                 <hr>
-                <div class="size-picker">
-                    <div class="size-picker-top clearfix">
-                        <p class="float-left">SIZE*</p>
-                        <p class="float-right">* Required Fields</p>
-                    </div>
-                    <div class="size-picker-item">
-                        <input type="radio" name="size-picker-radio" value="small" checked> S
-                    </div>
-                    <div class="size-picker-item">
-                        <input type="radio" name="size-picker-radio" value="medium"> M
-                    </div>
-                    <div class="size-picker-item">
-                        <input type="radio" name="size-picker-radio" value="large"> L
-                    </div>
-                    <div class="size-picker-item">
-                        <input type="radio" name="size-picker-radio" value="1x"> XL
-                    </div>
-                    <div class="size-picker-item">
-                        <input type="radio" name="size-picker-radio" value="2x"> XXL
-                    </div>
-                    <div class="size-picker-item">
-                        <input type="radio" name="size-picker-radio" value="3x"> XXXL
-                    </div>
-                </div>
+                {{--<div class="size-picker">--}}
+                    {{--<div class="size-picker-top clearfix">--}}
+                        {{--<p class="float-left">SIZE <span class="text-red">*</span></p>--}}
+                        {{--<p class="float-right text-red">* Required Fields</p>--}}
+                    {{--</div>--}}
+                    {{--<div class="size-picker-item">--}}
+                        {{--<input type="radio" name="size-picker-radio" value="small" checked> S--}}
+                    {{--</div>--}}
+                    {{--<div class="size-picker-item">--}}
+                        {{--<input type="radio" name="size-picker-radio" value="medium"> M--}}
+                    {{--</div>--}}
+                    {{--<div class="size-picker-item">--}}
+                        {{--<input type="radio" name="size-picker-radio" value="large"> L--}}
+                    {{--</div>--}}
+                    {{--<div class="size-picker-item">--}}
+                        {{--<input type="radio" name="size-picker-radio" value="1x"> XL--}}
+                    {{--</div>--}}
+                    {{--<div class="size-picker-item">--}}
+                        {{--<input type="radio" name="size-picker-radio" value="2x"> XXL--}}
+                    {{--</div>--}}
+                    {{--<div class="size-picker-item">--}}
+                        {{--<input type="radio" name="size-picker-radio" value="3x"> XXXL--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
                 <div class="row mt-4">
                     <div class="col-md-3 col-lg-3 col-sm-3">
@@ -74,10 +74,6 @@
                     <div class="col-md-9 col-lg-9 col-sm-9 clearfix text-center ">
                         <div class="float-right">
                             <button class="add_to_cart" id="add_to_cart" data-product-id="{{$product->id}}">add to cart</button><br>
-                            {{---OR-<br>--}}
-                            {{--<button type="button">Paypal</button><br>--}}
-                            {{---OR-<br>--}}
-                            {{--<button type="button">Paypal Credit</button><br>--}}
                         </div>
 
                     </div>

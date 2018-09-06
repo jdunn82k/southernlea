@@ -92,19 +92,22 @@ function loadProducts(page=1, viewall=false){
         $("#product-count").text(cb.products_count);
         if (product_count > 0){
             $.each(products, function(key, val){
+                var url  = "";
                 if (typeof images[val.id] !== 'undefined'){
-                    var url = "";
                     $.each(images[val.id], function(key2, val2){
                         if (val2.default === 1){
                             url = val2.url;
                         }
                     });
+                } else {
+                    var url = "img/No_Image_Available.jpg";
                 }
 
                 var html = "<div class=\"product-block\">\n" +
                     "          <a href=\"/product/"+val.id+"\"><img src=\""+url+"\" class=\"img-responsive product-image\" alt=\"\"></a>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
-                    "              <h5 class=\"product-description\">\""+val.name+"\"</h5>\n" +
+                    "              <h5 class=\"product-description\">"+val.name+"</h5>\n" +
+                    "              <h5 class=\"product-description\">"+val.desc+"</h5>\n" +
                     "               <div class=\"item_add\"><span class=\"item_price\"><h6>ONLY $"+val.price+"</h6></span></div>\n" +
                     "            </div>\n" +
                     "        </div>";

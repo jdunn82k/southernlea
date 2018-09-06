@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Categories;
+use App\CategoryLinks;
+use App\Products;
+use App\SubCategories;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,12 +32,18 @@ class AdminController extends Controller
 
     }
 
+    public function showProduct($id)
+    {
+        return view('admin.product-details')->with('id', $id);
+    }
+
     public function products()
     {
         return view('admin.products')
-                    ->with('products', \App\Products::all())
-                    ->with('categories', \App\Categories::all())
-                    ->with('subcategories', \App\SubCategories::all());
+                    ->with('products', Products::all())
+                    ->with('categories', Categories::all())
+                    ->with('subcategories', SubCategories::all())
+                    ->with('links', CategoryLinks::all());
     }
     public function dashboard()
     {

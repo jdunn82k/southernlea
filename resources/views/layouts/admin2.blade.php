@@ -24,51 +24,51 @@
     <link href="{{URL::to('css/style.css')}}" rel='stylesheet'>
 
 </head>
-<div class="top_bg sticky-top">
-    <div class="container">
-        <div class="header_top">
-            <div class="top_right">
-                <ul>
-                    <li class="pull-left">Southern Lea Admin Area</li>
-                </ul>
-            </div>
+<div class="admin-header">
+        <div class="header_top text-center">
+            <img src="{{URL::to('img/main-01.jpg')}}" alt="" class="header-image">
             <div class="top_left">
                 <p><span></span> <a href="{{URL::to('/admin/logout')}}">Logout</a></p>
             </div>
             <div class="clearfix"> </div>
         </div>
-    </div>
-</div>
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-
-            <li>
-                <a href="{{URL::to('/admin/dashboard')}}">Dashboard</a>
-            </li>
-            <li>
-                <a href="{{URL::to('/admin/products')}}">Products</a>
-            </li>
-            <li>
-                <a href="{{URL::to('/admin/categories')}}">Categories</a>
-            </li>
-            <li>
-                <a href="{{URL::to('/admin/users')}}">Users</a>
-            </li>
-
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        @yield('content')
-    </div>
-    <!-- /#page-content-wrapper -->
 
 </div>
+<div class="container mb-5 font-calibri">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{URL::to('/admin/dashboard')}}">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{URL::to('/admin/products')}}">Products</a>
+                </li>
+                {{--<li class="nav-item dropdown">--}}
+                    {{--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                        {{--Dropdown--}}
+                    {{--</a>--}}
+                    {{--<div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+                        {{--<a class="dropdown-item" href="#">Action</a>--}}
+                        {{--<a class="dropdown-item" href="#">Another action</a>--}}
+                        {{--<div class="dropdown-divider"></div>--}}
+                        {{--<a class="dropdown-item" href="#">Something else here</a>--}}
+                    {{--</div>--}}
+                {{--</li>--}}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Categories</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+@yield('content')
 
 @section('footer')
     <script src="{{URL::to('js/jquery.min.js')}}"></script>
