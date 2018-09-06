@@ -105,7 +105,7 @@ function loadProducts(page=1, viewall=false){
 
                 var html = "<div class=\"product-block\">\n" +
                     "          <a href=\"/product/"+val.id+"\">" +
-                    "<div style='background: url(\""+(url)+"\");background-size:contain;background-repeat:no-repeat;height:400px;width:200px;'></div>\n" +
+                    "<div style='background: url(\""+(url)+"\");background-size:contain;background-repeat:no-repeat;height:320px;width:200px;'></div>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
                     "              <h5 class=\"product-description\">"+val.name+"</h5>\n" +
                     "              <h5 class=\"product-description\">"+val.desc+"</h5>\n" +
@@ -123,6 +123,23 @@ function loadProducts(page=1, viewall=false){
     });
 
 }
+
+$("#paypal_pay").on("click", function(e){
+    e.preventDefault();
+
+    var name = $("input[name='name']").val();
+    var add1 = $("input[name='address1']").val();
+    var city = $("input[name='city']").val();
+    var state = $("input[name='state']").val();
+    var zip   = $("input[name='zipcode']").val();
+
+    if ( (name.length > 1) && (add1.length > 1) && (city.length > 1) && (state.length > 2) && (zip.length > 2) ){
+        $("#paypal_form").submit();
+    } else {
+
+    }
+});
+
 
 //Empty Cart button handler
 $(".simpleCart_empty").on("click", function(e){

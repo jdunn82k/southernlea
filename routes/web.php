@@ -27,6 +27,10 @@ Route::delete('/cart/', 'CartController@emptyCart');
 Route::get('/cart', 'CartController@showCart');
 Route::post('/cart/delete', 'CartController@removeCartItem');
 
+Route::get('/checkout', 'CartController@checkOut');
+
+Route::get('/thankyou', 'CartController@thankYou');
+
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin', 'AdminController@adminAuth');
 

@@ -122,12 +122,13 @@
 /* End Admin Nav bar */
 
 
-.add_to_cart{
+.add_to_cart, .checkout{
 	background: rgb(9, 209, 182);
 	border: none;
 	color: #fff;
 	padding: 10px 20px;
 	font-size: 0.85em;
+	cursor:pointer;
 }
 
 .admin-login{
@@ -336,7 +337,10 @@
 }
 
 
-
+.shopping-cart-image{
+	max-height: 200px;
+	width: auto;
+}
 .sidebar-item{
 	width: 195px;
 }
@@ -404,6 +408,10 @@ textarea#product-description{
 }
 .text-red{
 	color:red;
+}
+
+.thank-you{
+	min-height:300px;
 }
 
 .upload-new{

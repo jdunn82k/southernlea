@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+
+    public function checkOut()
+    {
+        return view('pages.shipping')
+            ->with('cartContent', self::getCartContent())
+            ->with('cartCount', self::getCartCount())
+            ->with('cartSubTotal', self::getCartSubTotal())
+            ->with('cartTax', self::getCartTax())
+            ->with('taxRate', \Config::get('cart.tax'))
+            ->with('shippingRate', \Config::get('cart.shipping'));
+    }
+
+    public function thankYou()
+    {
+        self::emptyCart();
+        return view('pages.thankyou');
+    }
     public function getCartCount()
     {
         return Cart::count();
@@ -51,7 +68,8 @@ class CartController extends Controller
             ->with('cartCount', self::getCartCount())
             ->with('cartSubTotal', self::getCartSubTotal())
             ->with('cartTax', self::getCartTax())
-            ->with('taxRate', \Config::get('cart.tax'));
+            ->with('taxRate', \Config::get('cart.tax'))
+            ->with('shippingRate', \Config::get('cart.shipping'));
     }
 
     public function addToCart(Request $request)
