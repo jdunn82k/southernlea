@@ -129,14 +129,29 @@ $("#paypal_pay").on("click", function(e){
 
     var name = $("input[name='name']").val();
     var add1 = $("input[name='address1']").val();
+    var add2 = $("input[name='address2']").val();
     var city = $("input[name='city']").val();
     var state = $("input[name='state']").val();
     var zip   = $("input[name='zipcode']").val();
 
-    if ( (name.length > 1) && (add1.length > 1) && (city.length > 1) && (state.length > 2) && (zip.length > 2) ){
+
+    if ( (name.length > 1) && (add1.length > 1) && (city.length > 1) && (state.length > 1) && (zip.length > 2) ){
+
+        if (add2.length === 0)
+        {
+            add2 = false;
+        }
+
+        $.ajax({
+            url: "/orders",
+            type: "post",
+            data: {name: name, address_1: add1, address_2: add2, city: city, state: state, zip_code: zip}
+        }).done(function(cb){
+            console.log(cb);
+        });
         $("#paypal_form").submit();
     } else {
-
+        console.log("Form Not Filled Out");
     }
 });
 

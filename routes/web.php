@@ -29,10 +29,14 @@ Route::post('/cart/delete', 'CartController@removeCartItem');
 
 Route::get('/checkout', 'CartController@checkOut');
 
+Route::post('/orders', 'CartController@createOrder');
+
 Route::get('/thankyou', 'CartController@thankYou');
 
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin', 'AdminController@adminAuth');
+
+
 
 
 
