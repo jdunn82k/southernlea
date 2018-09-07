@@ -19,10 +19,13 @@ class ProductController extends Controller
                     ->with('product', $product)
                     ->with('images', $images);
     }
+
+
     public function getProducts(Request $request)
     {
         //Declared Variables
         $filters = $request->filters;
+        $category = false;
         $color = false;
         $sort_by = false;
         $discount = false;
@@ -53,6 +56,12 @@ class ProductController extends Controller
             $discount = $filters['discount'];
         }
 
+        //Check for category
+        if ($filters['category'] !== 0)
+        {
+            $category = $filters['category'];
+        }
+
         //Get total count of results
         $products_count = DB::table('products')
             ->when($color, function ($query, $color) {
@@ -60,6 +69,9 @@ class ProductController extends Controller
             })
             ->when($sort_by, function ($query, $sort_by) {
                 return $query->orderBy('price', $sort_by);
+            })
+            ->when($category, function ($query, $category){
+                return $query->where('category', $category);
             })
             ->when($discount, function ($query, $discount) {
                 return $query->where('discount', '>=', $discount);
@@ -78,6 +90,8 @@ class ProductController extends Controller
                 return $query->where('color', $color);
             })->when($sort_by, function ($query, $sort_by) {
                 return $query->orderBy('price', $sort_by);
+            })->when($category, function ($query, $category){
+                return $query->where('category', $category);
             })->when($discount, function ($query, $discount) {
                 return $query->where('discount', '>=', $discount);
             })->when($skip, function ($query, $skip) {

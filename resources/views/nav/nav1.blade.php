@@ -82,34 +82,17 @@
 
                 @php
                     $categories = \App\Categories::all();
-                    $subcategories = \App\SubCategories::all();
-                    $categorylinks = \App\CategoryLinks::all();
+                    //$subcategories = \App\SubCategories::all();
+                    //$categorylinks = \App\CategoryLinks::all();
                 @endphp
                 @foreach($categories as $category)
-                    <li class="grid"><a class="color2" href="#">{{$category->name}}</a>
-                        <div class="megapanel">
-                            <div class="row">
-                                @foreach($subcategories as $subcat)
-                                    @if ($subcat->category_id === $category->id)
-                                        <div class="col1">
-                                            <div class="h_nav">
-                                                <h4>{{$subcat->name}}</h4>
-                                                <ul>
-                                                    @foreach($categorylinks as $links)
-                                                        @if($links->subcategory_id === $subcat->id)
-                                                            <li><a href="#" data-cat-id="{{$category->id}}" data-sub-id="{{$subcat->id}}" data-link-id="{{$links->id}}">{{$links->name}}</a></li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
+                    <li class="grid"><a class="color2 navigation-link" data-link-id="{{$category->id}}" id="{{strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $category->name))}}" href="#">{{$category->name}}</a>
                     </li>
                 @endforeach
             </ul>
         </div>
     </div>
 </div>
+<form id="page-nav" method="POST" action="/">
+    <input type="hidden" name="category" value="0">
+</form>

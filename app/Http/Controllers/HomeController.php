@@ -15,6 +15,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.home')->with('colors', ColorFilters::all());
+        return view('pages.home')->with('colors', ColorFilters::all())->with('category', 0);
+    }
+
+    public function catIndex(Request $request)
+    {
+        return view('pages.home')
+            ->with('colors', ColorFilters::all())
+            ->with('category', $request->category);
     }
 }

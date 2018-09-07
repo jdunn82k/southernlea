@@ -26,6 +26,7 @@ function getFilters(){
     }
 
     filters.sort_by = $("#sort-filter").val();
+    filters.category = $("#category").val();
     return filters;
 }
 
@@ -70,7 +71,11 @@ function pagination(current_page, total){
         $(".pagination").html("");
     }
 }
-function loadProducts(page=1, viewall=false){
+function loadProducts(page=1, viewall=false, category=false){
+
+    if (category){
+        $("#category").val(category);
+    }
 
     $("#product-listings").html("");
     var filters = getFilters();
@@ -123,6 +128,24 @@ function loadProducts(page=1, viewall=false){
     });
 
 }
+
+$(document).on("click", ".navigation-link", function(e){
+
+    if ($("#link_page").length > 0)
+    {
+        e.preventDefault();
+        $(".megamenu .active").removeClass('active');
+        $(this).parent().addClass('active');
+        loadProducts(1,false,$(this).data("link-id"));
+    }
+    else
+    {
+        e.preventDefault();
+        $("#page-nav input").val($(this).data("link-id"));
+        $("#page-nav").submit();
+    }
+
+});
 
 $("#paypal_pay").on("click", function(e){
     e.preventDefault();
@@ -247,5 +270,6 @@ $(document).on("click", ".color-block", function(){
 $(document).on("click", ".product-page", function(e){
     e.preventDefault();
     loadProducts($(this).data("page-num"), false);
+    $("html, body").animate({ scrollTop: 0 }, "slow");
 });
 
