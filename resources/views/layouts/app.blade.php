@@ -14,9 +14,9 @@
     <meta name="keywords" content="Southern Lea">
 
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet'>
-    <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,400i" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet'>
+    <link href="httpss://fonts.googleapis.com/css?family=Cormorant+Garamond:400,400i" rel="stylesheet">
     <!-- start menu -->
     <link href="{{ URL::to('css/megamenu.css') }}" rel="stylesheet" media="all">
 
