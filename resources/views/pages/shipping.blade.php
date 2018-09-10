@@ -11,7 +11,7 @@
                         <legend>Shipping Address</legend>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="textinput">Name</label>
+                            <label class="col-sm-3 control-label" for="textinput">Name <span class="text-red">*</span></label>
                             <div class="col-sm-10">
                                 <input type="text" name="name" class="form-control shipping-input">
                             </div>
@@ -19,7 +19,7 @@
 
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="textinput">Address 1</label>
+                            <label class="col-sm-3 control-label" for="textinput">Address 1 <span class="text-red">*</span></label>
                             <div class="col-sm-10">
                                 <input type="text" name="address1"  class="form-control shipping-input">
                             </div>
@@ -35,7 +35,7 @@
 
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="textinput">City</label>
+                            <label class="col-sm-3 control-label" for="textinput">City <span class="text-red">*</span></label>
                             <div class="col-sm-10">
                                 <input type="text" name="city" class="form-control shipping-input">
                             </div>
@@ -43,20 +43,20 @@
 
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="textinput">State</label>
+                            <label class="col-sm-3 control-label" for="textinput">State <span class="text-red">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" name="state" class="form-control shipping-input">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="textinput">Zip Code</label>
+                            <label class="col-sm-3 control-label" for="textinput">Zip Code <span class="text-red">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" name="zipcode" class="form-control shipping-input">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-4 control-label" for="phone">Phone Number</label>
+                            <label class="col-sm-4 control-label" for="phone">Phone Number <span class="text-red">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" name="phone" class="form-control shipping-input">
                             </div>
@@ -107,6 +107,8 @@
 
 
                     </form>
+
+                    <p><span class="text-red font-italic font-size-13">* Required Fields </span></p>
                 </div>
 
             </div>
