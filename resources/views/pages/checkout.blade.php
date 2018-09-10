@@ -32,7 +32,7 @@
                             <div class="cart-item-info">
                                 <h3><a href="{{URL::to("/product/".$cartItem->id)}}">{{$cartItem->name}} - {{$cartItem->options->desc}}</a></h3>
                                 <ul class="qty">
-                                    {{--<li><p>Size : {{ucwords($cartItem->options->size)}}</p></li>--}}
+                                    <li><p>Size : {{ucwords($cartItem->options->size)}}</p></li>
                                     <li><p>Qty : {{$cartItem->qty}}</p></li>
                                 </ul>
                             </div>

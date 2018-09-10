@@ -55,6 +55,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="phone">Phone Number</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="phone" class="form-control shipping-input">
+                            </div>
+                        </div>
+
                     </fieldset>
                 </form>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\OrderPlaced;
 use App\Products;
 use App\Orders;
+use App\ProductSizes;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -19,11 +20,22 @@ class CartController extends Controller
         foreach(Cart::content() as $item)
         {
             $product = Products::findOrFail($item->id);
+
+            $product_code = $item->code;
+            $product_price = $item->price;
+            if (isset($item->options->size))
+            {
+                $productSize = ProductSizes::find($item->options->size_id);
+                $product_price = $productSize->price;
+                $product_code = $productSize->product_code;
+            }
+
+
             $product_info[] = [
                 'id' => $item->id,
                 'product_name' => $item->description1." - ".$item->description2,
-                'product_code' => $item->code,
-                'product_price' => $item->price,
+                'product_code' => $product_code,
+                'product_price' => $product_price,
                 'quantity' => $item->qty,
             ];
 
@@ -36,6 +48,7 @@ class CartController extends Controller
         $order->city = $request->city;
         $order->state = $request->state;
         $order->zip_code = $request->zip_code;
+        $order->phone     = $request->phone;
         $order->product_info = json_encode($product_info);
         $order->shipping_cost = \Config::get('cart.shipping');
         $order->tax_rate = \Config::get('cart.tax');
@@ -126,31 +139,28 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $product = Products::findOrFail($request->product);
+        $productSize = ProductSizes::where('id', $request->size_id)->get();
+
+        $price = $product->price;
+        $size  = false;
+        if (count($productSize) > 0)
+        {
+            $price = $productSize[0]->price;
+            $size  = $productSize[0]->size;
+        }
 
         //Configure discount
         if ($product->discount > 0)
         {
-            $price = number_format($product->price - ($product->price * ($product->discount / 100)),2);
-        }
-        else
-        {
-            $price = $product->price;
+            $price = number_format($price - ($price * ($product->discount / 100)),2);
         }
 
-        if (isset($request->size))
-        {
-            $size = $request->size;
-        }
-        else
-        {
-            $size = false;
-        }
 
         $data = ['id' => $request->product, 'name' => $product->description1, 'qty' => $request->quantity, 'price' => $price];
 
         if ($size)
         {
-            $data['options'] = ['size' => $size, 'desc' => $product->description2];
+            $data['options'] = ['size' => $size, 'desc' => $product->description2, 'size_id' => $request->size_id];
         }
         else
         {

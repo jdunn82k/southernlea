@@ -1,82 +1,84 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Southern Lea</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="{{URL::to('css/app.css')}}" rel='stylesheet'>
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <title>Southern Lea | Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="keywords" content="Southern Lea">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
 
-    <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet'>
-    <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,400i" rel="stylesheet">
-    <!-- start menu -->
-    <link href="{{ URL::to('css/megamenu.css') }}" rel="stylesheet" media="all">
+    <!-- Bootstrap Core CSS -->
+    <link href="{{URL::to('admin_files/css/bootstrap.css')}}" rel='stylesheet'>
 
-    <!-- Custom Theme files -->
-    <link href="{{URL::to('css/style.css')}}" rel='stylesheet'>
+    <!-- Custom CSS -->
+    <link href="{{URL::to('admin_files/css/style.css')}}" rel='stylesheet'>
+
+    <!-- font-awesome icons CSS -->
+    <link href="{{URL::to('admin_files/css/font-awesome.css')}}" rel="stylesheet">
+    <!-- //font-awesome icons CSS -->
+
+    <!-- side nav css file -->
+    <link href='{{URL::to('admin_files/css/SidebarNav.min.css')}}' media='all' rel='stylesheet'>
+    <!-- side nav css file -->
+
+    <link href="{{URL::to('admin_files/css/custom.css')}}" rel="stylesheet">
+
+    <!--webfonts-->
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+    <!--//webfonts-->
+
+    <script src="{{URL::to('admin_files/js/jquery-1.11.1.min.js')}}"></script>
 
 </head>
-<div class="admin-header">
-        <div class="header_top text-center">
-            <img src="{{URL::to('img/main-01.jpg')}}" alt="" class="header-image">
-            <div class="top_left">
-                <p><span></span> <a href="{{URL::to('/admin/logout')}}">Logout</a></p>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-
-</div>
-<div class="container mb-5 font-calibri">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{URL::to('/admin/dashboard')}}">Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{URL::to('/admin/products')}}">Products</a>
-                </li>
-                {{--<li class="nav-item dropdown">--}}
-                    {{--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                        {{--Dropdown--}}
-                    {{--</a>--}}
-                    {{--<div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-                        {{--<a class="dropdown-item" href="#">Action</a>--}}
-                        {{--<a class="dropdown-item" href="#">Another action</a>--}}
-                        {{--<div class="dropdown-divider"></div>--}}
-                        {{--<a class="dropdown-item" href="#">Something else here</a>--}}
-                    {{--</div>--}}
-                {{--</li>--}}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Categories</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-
+@include('nav.admin-nav')
 @yield('content')
 
 @section('footer')
-    <script src="{{URL::to('js/jquery.min.js')}}"></script>
-    <script src="{{URL::to('js/app.js')}}"></script>
-    <script src="{{URL::to('js/megamenu.js')}}"></script>
-    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-    <script src="{{URL::to('js/menu_jquery.js')}}"></script>
-    <script src="{{URL::to('js/custom.js')}}"></script>
-    <script>updateCart();</script>
+    <div class="footer">
+        <p>&copy; 2018 Southern Lea. All Rights Reserved
+    </div>
+    <!-- js-->
+    <script src="{{URL::to('admin_files/js/modernizr.custom.js')}}"></script>
+    <!-- Metis Menu -->
+    <script src="{{URL::to('admin_files/js/metisMenu.min.js')}}"></script>
+    <script src="{{URL::to('admin_files/js/custom.js')}}"></script>
+    <!--//Metis Menu -->
+    <!-- side nav js -->
+    <script src='{{URL::to('admin_files/js/SidebarNav.min.js')}}'></script>
+    <script>
+        $('.sidebar-menu').SidebarNav()
+    </script>
+    <!-- //side nav js -->
+
+    <!-- Classie --><!-- for toggle left push menu script -->
+    <script src="{{URL::to('admin_files/js/classie.js')}}"></script>
+    <script>
+        var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+            showLeftPush = document.getElementById( 'showLeftPush' ),
+            body = document.body;
+
+        showLeftPush.onclick = function() {
+            classie.toggle( this, 'active' );
+            classie.toggle( body, 'cbp-spmenu-push-toright' );
+            classie.toggle( menuLeft, 'cbp-spmenu-open' );
+            disableOther( 'showLeftPush' );
+        };
+
+        function disableOther( button ) {
+            if( button !== 'showLeftPush' ) {
+                classie.toggle( showLeftPush, 'disabled' );
+            }
+        }
+    </script>
+    <!-- //Classie --><!-- //for toggle left push menu script -->
+
+    <!--scrolling js-->
+    <script src="{{URL::to('admin_files/js/jquery.nicescroll.js')}}"></script>
+    <script src="{{URL::to('admin_files/js/scripts.js')}}"></script>
+    <!--//scrolling js-->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{URL::to('admin_files/js/bootstrap.js')}}"> </script>
+    <!-- //Bootstrap Core JavaScript -->
     <script> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
 @show

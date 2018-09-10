@@ -37,6 +37,8 @@ Route::get('/thankyou', 'CartController@thankYou');
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin', 'AdminController@adminAuth');
 
+Route::get('/product/size/{sid}', 'ProductController@getProductSizes');
+
 
 
 

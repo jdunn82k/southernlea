@@ -21,59 +21,63 @@
                 @endforeach
             </div>
             <div class="col-md-4 col-lg-4 col-sm-4">
-                <p><span class="font-weight-bold font-size-13">PRODUCT CODE: </span><span class="highlight">{{$product->code}}</span></p>
+                <p><span class="font-weight-bold font-size-13">PRODUCT CODE: </span><span class="highlight" id="product-code">{{$product->code}}</span></p>
                 <div class="clearfix">
                     @if ($product->quantityInStock > 0)
-                        <p class="float-left font-size-13">Availability: <span class="text-green">In stock</span></p>
+                        <p class="float-left font-size-13" id="stock">Availability: <span class="text-green">In stock</span></p>
                     @else
-                        <p class="float-left font-size-13">Availability: <span class="text-red">Out Of Stock</span></p>
+                        <p class="float-left font-size-13" id="stock">Availability: <span class="text-red">Out Of Stock</span></p>
                     @endif
 
-                    <p class="float-right font-size-13">Only <span class="font-weight-bold">{{$product->quantityInStock}}</span> Left</p>
+                    <p class="float-right font-size-13">Only <span class="font-weight-bold" id="quantity-in-stock">{{$product->quantityInStock}}</span> Left</p>
                 </div>
                 <h3 class="mt-5 font-weight-bold">{{$product->description1}}</h3>
-                <p class="mt-5 price-color clearfix">
+                <h4 class="font-weight-bold">{{$product->description2}}</h4>
+
+                <p class="mt-2 mb-4 price-color clearfix">
+                    <span class="your-price">Your Price</span>
                     @if ($product->discount > 0)
-                        <span>${{ number_format( ($product->price - ($product->price * ($product->discount / 100)) ),2) }}</span>
+                        <span id="your-price">${{ number_format( ($product->price - ($product->price * ($product->discount / 100)) ),2) }}</span>
                     @else
-                        ${{$product->price}}
+                        <span id="your-price">${{$product->price}}</span>
                     @endif
                 </p>
                 <hr>
-                {{--<div class="size-picker">--}}
-                    {{--<div class="size-picker-top clearfix">--}}
-                        {{--<p class="float-left">SIZE <span class="text-red">*</span></p>--}}
-                        {{--<p class="float-right text-red">* Required Fields</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="size-picker-item">--}}
-                        {{--<input type="radio" name="size-picker-radio" value="small" checked> S--}}
-                    {{--</div>--}}
-                    {{--<div class="size-picker-item">--}}
-                        {{--<input type="radio" name="size-picker-radio" value="medium"> M--}}
-                    {{--</div>--}}
-                    {{--<div class="size-picker-item">--}}
-                        {{--<input type="radio" name="size-picker-radio" value="large"> L--}}
-                    {{--</div>--}}
-                    {{--<div class="size-picker-item">--}}
-                        {{--<input type="radio" name="size-picker-radio" value="1x"> XL--}}
-                    {{--</div>--}}
-                    {{--<div class="size-picker-item">--}}
-                        {{--<input type="radio" name="size-picker-radio" value="2x"> XXL--}}
-                    {{--</div>--}}
-                    {{--<div class="size-picker-item">--}}
-                        {{--<input type="radio" name="size-picker-radio" value="3x"> XXXL--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                <div class="row mt-4">
-                    <div class="col-md-3 col-lg-3 col-sm-3">
-                        <div class="quantity-picker">
-                            QTY: <input type="number" id="quantity" value="1" max="99">
+                @if (count($sizes) > 0)
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-sm-12">
+                            <div class="size-picker">
+                                Size: <select class="ml-1 form-control" id="size-select">
+                                    @foreach($sizes as $size)
+                                        @if ($size->default === 1)
+                                            <option value="{{$size->id}}" selected>{{$size->size}}</option>
+                                        @else
+                                            <option value="{{$size->id}}">{{$size->size}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-9 col-lg-9 col-sm-9 clearfix text-center ">
+                @endif
+
+                <div class="row mt-4">
+                    <div class="col-md-5 col-lg-5 col-sm-5">
+                        <div class="quantity-picker">
+                            Qty: <input type="number" class='form-control' id="quantity" value="1" max="99">
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-7 col-sm-7 clearfix text-center">
                         <div class="float-right">
-                            <button class="add_to_cart" id="add_to_cart" data-product-id="{{$product->id}}">add to cart</button><br>
+                            @if (count($sizes) > 0)
+                                @foreach($sizes as $size)
+                                    @if($size->default === 1)
+                                        <button class="add_to_cart" id="add_to_cart" data-product-id="{{$product->id}}" data-product-size="{{$size->id}}">add to cart</button><br>
+                                    @endif
+                                @endforeach
+                            @else
+                                <button class="add_to_cart" id="add_to_cart" data-product-id="{{$product->id}}" data-product-size="0">add to cart</button><br>
+                            @endif
                         </div>
 
                     </div>

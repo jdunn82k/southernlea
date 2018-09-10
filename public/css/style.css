@@ -315,13 +315,11 @@
 	letter-spacing: -0.5px;
 }
 
-.quantity-picker{
+.quantity-picker, .size-picker{
 	display:flex;
 }
 .quantity-picker > input{
-	width: 45px;
-	margin-left:6px;
-	padding:2px;
+	margin-left:11px;
 }
 
 .form-check select.form-control{
@@ -421,6 +419,13 @@ textarea#product-description{
 .w_sidebar .row1{
 	height:250px;
 }
+
+.your-price{
+	font-weight:normal;
+	color:black;
+	font-size:18px;
+}
+
 
 @media (max-width: 767px){
 	.pagination1{

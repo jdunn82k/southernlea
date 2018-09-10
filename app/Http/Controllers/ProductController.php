@@ -4,19 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Products;
 use App\ProductImages;
+use App\ProductSizes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
 
+
+    public function getProductSizes($sid)
+    {
+        $size = ProductSizes::findOrFail($sid);
+        return $size;
+    }
     public function showProduct($id)
     {
         $product = Products::findOrFail($id);
         $images  = ProductImages::where('product_id', $id)->get();
+        $sizes   = ProductSizes::where('product_id', $id)->get();
 
         return view('pages.product')
                     ->with('product', $product)
+                    ->with('sizes', $sizes)
                     ->with('images', $images);
     }
 

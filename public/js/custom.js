@@ -156,9 +156,10 @@ $("#paypal_pay").on("click", function(e){
     var city = $("input[name='city']").val();
     var state = $("input[name='state']").val();
     var zip   = $("input[name='zipcode']").val();
+    var phone = $("input[name='phone']").val();
 
 
-    if ( (name.length > 1) && (add1.length > 1) && (city.length > 1) && (state.length > 1) && (zip.length > 2) ){
+    if ( (name.length > 1) && (add1.length > 1) && (city.length > 1) && (state.length > 1) && (zip.length > 2) && (phone.length > 2)){
 
         if (add2.length === 0)
         {
@@ -168,13 +169,10 @@ $("#paypal_pay").on("click", function(e){
         $.ajax({
             url: "/orders",
             type: "post",
-            data: {name: name, address_1: add1, address_2: add2, city: city, state: state, zip_code: zip}
+            data: {name: name, address_1: add1, address_2: add2, city: city, state: state, zip_code: zip, phone: phone}
         }).done(function(cb){
-            console.log(cb);
+            $("#paypal_form").submit();
         });
-        $("#paypal_form").submit();
-    } else {
-        console.log("Form Not Filled Out");
     }
 });
 
@@ -193,6 +191,7 @@ $(".simpleCart_empty").on("click", function(e){
 
 //Add To Cart button handler
 $("#add_to_cart").on("click", function(){
+    var product_size_id = $(this).data('product-size');
     var product_id      = $(this).data('product-id');
     var size_checked    = $("input[name='size-picker-radio']:checked").val();
     var qty             = $("#quantity").val();
@@ -200,7 +199,7 @@ $("#add_to_cart").on("click", function(){
     $.ajax({
         url: "/cart/add",
         type: "put",
-        data: {product: product_id, size: size_checked, quantity: qty}
+        data: {product: product_id, size: size_checked, quantity: qty, size_id: product_size_id}
     }).done(function(cb){
         updateCart();
         $("#add_to_cart").text("added to cart").prop("disabled", true).css('background-color', '#f5f5f5').css('color', '#8c8585');
@@ -250,6 +249,23 @@ $(".size-picker-item").on("click", function(){
    $(this).find('input')[0].click();
 });
 
+$("#size-select").on("change", function(){
+   var size_id = $(this).val();
+   $.ajax({
+       url: "/product/size/"+size_id,
+       type: "get"
+   }).done(function(cb){
+       $("#product-code").text(cb.product_code);
+       if (cb.quantity > 0){
+           $("#stock").html("Availability: <span class='text-green'>In Stock</span>");
+       } else {
+           $("#stock").html("Availability: <span class='text-red'>Out Of Stock</span>");
+       }
+        $("#quantity-in-stock").text(cb.quantity);
+       $("#your-price").text("$"+cb.price);
+       $("#add_to_cart").data('product-size', cb.id);
+   })
+});
 
 //Color Block Filter
 $(document).on("click", ".color-block", function(){
