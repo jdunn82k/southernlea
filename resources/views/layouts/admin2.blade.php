@@ -20,6 +20,16 @@
     <link href='{{URL::to('admin_files/css/SidebarNav.min.css')}}' media='all' rel='stylesheet'>
     <!-- side nav css file -->
 
+    <!-- dataTables CSS -->
+    <link href="{{URL::to('admin_files/vendor/DataTables-1.10.18/css/jquery.dataTables.css')}}" rel="stylesheet">
+    <link href="{{URL::to('admin_files/vendor/DataTables-1.10.18/css/dataTables.bootstrap.css')}}" rel="stylesheet">
+    <link href="{{URL::to('admin_files/vendor/Buttons-1.5.2/css/buttons.dataTables.css')}}" rel="stylesheet">
+    <link href="{{URL::to('admin_files/vendor/Buttons-1.5.2/css/buttons.bootstrap.css')}}" rel="stylesheet">
+    <link href="{{URL::to('admin_files/vendor/Select-1.2.6/css/select.dataTables.css')}}" rel="stylesheet">
+    <link href="{{URL::to('admin_files/vendor/Select-1.2.6/css/select.bootstrap.css')}}" rel="stylesheet">
+    <link href="{{URL::to('admin_files/vendor/Responsive-2.2.2/css/responsive.dataTables.css')}}" rel="stylesheet">
+    <link href="{{URL::to('admin_files/vendor/Responsive-2.2.2/css/responsive.bootstrap.css')}}" rel="stylesheet">
+
     <link href="{{URL::to('admin_files/css/custom.css')}}" rel="stylesheet">
 
     <!--webfonts-->
@@ -40,7 +50,6 @@
     <script src="{{URL::to('admin_files/js/modernizr.custom.js')}}"></script>
     <!-- Metis Menu -->
     <script src="{{URL::to('admin_files/js/metisMenu.min.js')}}"></script>
-    <script src="{{URL::to('admin_files/js/custom.js')}}"></script>
     <!--//Metis Menu -->
     <!-- side nav js -->
     <script src='{{URL::to('admin_files/js/SidebarNav.min.js')}}'></script>
@@ -79,6 +88,20 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{URL::to('admin_files/js/bootstrap.js')}}"> </script>
     <!-- //Bootstrap Core JavaScript -->
+
+    <!-- dataTables JS -->
+    <script src="{{URL::to('admin_files/vendor/DataTables-1.10.18/js/jquery.dataTables.js')}}"></script>
+    <script src="{{URL::to('admin_files/vendor/DataTables-1.10.18/js/dataTables.bootstrap.js')}}"></script>
+    <script src="{{URL::to('admin_files/vendor/Buttons-1.5.2/js/dataTables.buttons.js')}}"></script>
+    <script src="{{URL::to('admin_files/vendor/Buttons-1.5.2/js/buttons.bootstrap.js')}}"></script>
+    <script src="{{URL::to('admin_files/vendor/Select-1.2.6/js/dataTables.select.js')}}"></script>
+    <script src="{{URL::to('admin_files/vendor/Select-1.2.6/js/select.bootstrap.js')}}"></script>
+    <script src="{{URL::to('admin_files/vendor/Responsive-2.2.2/js/dataTables.responsive.js')}}"></script>
+    <script src="{{URL::to('admin_files/vendor/Responsive-2.2.2./js/responsive.bootstrap.js')}}}"></script>
+
+    <!-- Custom JS -->
+    <script src="{{URL::to('admin_files/js/custom.js')}}"></script>
+
     <script> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 @show

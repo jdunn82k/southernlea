@@ -34,3 +34,33 @@ $(function() {
         element.addClass('active');
     }
 });
+
+//DataTable Initializations
+$(function(){
+
+
+
+    //Products Table under 'View Products'
+    $("#products-table").dataTable({
+        columnDefs:[{
+            orderable: false,
+            className: 'select-checkbox',
+            targets: 0,
+        }],
+        select:{
+            style: 'multi',
+            selector: 'td:first-child'
+        },
+        order: [[1, 'asc']],
+        dom: '<"mb-10 clearfix" lfr >tiB<>p',
+        buttons: [
+            {
+                text: 'Delete Selected',
+                action: function ( e, dt, node, config ) {
+                    alert( 'Button activated' );
+                }
+            }
+        ]
+    });
+
+});

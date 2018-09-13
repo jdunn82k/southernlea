@@ -1,6 +1,7 @@
 @extends('layouts.admin2')
 
 @section('content')
+
     <div id="page-wrapper">
         <div class="main-page">
             <div class="col_3">
@@ -8,7 +9,7 @@
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-dollar icon-rounded"></i>
                         <div class="stats">
-                            <h5><strong>$452</strong></h5>
+                            <h5><strong>${{$order_stats['total_revenue']}}</strong></h5>
                             <span>Total Revenue</span>
                         </div>
                     </div>
@@ -17,34 +18,43 @@
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
                         <div class="stats">
-                            <h5><strong>$1019</strong></h5>
-                            <span>Online Revenue</span>
+                            <h5><strong>{{$order_stats['pending']}}</strong></h5>
+                            <span>Orders Not Shipped</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 widget widget1">
                     <div class="r3_counter_box">
-                        <i class="pull-left fa fa-money user2 icon-rounded"></i>
+                        <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
                         <div class="stats">
-                            <h5><strong>$1012</strong></h5>
-                            <span>Expenses</span>
+                            <h5><strong>{{$order_stats['complete']}}</strong></h5>
+                            <span>Orders Completed</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 widget widget1">
-                    <div class="r3_counter_box">
-                        <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
-                        <div class="stats">
-                            <h5><strong>$450</strong></h5>
-                            <span>Expenditure</span>
-                        </div>
-                    </div>
-                </div>
+                {{--<div class="col-md-3 widget widget1">--}}
+                    {{--<div class="r3_counter_box">--}}
+                        {{--<i class="pull-left fa fa-money user2 icon-rounded"></i>--}}
+                        {{--<div class="stats">--}}
+                            {{--<h5><strong>$1012</strong></h5>--}}
+                            {{--<span>Expenses</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-md-3 widget widget1">--}}
+                    {{--<div class="r3_counter_box">--}}
+                        {{--<i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>--}}
+                        {{--<div class="stats">--}}
+                            {{--<h5><strong>$450</strong></h5>--}}
+                            {{--<span>Expenditure</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <div class="col-md-3 widget">
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
                         <div class="stats">
-                            <h5><strong>1450</strong></h5>
+                            <h5><strong>{{$user_count}}</strong></h5>
                             <span>Total Users</span>
                         </div>
                     </div>
@@ -64,38 +74,38 @@
 
                     </div>
                 </div>
-                <div class="col-md-3 stat">
-                    <div class="content-top-1">
-                        <div class="col-md-6 top-content">
-                            <h5>Sales</h5>
-                            <label>1283+</label>
-                        </div>
-                        <div class="col-md-6 top-content1">
-                            <div id="demo-pie-1" class="pie-title-center" data-percent="45"> <span class="pie-value"></span> </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="content-top-1">
-                        <div class="col-md-6 top-content">
-                            <h5>Reviews</h5>
-                            <label>2262+</label>
-                        </div>
-                        <div class="col-md-6 top-content1">
-                            <div id="demo-pie-2" class="pie-title-center" data-percent="75"> <span class="pie-value"></span> </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="content-top-1">
-                        <div class="col-md-6 top-content">
-                            <h5>Visitors</h5>
-                            <label>12589+</label>
-                        </div>
-                        <div class="col-md-6 top-content1">
-                            <div id="demo-pie-3" class="pie-title-center" data-percent="90"> <span class="pie-value"></span> </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                </div>
+                {{--<div class="col-md-3 stat">--}}
+                    {{--<div class="content-top-1">--}}
+                        {{--<div class="col-md-6 top-content">--}}
+                            {{--<h5>Sales</h5>--}}
+                            {{--<label>1283+</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-6 top-content1">--}}
+                            {{--<div id="demo-pie-1" class="pie-title-center" data-percent="45"> <span class="pie-value"></span> </div>--}}
+                        {{--</div>--}}
+                        {{--<div class="clearfix"> </div>--}}
+                    {{--</div>--}}
+                    {{--<div class="content-top-1">--}}
+                        {{--<div class="col-md-6 top-content">--}}
+                            {{--<h5>Reviews</h5>--}}
+                            {{--<label>2262+</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-6 top-content1">--}}
+                            {{--<div id="demo-pie-2" class="pie-title-center" data-percent="75"> <span class="pie-value"></span> </div>--}}
+                        {{--</div>--}}
+                        {{--<div class="clearfix"> </div>--}}
+                    {{--</div>--}}
+                    {{--<div class="content-top-1">--}}
+                        {{--<div class="col-md-6 top-content">--}}
+                            {{--<h5>Visitors</h5>--}}
+                            {{--<label>12589+</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-6 top-content1">--}}
+                            {{--<div id="demo-pie-3" class="pie-title-center" data-percent="90"> <span class="pie-value"></span> </div>--}}
+                        {{--</div>--}}
+                        {{--<div class="clearfix"> </div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <div class="col-md-2 stat">
                     <div class="content-top">
                         <div class="top-content facebook">
@@ -131,32 +141,32 @@
                 <div class="clearfix"> </div>
             </div>
 
-            <div class="charts">
-                <div class="col-md-4 charts-grids widget">
-                    <div class="card-header">
-                        <h3>Bar chart</h3>
-                    </div>
+            {{--<div class="charts">--}}
+                {{--<div class="col-md-4 charts-grids widget">--}}
+                    {{--<div class="card-header">--}}
+                        {{--<h3>Bar chart</h3>--}}
+                    {{--</div>--}}
 
-                    <div id="container" style="width: 100%; height:270px;">
-                        <canvas id="canvas"></canvas>
-                    </div>
-                    <button id="randomizeData">Randomize Data</button>
-                    <button id="addDataset">Add Dataset</button>
-                    <button id="removeDataset">Remove Dataset</button>
-                    <button id="addData">Add Data</button>
-                    <button id="removeData">Remove Data</button>
+                    {{--<div id="container" style="width: 100%; height:270px;">--}}
+                        {{--<canvas id="canvas"></canvas>--}}
+                    {{--</div>--}}
+                    {{--<button id="randomizeData">Randomize Data</button>--}}
+                    {{--<button id="addDataset">Add Dataset</button>--}}
+                    {{--<button id="removeDataset">Remove Dataset</button>--}}
+                    {{--<button id="addData">Add Data</button>--}}
+                    {{--<button id="removeData">Remove Data</button>--}}
 
-                </div>
+                {{--</div>--}}
 
-                <div class="col-md-4 charts-grids widget states-mdl">
-                    <div class="card-header">
-                        <h3>Column & Line Graph</h3>
-                    </div>
-                    <div id="chartdiv"></div>
-                </div>
+                {{--<div class="col-md-4 charts-grids widget states-mdl">--}}
+                    {{--<div class="card-header">--}}
+                        {{--<h3>Column & Line Graph</h3>--}}
+                    {{--</div>--}}
+                    {{--<div id="chartdiv"></div>--}}
+                {{--</div>--}}
 
-                <div class="clearfix"> </div>
-            </div>
+                {{--<div class="clearfix"> </div>--}}
+            {{--</div>--}}
 
 
 
@@ -640,52 +650,52 @@
                 { X: "4:00", Y: 310.00 }
             ]
         };
-        var Piedata = {
-            linecolor: "Random",
-            title: "Profit",
-            values: [
-                { X: "Monday", Y: 50.00 },
-                { X: "Tuesday", Y: 110.98 },
-                { X: "Wednesday", Y: 70.00 },
-                { X: "Thursday", Y: 204.00 },
-                { X: "Friday", Y: 80.25 },
-                { X: "Saturday", Y: 38.56 },
-                { X: "Sunday", Y: 98.57 }
-            ]
-        };
+        // var Piedata = {
+        //     linecolor: "Random",
+        //     title: "Profit",
+        //     values: [
+        //         { X: "Monday", Y: 50.00 },
+        //         { X: "Tuesday", Y: 110.98 },
+        //         { X: "Wednesday", Y: 70.00 },
+        //         { X: "Thursday", Y: 204.00 },
+        //         { X: "Friday", Y: 80.25 },
+        //         { X: "Saturday", Y: 38.56 },
+        //         { X: "Sunday", Y: 98.57 }
+        //     ]
+        // };
         $(function () {
-            $("#Bargraph").SimpleChart({
-                ChartType: "Bar",
-                toolwidth: "50",
-                toolheight: "25",
-                axiscolor: "#E6E6E6",
-                textcolor: "#6E6E6E",
-                showlegends: true,
-                data: [graphdata4, graphdata3, graphdata2, graphdata1],
-                legendsize: "140",
-                legendposition: 'bottom',
-                xaxislabel: 'Hours',
-                title: 'Weekly Profit',
-                yaxislabel: 'Profit in $'
-            });
-            $("#sltchartype").on('change', function () {
-                $("#Bargraph").SimpleChart('ChartType', $(this).val());
-                $("#Bargraph").SimpleChart('reload', 'true');
-            });
-            $("#Hybridgraph").SimpleChart({
-                ChartType: "Hybrid",
-                toolwidth: "50",
-                toolheight: "25",
-                axiscolor: "#E6E6E6",
-                textcolor: "#6E6E6E",
-                showlegends: true,
-                data: [graphdata4],
-                legendsize: "140",
-                legendposition: 'bottom',
-                xaxislabel: 'Hours',
-                title: 'Weekly Profit',
-                yaxislabel: 'Profit in $'
-            });
+            // $("#Bargraph").SimpleChart({
+            //     ChartType: "Bar",
+            //     toolwidth: "50",
+            //     toolheight: "25",
+            //     axiscolor: "#E6E6E6",
+            //     textcolor: "#6E6E6E",
+            //     showlegends: true,
+            //     data: [graphdata4, graphdata3, graphdata2, graphdata1],
+            //     legendsize: "140",
+            //     legendposition: 'bottom',
+            //     xaxislabel: 'Hours',
+            //     title: 'Weekly Profit',
+            //     yaxislabel: 'Profit in $'
+            // });
+            // $("#sltchartype").on('change', function () {
+            //     $("#Bargraph").SimpleChart('ChartType', $(this).val());
+            //     $("#Bargraph").SimpleChart('reload', 'true');
+            // });
+            // $("#Hybridgraph").SimpleChart({
+            //     ChartType: "Hybrid",
+            //     toolwidth: "50",
+            //     toolheight: "25",
+            //     axiscolor: "#E6E6E6",
+            //     textcolor: "#6E6E6E",
+            //     showlegends: true,
+            //     data: [graphdata4],
+            //     legendsize: "140",
+            //     legendposition: 'bottom',
+            //     xaxislabel: 'Hours',
+            //     title: 'Weekly Profit',
+            //     yaxislabel: 'Profit in $'
+            // });
             $("#Linegraph").SimpleChart({
                 ChartType: "Line",
                 toolwidth: "50",
@@ -693,86 +703,86 @@
                 axiscolor: "#E6E6E6",
                 textcolor: "#6E6E6E",
                 showlegends: false,
-                data: [graphdata4, graphdata3, graphdata2, graphdata1],
+                data: [graphdata1],
                 legendsize: "140",
                 legendposition: 'bottom',
                 xaxislabel: 'Hours',
                 title: 'Weekly Profit',
                 yaxislabel: 'Profit in $'
             });
-            $("#Areagraph").SimpleChart({
-                ChartType: "Area",
-                toolwidth: "50",
-                toolheight: "25",
-                axiscolor: "#E6E6E6",
-                textcolor: "#6E6E6E",
-                showlegends: true,
-                data: [graphdata4, graphdata3, graphdata2, graphdata1],
-                legendsize: "140",
-                legendposition: 'bottom',
-                xaxislabel: 'Hours',
-                title: 'Weekly Profit',
-                yaxislabel: 'Profit in $'
-            });
-            $("#Scatterredgraph").SimpleChart({
-                ChartType: "Scattered",
-                toolwidth: "50",
-                toolheight: "25",
-                axiscolor: "#E6E6E6",
-                textcolor: "#6E6E6E",
-                showlegends: true,
-                data: [graphdata4, graphdata3, graphdata2, graphdata1],
-                legendsize: "140",
-                legendposition: 'bottom',
-                xaxislabel: 'Hours',
-                title: 'Weekly Profit',
-                yaxislabel: 'Profit in $'
-            });
-            $("#Piegraph").SimpleChart({
-                ChartType: "Pie",
-                toolwidth: "50",
-                toolheight: "25",
-                axiscolor: "#E6E6E6",
-                textcolor: "#6E6E6E",
-                showlegends: true,
-                showpielables: true,
-                data: [Piedata],
-                legendsize: "250",
-                legendposition: 'right',
-                xaxislabel: 'Hours',
-                title: 'Weekly Profit',
-                yaxislabel: 'Profit in $'
-            });
-
-            $("#Stackedbargraph").SimpleChart({
-                ChartType: "Stacked",
-                toolwidth: "50",
-                toolheight: "25",
-                axiscolor: "#E6E6E6",
-                textcolor: "#6E6E6E",
-                showlegends: true,
-                data: [graphdata3, graphdata2, graphdata1],
-                legendsize: "140",
-                legendposition: 'bottom',
-                xaxislabel: 'Hours',
-                title: 'Weekly Profit',
-                yaxislabel: 'Profit in $'
-            });
-
-            $("#StackedHybridbargraph").SimpleChart({
-                ChartType: "StackedHybrid",
-                toolwidth: "50",
-                toolheight: "25",
-                axiscolor: "#E6E6E6",
-                textcolor: "#6E6E6E",
-                showlegends: true,
-                data: [graphdata3, graphdata2, graphdata1],
-                legendsize: "140",
-                legendposition: 'bottom',
-                xaxislabel: 'Hours',
-                title: 'Weekly Profit',
-                yaxislabel: 'Profit in $'
-            });
+            // $("#Areagraph").SimpleChart({
+            //     ChartType: "Area",
+            //     toolwidth: "50",
+            //     toolheight: "25",
+            //     axiscolor: "#E6E6E6",
+            //     textcolor: "#6E6E6E",
+            //     showlegends: true,
+            //     data: [graphdata4, graphdata3, graphdata2, graphdata1],
+            //     legendsize: "140",
+            //     legendposition: 'bottom',
+            //     xaxislabel: 'Hours',
+            //     title: 'Weekly Profit',
+            //     yaxislabel: 'Profit in $'
+            // });
+            // $("#Scatterredgraph").SimpleChart({
+            //     ChartType: "Scattered",
+            //     toolwidth: "50",
+            //     toolheight: "25",
+            //     axiscolor: "#E6E6E6",
+            //     textcolor: "#6E6E6E",
+            //     showlegends: true,
+            //     data: [graphdata4, graphdata3, graphdata2, graphdata1],
+            //     legendsize: "140",
+            //     legendposition: 'bottom',
+            //     xaxislabel: 'Hours',
+            //     title: 'Weekly Profit',
+            //     yaxislabel: 'Profit in $'
+            // });
+            // $("#Piegraph").SimpleChart({
+            //     ChartType: "Pie",
+            //     toolwidth: "50",
+            //     toolheight: "25",
+            //     axiscolor: "#E6E6E6",
+            //     textcolor: "#6E6E6E",
+            //     showlegends: true,
+            //     showpielables: true,
+            //     data: [Piedata],
+            //     legendsize: "250",
+            //     legendposition: 'right',
+            //     xaxislabel: 'Hours',
+            //     title: 'Weekly Profit',
+            //     yaxislabel: 'Profit in $'
+            // });
+            //
+            // $("#Stackedbargraph").SimpleChart({
+            //     ChartType: "Stacked",
+            //     toolwidth: "50",
+            //     toolheight: "25",
+            //     axiscolor: "#E6E6E6",
+            //     textcolor: "#6E6E6E",
+            //     showlegends: true,
+            //     data: [graphdata3, graphdata2, graphdata1],
+            //     legendsize: "140",
+            //     legendposition: 'bottom',
+            //     xaxislabel: 'Hours',
+            //     title: 'Weekly Profit',
+            //     yaxislabel: 'Profit in $'
+            // });
+            //
+            // $("#StackedHybridbargraph").SimpleChart({
+            //     ChartType: "StackedHybrid",
+            //     toolwidth: "50",
+            //     toolheight: "25",
+            //     axiscolor: "#E6E6E6",
+            //     textcolor: "#6E6E6E",
+            //     showlegends: true,
+            //     data: [graphdata3, graphdata2, graphdata1],
+            //     legendsize: "140",
+            //     legendposition: 'bottom',
+            //     xaxislabel: 'Hours',
+            //     title: 'Weekly Profit',
+            //     yaxislabel: 'Profit in $'
+            // });
         });
 
     </script>

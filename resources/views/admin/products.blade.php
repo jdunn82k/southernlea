@@ -1,29 +1,28 @@
 @extends('layouts.admin2')
 
 @section('content')
-    <div class="container font-calibri">
-        <div class="row">
-            <div class="col-md-12 col-lg-12 col-sm-12">
-                <h3>Products</h3>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-striped table-sm">
-                    <thead>
+    <div id="page-wrapper">
+        <div class="main-page">
+            <div class="tables">
+                {{--<h2 class="title1">Products</h2>--}}
+                <div class="table-responsive bs-example widget-shadow">
+                    <h4>Products</h4>
+                    <table class="table table-bordered display" id="products-table">
+                        <thead>
                         <tr>
+                            <th></th>
                             <th>Product Name</th>
                             <th>Category</th>
                             <th>SubCategory</th>
                             <th>Price</th>
-                            <th>Discount</th>
+                            {{--<th>Discount</th>--}}
                             <th>Quantity</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         @foreach($products as $product)
                             <tr>
+                                <td></td>
                                 <td><a href="{{URL::to('/admin/products/'.$product->id)}}">{{$product->description1}}</a></td>
                                 <td>
                                     @foreach($categories as $cat)
@@ -44,13 +43,16 @@
                                     @endforeach
                                 </td>
                                 <td>${{$product->price}}</td>
-                                <td>{{$product->discount}}%</td>
+                                {{--<td>{{$product->discount}}%</td>--}}
                                 <td>{{$product->quantityInStock}}</td>
                             </tr>
                         @endforeach
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>
+
 @endsection

@@ -1,171 +1,240 @@
 @extends('layouts.admin2')
 
 @section('content')
-    @php
-        $product        = \App\Products::findOrFail($id);
-        $categories     = \App\Categories::all();
-        $subcategories  = \App\SubCategories::all();
-        $links          = \App\CategoryLinks::all();
-        $colors         = \App\ColorFilters::all();
-        $images         = \App\ProductImages::where('product_id', $id)->get();
-    @endphp
 
-    <div class="container font-calibri">
-        <form action="{{URL::to('/product/update')}}" method="post">
+    <div id="page-wrapper">
+        <div class="main-page">
+            <div class="container font-calibri">
+                    <div class="row">
+                        <h3 class="title1">Product Information</h3>
+                        <div class="form-three widget-shadow">
+                            <form class="form-horizontal" action="{{URL::to('/product/update')}}" method="post">
 
-            <!-- Product Information Section-->
-            <div class="row">
-                <div class="col-md-10 col-lg-10 col-sm-12">
-                    <h4 class="font-italic">Product Information</h4>
-                    <hr class="mt-0">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="form-group">
-                        <label for="product-name">Product Name:</label>
-                        <input class='form-control' type="text" id="product-name" value="{{$product->description1}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="product-code">Product Code:</label>
-                        <input type="text" class="form-control" id="product-code" value="{{$product->code}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="product-quantity">Quantity In Stock:</label>
-                        <input type="number" class="form-control" value="{{$product->quantityInStock}}">
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="form-group">
-                        <label for="product-category">Category</label>
-                        <select class="form-control" id="product-category">
-                            <option value="blank"></option>
-
-                            @foreach($categories as $cat)
-                                @if ($cat->id === $product->category)
-                                    <option value="{{$cat->id}}" selected>{{$cat->name}}</option>
-                                @else
-                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-subcategory">Subcategory:</label>
-                        <select class="form-control" id="product-subcatagory">
-                            <option value="blank"></option>
-                            @foreach($subcategories as $subcat)
-                                @if ($subcat->id === $product->subcategory)
-                                    <option value="{{$subcat->id}}" selected>{{$subcat->name}}</option>
-                                @else
-                                    <option value="{{$subcat->id}}">{{$subcat->name}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-category-link">Subcategory:</label>
-                        <select class="form-control" id="product-catagory-link">
-                            <option value="blank"></option>
-                            @foreach($links as $link)
-                                @if ($link->id === $product->categorylink)
-                                    <option value="{{$link->id}}" selected>{{$link->name}}</option>
-                                @else
-                                    <option value="{{$link->id}}">{{$link->name}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pricing Section -->
-            <div class="row">
-                <div class="col-md-10 col-lg-10 col-sm-12">
-                    <h4 class="font-italic">Pricing</h4>
-                    <hr class="mt-0">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="form-group">
-                        <label for="product-price">Price:</label>
-                        <input type="number" class="form-control" value="{{$product->price}}">
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="form-group">
-                        <label for="product-discount">Discount:</label>
-                        <input type="number" class="form-control" value="{{$product->discount}}">
-                    </div>
-                </div>
-            </div>
-            <!-- Color Section -->
-            <div class="row">
-                <div class="col-md-10 col-lg-10 col-sm-12">
-                    <h4 class="font-italic">Color</h4>
-                    <hr class="mt-0">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-sm-12">
-
-                        <ul class="w_nav2">
-                            @foreach($colors as $color)
-                                <li><div class="color-block" data-id="{{$color->id}}" style="background-color: {{$color->hex}}"></div></li>
-                            @endforeach
-                        </ul>
-
-                </div>
-            </div>
-
-            <!-- Photos Section -->
-            <div class="row">
-                <div class="col-md-10 col-lg-10 col-sm-12">
-                    <h4 class="font-italic">Images</h4>
-                    <hr class="mt-0">
-                </div>
-            </div>
-            <div class="row">
-                    <div class="photo-area">
-                        @foreach($images as $image)
-                            @if ($image->default === 1)
-                                <div class="photo-block m-3">
-                                    <div class="photo-block-image">
-                                        <input type="checkbox" class="form-control" checked>
-                                        <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
+                                <div class="form-group">
+                                    <label for="focusedinput" class="col-sm-2 control-label">Product Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control1" id="focusedinput" name='product-name' value="{{$product->description1}}">
                                     </div>
                                 </div>
-                            @endif
-                            <div class="photo-block m-3">
-                                <div class="photo-block-image">
-                                    <input type="checkbox" class="form-control">
-                                    <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
-                                </div>                             </div>
-                        @endforeach
-                        <div class="photo-block m-3 upload-new"><span class="add-new-image-text">Add New Image</span></div>
+
+                                <div class="form-group">
+                                    <label for="focusedinput" class="col-sm-2 control-label">Product Code</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control1" id="focusedinput" name='product-code' value="{{$product->code}}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="focusedinput" class="col-sm-2 control-label">Category</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="product-category" name="product-category">
+                                            <option value="blank"></option>
+
+                                            @foreach($categories as $cat)
+                                                @if ($cat->id === $product->category)
+                                                    <option value="{{$cat->id}}" selected>{{$cat->name}}</option>
+                                                @else
+                                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="focusedinput" class="col-sm-2 control-label">Subcategory</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<select class="form-control" id="product-subcatagory" name="product-subcategory">--}}
+                                            {{--<option value="blank"></option>--}}
+                                            {{--@foreach($subcategories as $subcat)--}}
+                                                {{--@if ($subcat->id === $product->subcategory)--}}
+                                                    {{--<option value="{{$subcat->id}}" selected>{{$subcat->name}}</option>--}}
+                                                {{--@else--}}
+                                                    {{--<option value="{{$subcat->id}}">{{$subcat->name}}</option>--}}
+                                                {{--@endif--}}
+                                            {{--@endforeach--}}
+                                        {{--</select>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+
+                                <div class="form-group">
+                                    <label for="focusedinput" class="col-sm-2 control-label">Price</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control1" id="focusedinput" name='product-price' value="{{$product->price}}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="txtarea1" class="col-sm-2 control-label">Description</label>
+                                    <div class="col-sm-8">
+                                        <textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control">{{$product->description2}}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Sizes Available </label>
+                                    <div class="col-sm-8">
+                                        <p class="mt-7"> Multiple sizes are available: <input type="checkbox" class="ml-6" @php if(count($sizes) > 0){echo "checked";} @endphp></p>
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <th>Product Code</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($sizes as $size)
+                                                    <tr>
+                                                        <td>{{$size->size}}</td>
+                                                        <td>{{$size->product_code}}</td>
+                                                        <td>{{$size->price}}</td>
+                                                        <td>{{$size->quantity}}</td>
+                                                        <td>
+                                                            <i class="fa fa-trash"></i>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-primary pull-right">Add Size</button>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Images</label>
+                                    <div class="col-sm-8 flex">
+                                        @foreach($images as $image)
+                                            @if ($image->default === 1)
+                                                <div class="photo-block m-3">
+                                                    <div class="photo-block-image">
+                                                        <input type="checkbox" class="form-control" checked>
+                                                        <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <div class="photo-block m-3">
+                                                <div class="photo-block-image">
+                                                    <input type="checkbox" class="form-control">
+                                                    <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
+                                                </div>                             </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <hr>
+                                        <button type="submit" class="btn btn-primary pull-right" id="submit-product-changes">Update</button>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="disabledinput" class="col-sm-2 control-label">Disabled Input</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<input disabled="" type="text" class="form-control1" id="disabledinput" placeholder="Disabled Input">--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="inputPassword" class="col-sm-2 control-label">Password</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<input type="password" class="form-control1" id="inputPassword" placeholder="Password">--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="checkbox" class="col-sm-2 control-label">Checkbox</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<div class="checkbox-inline1"><label><input type="checkbox"> Unchecked</label></div>--}}
+                                        {{--<div class="checkbox-inline1"><label><input type="checkbox" checked=""> Checked</label></div>--}}
+                                        {{--<div class="checkbox-inline1"><label><input type="checkbox" disabled=""> Disabled Unchecked</label></div>--}}
+                                        {{--<div class="checkbox-inline1"><label><input type="checkbox" disabled="" checked=""> Disabled Checked</label></div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="checkbox" class="col-sm-2 control-label">Checkbox Inline</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<div class="checkbox-inline"><label><input type="checkbox"> Unchecked</label></div>--}}
+                                        {{--<div class="checkbox-inline"><label><input type="checkbox" checked=""> Checked</label></div>--}}
+                                        {{--<div class="checkbox-inline"><label><input type="checkbox" disabled=""> Disabled Unchecked</label></div>--}}
+                                        {{--<div class="checkbox-inline"><label><input type="checkbox" disabled="" checked=""> Disabled Checked</label></div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="selector1" class="col-sm-2 control-label">Dropdown Select</label>--}}
+                                    {{--<div class="col-sm-8"><select name="selector1" id="selector1" class="form-control1">--}}
+                                            {{--<option>Lorem ipsum dolor sit amet.</option>--}}
+                                            {{--<option>Dolore, ab unde modi est!</option>--}}
+                                            {{--<option>Illum, fuga minus sit eaque.</option>--}}
+                                            {{--<option>Consequatur ducimus maiores voluptatum minima.</option>--}}
+                                        {{--</select></div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label class="col-sm-2 control-label">Multiple Select</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<select multiple="" class="form-control1">--}}
+                                            {{--<option>Option 1</option>--}}
+                                            {{--<option>Option 2</option>--}}
+                                            {{--<option>Option 3</option>--}}
+                                            {{--<option>Option 4</option>--}}
+                                            {{--<option>Option 5</option>--}}
+                                        {{--</select>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="txtarea1" class="col-sm-2 control-label">Textarea</label>--}}
+                                    {{--<div class="col-sm-8"><textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control1"></textarea></div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="radio" class="col-sm-2 control-label">Radio</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<div class="radio block"><label><input type="radio"> Unchecked</label></div>--}}
+                                        {{--<div class="radio block"><label><input type="radio" checked=""> Checked</label></div>--}}
+                                        {{--<div class="radio block"><label><input type="radio" disabled=""> Disabled Unchecked</label></div>--}}
+                                        {{--<div class="radio block"><label><input type="radio" disabled="" checked=""> Disabled Checked</label></div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="radio" class="col-sm-2 control-label">Radio Inline</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<div class="radio-inline"><label><input type="radio"> Unchecked</label></div>--}}
+                                        {{--<div class="radio-inline"><label><input type="radio" checked=""> Checked</label></div>--}}
+                                        {{--<div class="radio-inline"><label><input type="radio" disabled=""> Disabled Unchecked</label></div>--}}
+                                        {{--<div class="radio-inline"><label><input type="radio" disabled="" checked=""> Disabled Checked</label></div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="smallinput" class="col-sm-2 control-label label-input-sm">Small Input</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<input type="text" class="form-control1 input-sm" id="smallinput" placeholder="Small Input">--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="mediuminput" class="col-sm-2 control-label">Medium Input</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<input type="text" class="form-control1" id="mediuminput" placeholder="Medium Input">--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group mb-n">--}}
+                                    {{--<label for="largeinput" class="col-sm-2 control-label label-input-lg">Large Input</label>--}}
+                                    {{--<div class="col-sm-8">--}}
+                                        {{--<input type="text" class="form-control1 input-lg" id="largeinput" placeholder="Large Input">--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            </form>
+                        </div>
                     </div>
-
-            </div>
-
-            <!-- Description Section -->
-            <div class="row">
-                <div class="col-md-10 col-lg-10 col-sm-12">
-                    <h4 class="font-italic">Description</h4>
-                    <hr class="mt-0">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-lg-8 col-sm-12">
-                    <div class="form-group">
-                        <textarea class='form-control' id="product-description"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" id="submit-product-changes">Update</button>
-            </div>
                 </form>
             </div>
+        </div>
+    </div>
 @endsection
