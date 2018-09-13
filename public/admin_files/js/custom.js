@@ -1,3 +1,9 @@
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 $(function() {
 
     $('#side-menu').metisMenu();
@@ -35,10 +41,47 @@ $(function() {
     }
 });
 
-//DataTable Initializations
+//DataTable Initializations and Functions
 $(function(){
 
+    function confirmDelete(){
+        var count = 0;
+        $("#products-table .selected").each(function(){
+            count++;
+        });
 
+        if (count > 0)
+        {
+            var message = "selected product?";
+            if (count > 1)
+            {
+                var message = count+" products?";
+            }
+            $("#delete-count").text(message);
+            $("#confirm-delete").modal('toggle');
+        }
+    }
+
+    function deleteSelected(){
+
+        var ids = [];
+        var table = $("#products-table").DataTable();
+        $("#products-table .selected").each(function(){
+           ids.push(parseInt($(this).prop("id").replace("product_", "")));
+        });
+
+        $.ajax({
+            url: "/admin/products",
+            type:"delete",
+            data: {ids: ids}
+        }).done(function(){
+            $("#confirm-delete").modal('toggle');
+            table.rows('.selected').remove().draw();
+        });
+    }
+
+
+    $("#delete-selected-products").on("click", deleteSelected);
 
     //Products Table under 'View Products'
     $("#products-table").dataTable({
@@ -57,7 +100,7 @@ $(function(){
             {
                 text: 'Delete Selected',
                 action: function ( e, dt, node, config ) {
-                    alert( 'Button activated' );
+                   confirmDelete();
                 }
             }
         ]

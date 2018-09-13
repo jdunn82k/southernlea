@@ -57,6 +57,21 @@ class AdminController extends Controller
 
 
     }
+
+    public function deleteProducts(Request $request)
+    {
+        Products::destroy($request->ids);
+
+        foreach($request->ids as $id)
+        {
+            ProductImages::where('product_id', $id)->delete();
+            ProductSizes::where('product_id', $id)->delete();
+        }
+
+        return true;
+
+    }
+
     public function adminAuth(Request $request)
     {
 

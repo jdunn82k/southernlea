@@ -6,6 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="" />
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Bootstrap Core CSS -->
     <link href="{{URL::to('admin_files/css/bootstrap.css')}}" rel='stylesheet'>
 
@@ -27,8 +30,7 @@
     <link href="{{URL::to('admin_files/vendor/Buttons-1.5.2/css/buttons.bootstrap.css')}}" rel="stylesheet">
     <link href="{{URL::to('admin_files/vendor/Select-1.2.6/css/select.dataTables.css')}}" rel="stylesheet">
     <link href="{{URL::to('admin_files/vendor/Select-1.2.6/css/select.bootstrap.css')}}" rel="stylesheet">
-    <link href="{{URL::to('admin_files/vendor/Responsive-2.2.2/css/responsive.dataTables.css')}}" rel="stylesheet">
-    <link href="{{URL::to('admin_files/vendor/Responsive-2.2.2/css/responsive.bootstrap.css')}}" rel="stylesheet">
+
 
     <link href="{{URL::to('admin_files/css/custom.css')}}" rel="stylesheet">
 
@@ -96,8 +98,7 @@
     <script src="{{URL::to('admin_files/vendor/Buttons-1.5.2/js/buttons.bootstrap.js')}}"></script>
     <script src="{{URL::to('admin_files/vendor/Select-1.2.6/js/dataTables.select.js')}}"></script>
     <script src="{{URL::to('admin_files/vendor/Select-1.2.6/js/select.bootstrap.js')}}"></script>
-    <script src="{{URL::to('admin_files/vendor/Responsive-2.2.2/js/dataTables.responsive.js')}}"></script>
-    <script src="{{URL::to('admin_files/vendor/Responsive-2.2.2./js/responsive.bootstrap.js')}}}"></script>
+
 
     <!-- Custom JS -->
     <script src="{{URL::to('admin_files/js/custom.js')}}"></script>

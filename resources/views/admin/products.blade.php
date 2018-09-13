@@ -12,16 +12,14 @@
                         <tr>
                             <th></th>
                             <th>Product Name</th>
-                            <th>Category</th>
-                            <th>SubCategory</th>
+                            <th>Category Information</th>
                             <th>Price</th>
-                            {{--<th>Discount</th>--}}
                             <th>Quantity</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($products as $product)
-                            <tr>
+                            <tr id="product_{{$product->id}}">
                                 <td></td>
                                 <td><a href="{{URL::to('/admin/products/'.$product->id)}}">{{$product->description1}}</a></td>
                                 <td>
@@ -31,19 +29,18 @@
                                         @endif
                                     @endforeach
                                 </td>
-                                <td>
-                                    @foreach($categories as $cat)
-                                        @if($cat->id === $product->category)
-                                            @foreach($subcategories as $sub)
-                                                @if($cat->id === $product->category && $sub->category_id === $product->subcategory)
-                                                    {{$sub->name}}
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    @endforeach
-                                </td>
+                                {{--<td>--}}
+                                    {{--@foreach($categories as $cat)--}}
+                                        {{--@if($cat->id === $product->category)--}}
+                                            {{--@foreach($subcategories as $sub)--}}
+                                                {{--@if($cat->id === $product->category && $sub->category_id === $product->subcategory)--}}
+                                                    {{--{{$sub->name}}--}}
+                                                {{--@endif--}}
+                                            {{--@endforeach--}}
+                                        {{--@endif--}}
+                                    {{--@endforeach--}}
+                                {{--</td>--}}
                                 <td>${{$product->price}}</td>
-                                {{--<td>{{$product->discount}}%</td>--}}
                                 <td>{{$product->quantityInStock}}</td>
                             </tr>
                         @endforeach
@@ -55,4 +52,17 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm-delete">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="mySmallModalLabel">Delete <span id="delete-count"></span></h4>
+                </div>
+                <div class="modal-body text-center">
+                    <button class="btn btn-warning" id="delete-selected-products">Delete Product(s)</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
