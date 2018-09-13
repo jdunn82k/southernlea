@@ -58,6 +58,13 @@ class AdminController extends Controller
 
     }
 
+    public function showNewProductForm()
+    {
+        return view('admin.newproduct')
+            ->with('categories', Categories::all())
+            ->with('subcategories', SubCategories::all())
+            ->with('colors', ColorFilters::all());
+    }
     public function deleteProducts(Request $request)
     {
         Products::destroy($request->ids);
@@ -70,6 +77,15 @@ class AdminController extends Controller
 
         return true;
 
+    }
+
+    public function showOrder($id)
+    {
+        return view('admin.order-details')->with('order_details', Orders::find($id));
+    }
+    public function showOrders()
+    {
+        return view('admin.orders')->with('orders', Orders::all());
     }
 
     public function adminAuth(Request $request)

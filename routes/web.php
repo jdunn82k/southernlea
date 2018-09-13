@@ -50,7 +50,11 @@ Route::group(['middleware' => 'auth.admin'], function()
 
     Route::get('/admin/products', 'AdminController@products');
     Route::get('/admin/products/{id}', 'AdminController@showProduct');
-
+    Route::get('/admin/product/new/', 'AdminController@showNewProductForm');
     Route::delete('/admin/products/', 'AdminController@deleteProducts');
+
+    Route::get('/admin/orders', 'AdminController@showOrders');
+    Route::get('/admin/order/{id}', 'AdminController@showOrder');
+
 
 });

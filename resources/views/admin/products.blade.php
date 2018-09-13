@@ -21,7 +21,7 @@
                         @foreach($products as $product)
                             <tr id="product_{{$product->id}}">
                                 <td></td>
-                                <td><a href="{{URL::to('/admin/products/'.$product->id)}}">{{$product->description1}}</a></td>
+                                <td><a href="{{URL::to('/admin/products/'.$product->id)}}">{{$product->description1}} / {{$product->description2}}</a></td>
                                 <td>
                                     @foreach($categories as $cat)
                                         @if($cat->id === $product->category)

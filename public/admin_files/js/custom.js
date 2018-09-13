@@ -41,6 +41,16 @@ $(function() {
     }
 });
 
+
+$(function(){
+   $(".sizes-available-checkbox").on("click", function(){
+       if ($(this).is(":checked")){
+           $(".sizes-available-table").removeClass('hide');
+       } else {
+           $(".sizes-available-table").addClass('hide');
+       }
+   });
+});
 //DataTable Initializations and Functions
 $(function(){
 
@@ -79,6 +89,9 @@ $(function(){
             table.rows('.selected').remove().draw();
         });
     }
+
+    $("#orders-to-ship-table").dataTable();
+    $("#past-orders-table").dataTable();
 
 
     $("#delete-selected-products").on("click", deleteSelected);

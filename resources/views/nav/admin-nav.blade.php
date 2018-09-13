@@ -39,7 +39,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{URL::to('admin/products')}}"><i class="fa fa-angle-right"></i> View Products</a></li>
-                            <li><a href="{{URL::to('admin/products/new')}}"><i class="fa fa-angle-right"></i> Add New Product</a></li>
+                            <li><a href="{{URL::to('admin/product/new')}}"><i class="fa fa-angle-right"></i> Add New Product</a></li>
                         </ul>
                     </li>
                     {{--<li class="treeview">--}}
