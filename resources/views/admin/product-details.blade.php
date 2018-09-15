@@ -9,7 +9,7 @@
                         <h3 class="title1">Product Information</h3>
                         <div class="form-three widget-shadow">
                             <form class="form-horizontal" action="{{URL::to('/product/update')}}" method="post">
-
+                                <input type="hidden" id="product-id" value="{{$product->id}}">
                                 <div class="form-group">
                                     <label for="focusedinput" class="col-sm-2 control-label">Product Name</label>
                                     <div class="col-sm-8">
@@ -71,62 +71,73 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Sizes Available </label>
-                                    <div class="col-sm-8">
-                                        <p class="mt-7"> Multiple sizes are available: <input type="checkbox" class="ml-6" @php if(count($sizes) > 0){echo "checked";} @endphp></p>
 
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Size</th>
-                                                    <th>Product Code</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($sizes as $size)
-                                                    <tr>
-                                                        <td>{{$size->size}}</td>
-                                                        <td>{{$size->product_code}}</td>
-                                                        <td>{{$size->price}}</td>
-                                                        <td>{{$size->quantity}}</td>
-                                                        <td>
-                                                            <i class="fa fa-trash"></i>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary pull-right">Add Size</button>
-
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Images</label>
-                                    <div class="col-sm-8 flex">
+                                    <div class="col-sm-8 flex image-blocks">
+                                        <input type="file" class="hide" id="image-input" name="image">
+
                                         @foreach($images as $image)
                                             @if ($image->default === 1)
                                                 <div class="photo-block m-3">
-                                                    <div class="photo-block-image">
-                                                        <input type="checkbox" class="form-control" checked>
+                                                    <div class="photo-block-image photo-select">
+                                                        <input type="checkbox" class="form-control" data-photo-id="{{$image->id}}">
                                                         <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
                                                     </div>
                                                 </div>
                                             @endif
                                             <div class="photo-block m-3">
                                                 <div class="photo-block-image">
-                                                    <input type="checkbox" class="form-control">
+                                                    <input type="checkbox" class="form-control" data-photo-id="{{$image->id}}">
                                                     <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
-                                                </div>                             </div>
+                                                </div>
+                                            </div>
                                         @endforeach
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="pull-right">
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-primary select-default">Set Default</button>
+                                                <button type="button" class="btn btn-primary add-new-image">Add Image</button>
+                                                <button type="button" class="btn btn-primary pull-right delete-images">Delete Selected Images</button>
+                                            </div>
 
+                                        </div>
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Sizes Available </label>
+                                    <div class="col-sm-8">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Size</th>
+                                                <th>Product Code</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($sizes as $size)
+                                                <tr>
+                                                    <td>{{$size->size}}</td>
+                                                    <td>{{$size->product_code}}</td>
+                                                    <td>{{$size->price}}</td>
+                                                    <td>{{$size->quantity}}</td>
+                                                    <td>
+                                                        <i class="fa fa-trash"></i>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-primary pull-right">Add Size</button>
+
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-10">
@@ -136,100 +147,6 @@
                                 </div>
 
 
-
-
-
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="disabledinput" class="col-sm-2 control-label">Disabled Input</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<input disabled="" type="text" class="form-control1" id="disabledinput" placeholder="Disabled Input">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="inputPassword" class="col-sm-2 control-label">Password</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<input type="password" class="form-control1" id="inputPassword" placeholder="Password">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="checkbox" class="col-sm-2 control-label">Checkbox</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<div class="checkbox-inline1"><label><input type="checkbox"> Unchecked</label></div>--}}
-                                        {{--<div class="checkbox-inline1"><label><input type="checkbox" checked=""> Checked</label></div>--}}
-                                        {{--<div class="checkbox-inline1"><label><input type="checkbox" disabled=""> Disabled Unchecked</label></div>--}}
-                                        {{--<div class="checkbox-inline1"><label><input type="checkbox" disabled="" checked=""> Disabled Checked</label></div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="checkbox" class="col-sm-2 control-label">Checkbox Inline</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<div class="checkbox-inline"><label><input type="checkbox"> Unchecked</label></div>--}}
-                                        {{--<div class="checkbox-inline"><label><input type="checkbox" checked=""> Checked</label></div>--}}
-                                        {{--<div class="checkbox-inline"><label><input type="checkbox" disabled=""> Disabled Unchecked</label></div>--}}
-                                        {{--<div class="checkbox-inline"><label><input type="checkbox" disabled="" checked=""> Disabled Checked</label></div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="selector1" class="col-sm-2 control-label">Dropdown Select</label>--}}
-                                    {{--<div class="col-sm-8"><select name="selector1" id="selector1" class="form-control1">--}}
-                                            {{--<option>Lorem ipsum dolor sit amet.</option>--}}
-                                            {{--<option>Dolore, ab unde modi est!</option>--}}
-                                            {{--<option>Illum, fuga minus sit eaque.</option>--}}
-                                            {{--<option>Consequatur ducimus maiores voluptatum minima.</option>--}}
-                                        {{--</select></div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label class="col-sm-2 control-label">Multiple Select</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<select multiple="" class="form-control1">--}}
-                                            {{--<option>Option 1</option>--}}
-                                            {{--<option>Option 2</option>--}}
-                                            {{--<option>Option 3</option>--}}
-                                            {{--<option>Option 4</option>--}}
-                                            {{--<option>Option 5</option>--}}
-                                        {{--</select>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="txtarea1" class="col-sm-2 control-label">Textarea</label>--}}
-                                    {{--<div class="col-sm-8"><textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control1"></textarea></div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="radio" class="col-sm-2 control-label">Radio</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<div class="radio block"><label><input type="radio"> Unchecked</label></div>--}}
-                                        {{--<div class="radio block"><label><input type="radio" checked=""> Checked</label></div>--}}
-                                        {{--<div class="radio block"><label><input type="radio" disabled=""> Disabled Unchecked</label></div>--}}
-                                        {{--<div class="radio block"><label><input type="radio" disabled="" checked=""> Disabled Checked</label></div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="radio" class="col-sm-2 control-label">Radio Inline</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<div class="radio-inline"><label><input type="radio"> Unchecked</label></div>--}}
-                                        {{--<div class="radio-inline"><label><input type="radio" checked=""> Checked</label></div>--}}
-                                        {{--<div class="radio-inline"><label><input type="radio" disabled=""> Disabled Unchecked</label></div>--}}
-                                        {{--<div class="radio-inline"><label><input type="radio" disabled="" checked=""> Disabled Checked</label></div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="smallinput" class="col-sm-2 control-label label-input-sm">Small Input</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<input type="text" class="form-control1 input-sm" id="smallinput" placeholder="Small Input">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="mediuminput" class="col-sm-2 control-label">Medium Input</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<input type="text" class="form-control1" id="mediuminput" placeholder="Medium Input">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group mb-n">--}}
-                                    {{--<label for="largeinput" class="col-sm-2 control-label label-input-lg">Large Input</label>--}}
-                                    {{--<div class="col-sm-8">--}}
-                                        {{--<input type="text" class="form-control1 input-lg" id="largeinput" placeholder="Large Input">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                             </form>
                         </div>
                     </div>

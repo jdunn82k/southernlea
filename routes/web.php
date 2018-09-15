@@ -55,6 +55,10 @@ Route::group(['middleware' => 'auth.admin'], function()
 
     Route::get('/admin/orders', 'AdminController@showOrders');
     Route::get('/admin/order/{id}', 'AdminController@showOrder');
+    Route::post('/admin/order/complete', 'AdminController@completeOrder');
+
+    Route::post('/admin/product/image', 'AdminController@addProductImage');
+    Route::delete('/admin/product/image', 'AdminController@removeProductImages');
 
 
 });

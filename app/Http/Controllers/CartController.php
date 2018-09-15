@@ -21,7 +21,7 @@ class CartController extends Controller
         {
             $product = Products::findOrFail($item->id);
 
-            $product_code = $item->code;
+            $product_code = $product->code;
             $product_price = $item->price;
             if (isset($item->options->size))
             {
@@ -33,7 +33,7 @@ class CartController extends Controller
 
             $product_info[] = [
                 'id' => $item->id,
-                'product_name' => $item->description1." - ".$item->description2,
+                'product_name' => $product->description1." - ".$product->description2,
                 'product_code' => $product_code,
                 'product_price' => $product_price,
                 'quantity' => $item->qty,
@@ -43,6 +43,7 @@ class CartController extends Controller
 
         $order = new Orders();
         $order->name = $request->name;
+        $order->email = $request->email;
         $order->address_1 = $request->address_1;
         $order->address_2 = $request->address_2;
         $order->city = $request->city;

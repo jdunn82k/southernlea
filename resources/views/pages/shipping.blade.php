@@ -8,8 +8,14 @@
                     <fieldset>
 
                         <!-- Form Name -->
-                        <legend>Shipping Address</legend>
+                        <h3 class="mt-2 mb-4">Shipping & Billing Information</h3>
 
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="textinput">Email Address <span class="text-red">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="email" name="email" class="form-control shipping-input">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="textinput">Name <span class="text-red">*</span></label>
                             <div class="col-sm-10">
