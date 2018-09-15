@@ -4,9 +4,9 @@
         <div class="header_top">
             <div class="top_right">
                 <ul>
-                    <li><a href="#">help</a></li>|
-                    <li><a href="{{URL::to('/contact')}}">Contact</a></li>|
-                    <li><a href="#">Delivery information</a></li>
+                    {{--<li><a href="#">help</a></li>|--}}
+                    {{--<li><a href="{{URL::to('/contact')}}">Contact</a></li>|--}}
+                    {{--<li><a href="#">Delivery information</a></li>--}}
                 </ul>
             </div>
             <div class="top_left">
@@ -66,12 +66,12 @@
                         </div>
                         <div class="clearfix"> </div>
                     </div>
-                    <div class="search">
-                        <form>
-                            <input type="text" value="" placeholder="search...">
-                            <input type="submit" value="">
-                        </form>
-                    </div>
+                    {{--<div class="search">--}}
+                        {{--<form>--}}
+                            {{--<input type="text" value="" placeholder="search...">--}}
+                            {{--<input type="submit" value="">--}}
+                        {{--</form>--}}
+                    {{--</div>--}}
                     <div class="clearfix"> </div>
                 </div>
                 <div class="clearfix"> </div>
