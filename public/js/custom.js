@@ -21,12 +21,15 @@ function getFilters(){
         filters.color = $(".color-block-active").data("id");
     }
 
-    if ($("input[name='discount']:checked").length > 0){
-        filters.discount = $("input[name='discount']:checked").val();
+    if ($("input[name='price_range']:checked").val() !== '0'){
+        console.log("triggered");
+        filters.price_range = $("input[name='price_range']:checked").val();
     }
 
     filters.sort_by = $("#sort-filter").val();
     filters.category = $("#category").val();
+
+    console.log(filters);
     return filters;
 }
 
@@ -229,7 +232,7 @@ if ($("#product-listings").length){
 }
 
 // Discount Filter
-$(document).on("click", "input[name='discount']", function(){
+$(document).on("click", "input[name='price_range']", function(){
     loadProducts();
 });
 

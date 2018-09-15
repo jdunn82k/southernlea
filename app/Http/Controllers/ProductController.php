@@ -37,7 +37,7 @@ class ProductController extends Controller
         $category = false;
         $color = false;
         $sort_by = false;
-        $discount = false;
+        $price_range = false;
         $skip = false;
         $take = false;
 
@@ -61,8 +61,8 @@ class ProductController extends Controller
         }
 
         //Check if Discount Filter is active
-        if (isset($filters['discount']) && $filters['discount'] > 0) {
-            $discount = $filters['discount'];
+        if (isset($filters['price_range']) && $filters['price_range'] !== 0) {
+            $price_range = $filters['price_range'];
         }
 
         //Check for category
@@ -82,8 +82,24 @@ class ProductController extends Controller
             ->when($category, function ($query, $category){
                 return $query->where('category', $category);
             })
-            ->when($discount, function ($query, $discount) {
-                return $query->where('discount', '>=', $discount);
+            ->when($price_range, function ($query, $price_range) {
+                switch ($price_range){
+                    case "10":
+                        $high = 9.99;
+                        $low = 0.00;
+                    break;
+
+                    case "20":
+                        $high = 19.99;
+                        $low = 10.00;
+                    break;
+
+                    case "20+":
+                        $high = 1000.00;
+                        $low  = 20.00;
+                    break;
+                }
+                return $query->where('price', '>=', $low)->where('price', '<=', $high);
             })->count();
 
         //If more than 20 results are present, paginate and determine results to obtain
@@ -101,8 +117,24 @@ class ProductController extends Controller
                 return $query->orderBy('price', $sort_by);
             })->when($category, function ($query, $category){
                 return $query->where('category', $category);
-            })->when($discount, function ($query, $discount) {
-                return $query->where('discount', '>=', $discount);
+            })->when($price_range, function ($query, $price_range) {
+                switch ($price_range){
+                    case "10":
+                        $high = 9.99;
+                        $low = 0.00;
+                        break;
+
+                    case "20":
+                        $high = 19.99;
+                        $low = 10.00;
+                        break;
+
+                    case "20+":
+                        $high = 1000.00;
+                        $low  = 20.00;
+                        break;
+                }
+                return $query->where('price', '>=', $low)->where('price', '<=', $high);
             })->when($skip, function ($query, $skip) {
                 return $query->skip($skip);
             })->when($take, function ($query, $take) {
