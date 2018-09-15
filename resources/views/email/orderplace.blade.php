@@ -1,7 +1,7 @@
 <html>
 <body style="font-family:Arial;">
-{{--<div style="text-align:center;"><img src="{{ $message->embed("img/logo.png") }}"></div>--}}
-<div style="text-align:center;"><img src="{{URL::to('img/main-01.jpg')}}" width='300' height='auto'></div>
+<div style="text-align:center;"><img src="{{ $message->embed("img/main-01.png") }}" width='300' height='auto'></div>
+{{--<div style="text-align:center;"><img src="{{URL::to('img/main-01.jpg')}}" width='300' height='auto'></div>--}}
 <div style="margin-top:10px;">
     <h2 style="text-align:center;">New Order Placed!</h2>
 </div>
