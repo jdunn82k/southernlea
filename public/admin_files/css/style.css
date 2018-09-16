@@ -9,7 +9,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 /* Custom CSS */
 
-.add-new-image{
+.add-new-image,
+.add-new-image-2{
     margin-right:7px;
 }
 
@@ -33,6 +34,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 .height-200{
     height:200px !important;
+}
+
+.image-blocks{
+    min-height:200px;
 }
 .flex{
     display:flex;
@@ -80,6 +85,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 .photo-area .default-overlay input{
     opacity:1;
+}
+
+#sizes-available i.fa-trash{
+    cursor:pointer;
 }
 
 .sub-table-heading{

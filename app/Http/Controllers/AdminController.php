@@ -107,6 +107,81 @@ class AdminController extends Controller
         ProductImages::destroy($request->ids);
         return "1";
     }
+
+    public function newProduct(Request $request)
+    {
+        $product = new Products();
+        $product->category      = $request->category;
+
+        if (isset($request->subcategory))
+        {
+            $product->subcategory   = $request->subcategory;
+
+        }
+        $product->description1  = $request->description_1;
+        $product->description2  = $request->description_2;
+        $product->code          = $request->product_code;
+        $product->quantityInStock = $request->quantity;
+        $product->price         = $request->price;
+        $product->save();
+
+        if (isset($request->new_sizes))
+        {
+            foreach($request->new_sizes as $size)
+            {
+                $new_size = new ProductSizes();
+                $new_size->product_id = $product->id;
+                $new_size->size = $size['size'];
+                $new_size->product_code = $size['code'];
+                $new_size->quantity = $size['quantity'];
+                $new_size->price = $size['price'];
+                $new_size->save();
+            }
+        }
+
+
+        //Add images
+        if (isset($request->new_images))
+        {
+            $count = 0;
+            foreach($request->new_images as $image)
+            {
+                $new_image = new ProductImages();
+                $new_image->product_id = $product->id;
+                $new_image->url         = "img/".$image;
+
+                if (isset($request->defaultImage))
+                {
+                    if ($request->defaultImage === $image)
+                    {
+                        $new_image->default = 1;
+                    }
+                    else
+                    {
+                        $new_image->default = 0;
+                    }
+                }
+                else
+                {
+                    if ($count === 0)
+                    {
+                        $new_image->default = 1;
+                    }
+                    else
+                    {
+                        $new_image->default = 0;
+                    }
+                }
+
+
+                $new_image->save();
+                $count++;
+
+            }
+        }
+
+
+    }
     public function addProductImage(Request $request)
     {
         $this->validate($request, [
@@ -117,13 +192,20 @@ class AdminController extends Controller
 
         $file = $request->file('file')->store(false, 'image-upload');
 
-        $image = new ProductImages();
-        $image->product_id = $request->product_id;
-        $image->url = "img/".$file;
-        $image->default = 0;
-        $image->save();
+        if (isset($request->product_id))
+        {
+            $image = new ProductImages();
+            $image->product_id = $request->product_id;
+            $image->url = "img/".$file;
+            $image->default = 0;
+            $image->save();
+            return response()->json(["id" => $image->id, "file" => $file]);
 
-        return response()->json(["id" => $image->id, "file" => $file]);
+        }
+
+        return response()->json(["file" => $file]);
+
+
     }
     public function completeOrder(Request $request)
     {
@@ -193,6 +275,69 @@ class AdminController extends Controller
         {
             return view('admin.login')->withErrors(['password' => 'Wrong Password']);
         }
+
+    }
+
+    public function updateProduct(Request $request)
+    {
+        $product                = Products::find($request->product_id);
+        $product->category      = $request->category;
+
+        if (isset($request->subcategory))
+        {
+            $product->subcategory   = $request->subcategory;
+
+        }
+        $product->description1  = $request->description_1;
+        $product->description2  = $request->description_2;
+        $product->code          = $request->product_code;
+        $product->quantityInStock = $request->quantity;
+        $product->price         = $request->price;
+        $product->save();
+
+        //Check for default image
+        if (isset($request->defaultImage))
+        {
+            $images = ProductImages::where('product_id', $request->product_id)->get();
+            foreach($images as $image)
+            {
+                $image->default = 0;
+                $image->save();
+            }
+
+            $image = ProductImages::find($request->defaultImage);
+            $image->default = 1;
+            $image->save();
+
+        }
+
+        //Check Existing Sizes
+        $existing_sizes = ProductSizes::where('product_id', $request->product_id)->get();
+
+        foreach($existing_sizes as $size)
+        {
+            if (!in_array($size->id, $request->existing_sizes))
+            {
+                $size->destroy();
+            }
+        }
+
+        //Check new sizes
+        if (isset($request->new_sizes))
+        {
+            foreach($request->new_sizes as $size)
+            {
+                $new_size = new ProductSizes();
+                $new_size->product_id = $request->product_id;
+                $new_size->size = $size['size'];
+                $new_size->product_code = $size['code'];
+                $new_size->quantity = $size['quantity'];
+                $new_size->price = $size['price'];
+                $new_size->save();
+            }
+        }
+
+
 
     }
 

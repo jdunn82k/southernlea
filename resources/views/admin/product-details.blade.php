@@ -8,19 +8,19 @@
                     <div class="row">
                         <h3 class="title1">Product Information</h3>
                         <div class="form-three widget-shadow">
-                            <form class="form-horizontal" action="{{URL::to('/product/update')}}" method="post">
+                            <form class="form-horizontal">
                                 <input type="hidden" id="product-id" value="{{$product->id}}">
                                 <div class="form-group">
                                     <label for="focusedinput" class="col-sm-2 control-label">Product Name</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control1" id="focusedinput" name='product-name' value="{{$product->description1}}">
+                                        <input type="text" class="form-control1" id="desc1" name='product-name' value="{{$product->description1}}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="focusedinput" class="col-sm-2 control-label">Product Code</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control1" id="focusedinput" name='product-code' value="{{$product->code}}">
+                                        <input type="text" class="form-control1" id="product-code" name='product-code' value="{{$product->code}}">
                                     </div>
                                 </div>
 
@@ -60,7 +60,14 @@
                                 <div class="form-group">
                                     <label for="focusedinput" class="col-sm-2 control-label">Price</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control1" id="focusedinput" name='product-price' value="{{$product->price}}">
+                                        <input type="text" class="form-control1" id="product-price" name='product-price' value="{{$product->price}}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="focusedinput" class="col-sm-2 control-label">Quantity In Stock</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control1" id="product-quantity" name='product-quantity' value="{{$product->quantityInStock}}">
                                     </div>
                                 </div>
 
@@ -86,13 +93,14 @@
                                                         <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
                                                     </div>
                                                 </div>
-                                            @endif
+                                            @else
                                             <div class="photo-block m-3">
                                                 <div class="photo-block-image">
                                                     <input type="checkbox" class="form-control" data-photo-id="{{$image->id}}">
                                                     <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
                                                 </div>
                                             </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                     <div class="col-sm-10">
@@ -110,7 +118,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Sizes Available </label>
                                     <div class="col-sm-8">
-                                        <table class="table">
+                                        <table class="table" id="sizes-available">
                                             <thead>
                                             <tr>
                                                 <th>Size</th>
@@ -122,7 +130,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($sizes as $size)
-                                                <tr>
+                                                <tr class="existing" id="size_{{$size->id}}">
                                                     <td>{{$size->size}}</td>
                                                     <td>{{$size->product_code}}</td>
                                                     <td>{{$size->price}}</td>
@@ -132,17 +140,17 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
+
                                             </tbody>
                                         </table>
-                                        <button type="button" class="btn btn-primary pull-right">Add Size</button>
-
+                                        <button type="button" class="btn btn-primary pull-right" id="add-size">Add Size</button>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-10">
                                         <hr>
-                                        <button type="submit" class="btn btn-primary pull-right" id="submit-product-changes">Update</button>
+                                        <button type="button" class="btn btn-primary pull-right" id="submit-product-changes">Update Product</button>
                                     </div>
                                 </div>
 
@@ -154,4 +162,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

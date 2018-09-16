@@ -31,6 +31,11 @@
                             <i class="fa fa-shopping-cart"></i> <span>Orders</span>
                         </a>
                     </li>
+                    {{--<li class="treeview">--}}
+                        {{--<a href="{{URL::to('admin/categories')}}">--}}
+                            {{--<i class="fa fa-shopping-cart"></i> <span>Categories</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-shopping-bag"></i>
@@ -42,6 +47,10 @@
                             <li><a href="{{URL::to('admin/product/new')}}"><i class="fa fa-angle-right"></i> Add New Product</a></li>
                         </ul>
                     </li>
+
+
+
+
                     {{--<li class="treeview">--}}
                         {{--<a href="charts.html">--}}
                             {{--<i class="fa fa-pie-chart"></i>--}}

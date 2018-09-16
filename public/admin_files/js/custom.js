@@ -44,8 +44,147 @@ $(function() {
 
 $(function(){
 
+    $("#add-product-button").on("click", function(){
+        var description_1   = $("#desc1").val();
+        var description_2   = $("#txtarea1").val();
+        var product_code    = $("#product-code").val();
+        var category        = $("#product-category").val();
+        var subcategory     = $("#product-subcategory").val();
+        var price           = $("#product-price").val();
+        var quantityInStock        = $("#product-quantity").val();
+
+        var new_sizes           = [];
+        $(".new-size").each(function(){
+            $this = $(this);
+            var size        = $this.find("#size-select").val();
+            var code        = $this.find(".product-code").val();
+            var price       = $this.find(".product-price").val();
+            var quantity    = $this.find(".product-quantity").val();
+
+            new_sizes.push( {size: size, code: code, price: price, quantity: quantity} );
+        });
+
+        //Check for images
+        var new_images = [];
+        var defaultImage;
+        $(".photo-block-image").each(function(){
+           var img_name = $(this).find("input[type='checkbox']").data('photo-url');
+           if ($(this).find("input[type='checkbox']").parent().hasClass('photo-select')){
+               defaultImage = $(this).find("input[type='checkbox']").data('photo-url');
+           }
+           new_images.push(img_name);
+        });
+
+        $.ajax({
+            url: "/admin/product/new",
+            type: "post",
+            data: {
+                description_1: description_1,
+                description_2: description_2,
+                product_code: product_code,
+                category: category,
+                subcategory: subcategory,
+                price: price,
+                new_sizes: new_sizes,
+                defaultImage: defaultImage,
+                quantity: quantityInStock,
+                new_images: new_images,
+            }
+        }).done(function(cb){
+            console.log(cb);
+        });
+    });
+
+
+    $("#submit-product-changes").on("click", function(){
+
+        var product_id      = $("#product-id").val();
+        var description_1   = $("#desc1").val();
+        var description_2   = $("#txtarea1").val();
+        var product_code    = $("#product-code").val();
+        var category        = $("#product-category").val();
+        var subcategory     = $("#product-subcategory").val();
+        var price           = $("#product-price").val();
+        var defaultImage    = $(".photo-select input").data("photo-id");
+        var quantityInStock        = $("#product-quantity").val();
+
+        var new_sizes           = [];
+        $(".new-size").each(function(){
+            $this = $(this);
+            var size        = $this.find("#size-select").val();
+            var code        = $this.find(".product-code").val();
+            var price       = $this.find(".product-price").val();
+            var quantity    = $this.find(".product-quantity").val();
+
+            new_sizes.push( {size: size, code: code, price: price, quantity: quantity} );
+        });
+
+        var existing_sizes      = [];
+        $(".existing").each(function(){
+            $this = $(this);
+
+            var id          = $this.prop('id').replace("size_", "");
+
+            existing_sizes.push( id );
+        });
+
+
+        $.ajax({
+            url: "/admin/product/update",
+            type: "post",
+            data: {
+                product_id: product_id,
+                description_1: description_1,
+                description_2: description_2,
+                product_code: product_code,
+                category: category,
+                subcategory: subcategory,
+                price: price,
+                new_sizes: new_sizes,
+                existing_sizes: existing_sizes,
+                defaultImage: defaultImage,
+                quantity: quantityInStock
+            }
+        }).done(function(cb){
+            console.log(cb);
+        });
+
+    });
+
+    $(document).on("click", "#sizes-available i.fa-trash", function(){
+        $(this).parent().parent().remove();
+    });
+    $("#add-size").on("click", function(){
+        var html = "<tr class=\"new-size\">\n" +
+            "    <td>\n" +
+            "        <select id=\"size-select\" class=\"form-control\">\n" +
+            "            <option value=\"XS\">XS</option>\n" +
+            "            <option value=\"S\">S</option>\n" +
+            "            <option value=\"M\">M</option>\n" +
+            "            <option value=\"L\">L</option>\n" +
+            "            <option value=\"XL\">XL</option>\n" +
+            "            <option value=\"2X\">2X</option>\n" +
+            "        </select>\n" +
+            "    </td>\n" +
+            "    <td>\n" +
+            "        <input type=\"text\"  class=\"form-control product-code\">\n" +
+            "    </td>\n" +
+            "    <td>\n" +
+            "        <input type=\"text\"  class=\"form-control product-price\">\n" +
+            "    </td>\n" +
+            "    <td>\n" +
+            "        <input type=\"number\" class=\"form-control product-quantity\">\n" +
+            "    </td>\n" +
+            "    <td><i class=\"fa fa-trash\"></i></td>\n" +
+            "</tr>";
+        $("#sizes-available tbody").append(html);
+    });
    $(".add-new-image").on("click", function(){
         $("#image-input").click();
+   });
+
+   $(".add-new-image-2").on("click", function(){
+       $("#new-image-input").click();
    });
 
    $(".select-default").on("click", function(){
@@ -70,6 +209,29 @@ $(function(){
               data: {ids: ids}
           })
       }
+   });
+
+   $("#new-image-input").on("change", function(){
+       var formData = new FormData();
+       formData.append('file', $("#new-image-input")[0].files[0]);
+       $.ajax({
+           url: "/admin/product/image",
+           type: "post",
+           data: formData,
+           cache: false,
+           contentType: false,
+           processData: false
+       }).done(function(cb){
+           var new_block = $(".add-new-image").parent();
+           $(".image-blocks").append('<div class="photo-block m-3">\n' +
+               '                <div class="photo-block-image">\n' +
+               '                   <div>\n' +
+               '                     <input type="checkbox" class="form-control" data-photo-url="'+cb.file+'">\n' +
+               '                     <img src="../../img/'+cb.file+'" class="img-responsive" alt="">\n' +
+               '                   </div>\n' +
+               '                 </div>\n' +
+               '              </div>');
+       });
    });
    $("#image-input").on("change", function(){
        var formData = new FormData();
