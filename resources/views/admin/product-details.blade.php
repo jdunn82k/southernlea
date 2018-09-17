@@ -18,13 +18,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="focusedinput" class="col-sm-2 control-label">Product Code</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control1" id="product-code" name='product-code' value="{{$product->code}}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <label for="focusedinput" class="col-sm-2 control-label">Category</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" id="product-category" name="product-category">

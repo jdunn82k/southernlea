@@ -47,11 +47,12 @@ $(function(){
     $("#add-product-button").on("click", function(){
         var description_1   = $("#desc1").val();
         var description_2   = $("#txtarea1").val();
-        var product_code    = $("#product-code").val();
         var category        = $("#product-category").val();
         var subcategory     = $("#product-subcategory").val();
         var price           = $("#product-price").val();
         var quantityInStock        = $("#product-quantity").val();
+
+
 
         var new_sizes           = [];
         $(".new-size").each(function(){
@@ -81,7 +82,6 @@ $(function(){
             data: {
                 description_1: description_1,
                 description_2: description_2,
-                product_code: product_code,
                 category: category,
                 subcategory: subcategory,
                 price: price,
@@ -101,7 +101,6 @@ $(function(){
         var product_id      = $("#product-id").val();
         var description_1   = $("#desc1").val();
         var description_2   = $("#txtarea1").val();
-        var product_code    = $("#product-code").val();
         var category        = $("#product-category").val();
         var subcategory     = $("#product-subcategory").val();
         var price           = $("#product-price").val();
@@ -136,7 +135,6 @@ $(function(){
                 product_id: product_id,
                 description_1: description_1,
                 description_2: description_2,
-                product_code: product_code,
                 category: category,
                 subcategory: subcategory,
                 price: price,
@@ -154,6 +152,8 @@ $(function(){
     $(document).on("click", "#sizes-available i.fa-trash", function(){
         $(this).parent().parent().remove();
     });
+
+
     $("#add-size").on("click", function(){
         var html = "<tr class=\"new-size\">\n" +
             "    <td>\n" +
@@ -179,6 +179,8 @@ $(function(){
             "</tr>";
         $("#sizes-available tbody").append(html);
     });
+
+
    $(".add-new-image").on("click", function(){
         $("#image-input").click();
    });

@@ -120,7 +120,6 @@ class AdminController extends Controller
         }
         $product->description1  = $request->description_1;
         $product->description2  = $request->description_2;
-        $product->code          = $request->product_code;
         $product->quantityInStock = $request->quantity;
         $product->price         = $request->price;
         $product->save();
@@ -132,7 +131,6 @@ class AdminController extends Controller
                 $new_size = new ProductSizes();
                 $new_size->product_id = $product->id;
                 $new_size->size = $size['size'];
-                $new_size->product_code = $size['code'];
                 $new_size->quantity = $size['quantity'];
                 $new_size->price = $size['price'];
                 $new_size->save();
@@ -290,7 +288,6 @@ class AdminController extends Controller
         }
         $product->description1  = $request->description_1;
         $product->description2  = $request->description_2;
-        $product->code          = $request->product_code;
         $product->quantityInStock = $request->quantity;
         $product->price         = $request->price;
         $product->save();
@@ -318,7 +315,7 @@ class AdminController extends Controller
         {
             if (!in_array($size->id, $request->existing_sizes))
             {
-                $size->destroy();
+                $size->delete();
             }
         }
 
@@ -330,7 +327,6 @@ class AdminController extends Controller
                 $new_size = new ProductSizes();
                 $new_size->product_id = $request->product_id;
                 $new_size->size = $size['size'];
-                $new_size->product_code = $size['code'];
                 $new_size->quantity = $size['quantity'];
                 $new_size->price = $size['price'];
                 $new_size->save();
