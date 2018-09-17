@@ -111,13 +111,12 @@ class AdminController extends Controller
 
 
         $file = Storage::disk('image-upload')->get($image_url);
-
         $new_image = Image::make($file);
-
-
         $new_image->rotate(90);
 
-        return var_dump($new_image->save("img/".$image_url));
+        $new_image->save("img/".$image_url);
+
+        return response();
     }
     public function removeProductImages(Request $request)
     {
@@ -206,9 +205,19 @@ class AdminController extends Controller
 
         ]);
 
-        $file = $request->file('file')->store(false, 'image-upload');
+        $file = $request->file('file');
+        $image = Image::make($file);
 
-        return response()->json(["file" => $file]);
+        $filename = date('Ymdhis').'.jpg';
+
+        $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize(400, null, function($constraint){
+            $constraint->aspectRatio();
+        });
+
+        $image->insert($watermark, 'top-right');
+        $image->save('img/'.$filename);
+
+        return response()->json(["file" => $filename]);
     }
     public function addProductImage(Request $request)
     {
@@ -218,20 +227,33 @@ class AdminController extends Controller
 
         ]);
 
-        $file = $request->file('file')->store(false, 'image-upload');
+        $file = $request->file('file');
+        $image = Image::make($file);
+
+        $filename = date('Ymdhis').'.jpg';
+
+        $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize(400, null, function($constraint){
+            $constraint->aspectRatio();
+        });
+
+        $image->insert($watermark, 'top-right');
+        $image->save('img/'.$filename);
+//        $file = $request->file('file')->store(false, 'image-upload');
+
+
 
         if (isset($request->product_id))
         {
             $image = new ProductImages();
             $image->product_id = $request->product_id;
-            $image->url = "img/".$file;
+            $image->url = "img/".$filename;
             $image->default = 0;
             $image->save();
-            return response()->json(["id" => $image->id, "file" => $file]);
+            return response()->json(["id" => $image->id, "file" => $filename]);
 
         }
 
-        return response()->json(["file" => $file]);
+        return response()->json(["file" => $filename]);
 
 
     }
