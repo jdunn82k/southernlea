@@ -23,6 +23,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     margin-top:10px;
 }
 
+.drag-and-drop{
+    border: 1px dotted #DDD;
+    min-height:200px;
+}
 .dt-buttons{
     width:100% !important;
 }

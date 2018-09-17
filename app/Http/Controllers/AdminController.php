@@ -14,6 +14,8 @@ use App\SubCategories;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class AdminController extends Controller
 {
@@ -102,6 +104,21 @@ class AdminController extends Controller
 
     }
 
+    public function rotateImage1(Request $request)
+    {
+
+        $image_url = $request->url;
+
+
+        $file = Storage::disk('image-upload')->get($image_url);
+
+        $new_image = Image::make($file);
+
+
+        $new_image->rotate(90);
+
+        return var_dump($new_image->save("img/".$image_url));
+    }
     public function removeProductImages(Request $request)
     {
         ProductImages::destroy($request->ids);
@@ -179,6 +196,19 @@ class AdminController extends Controller
         }
 
 
+    }
+
+    public function addProductImageNewProduct(Request $request)
+    {
+        $this->validate($request, [
+
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+
+        ]);
+
+        $file = $request->file('file')->store(false, 'image-upload');
+
+        return response()->json(["file" => $file]);
     }
     public function addProductImage(Request $request)
     {

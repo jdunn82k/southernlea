@@ -58,10 +58,12 @@ Route::group(['middleware' => 'auth.admin'], function()
     Route::post('/admin/order/complete', 'AdminController@completeOrder');
 
     Route::post('/admin/product/image', 'AdminController@addProductImage');
+    Route::post('/admin/product/image_2', 'AdminController@addProductImageNewProduct');
+
     Route::delete('/admin/product/image', 'AdminController@removeProductImages');
 
     Route::post('/admin/product/update', 'AdminController@updateProduct');
     Route::post('/admin/product/new', 'AdminController@newProduct');
 
-
+    Route::post('/admin/image/rotate1', 'AdminController@rotateImage1');
 });

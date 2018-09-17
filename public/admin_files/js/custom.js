@@ -42,6 +42,11 @@ $(function() {
 });
 
 
+//Image Controls
+$(function(){
+
+
+});
 $(function(){
 
     $("#add-product-button").on("click", function(){
@@ -167,9 +172,6 @@ $(function(){
             "        </select>\n" +
             "    </td>\n" +
             "    <td>\n" +
-            "        <input type=\"text\"  class=\"form-control product-code\">\n" +
-            "    </td>\n" +
-            "    <td>\n" +
             "        <input type=\"text\"  class=\"form-control product-price\">\n" +
             "    </td>\n" +
             "    <td>\n" +
@@ -188,6 +190,24 @@ $(function(){
    $(".add-new-image-2").on("click", function(){
        $("#new-image-input").click();
    });
+
+
+    $(".rotate-image").on("click", function(){
+        var inputs = $(".photo-block-image input[type='checkbox']:checked");
+        if (inputs.length === 1){
+            var image_url = $(".photo-block-image input[type='checkbox']:checked").data('photo-url');
+            console.log(image_url);
+            $.ajax({
+                url: "/admin/image/rotate1",
+                type: "post",
+                data: {url: image_url}
+            }).done(function(cb){
+                var d = new Date();
+                $(".photo-block-image input[type='checkbox']:checked").parent().find("img").attr('src', '../../img/'+image_url+'?'+d.getTime())
+            });
+
+        }
+    });
 
    $(".select-default").on("click", function(){
 
@@ -217,7 +237,7 @@ $(function(){
        var formData = new FormData();
        formData.append('file', $("#new-image-input")[0].files[0]);
        $.ajax({
-           url: "/admin/product/image",
+           url: "/admin/product/image_2",
            type: "post",
            data: formData,
            cache: false,
@@ -229,7 +249,7 @@ $(function(){
                '                <div class="photo-block-image">\n' +
                '                   <div>\n' +
                '                     <input type="checkbox" class="form-control" data-photo-url="'+cb.file+'">\n' +
-               '                     <img src="../../img/'+cb.file+'" class="img-responsive" alt="">\n' +
+               '                     <img src="../../img/'+cb.file+'" id="'+cb.file+'" class="img-responsive" alt="">\n' +
                '                   </div>\n' +
                '                 </div>\n' +
                '              </div>');

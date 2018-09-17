@@ -21,7 +21,6 @@
                 @endforeach
             </div>
             <div class="col-md-4 col-lg-4 col-sm-4">
-                <p><span class="font-weight-bold font-size-13">PRODUCT CODE: </span><span class="highlight" id="product-code">{{$product->code}}</span></p>
                 <div class="clearfix">
                     @if ($product->quantityInStock > 0)
                         <p class="float-left font-size-13" id="stock">Availability: <span class="text-green">In stock</span></p>

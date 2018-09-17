@@ -86,6 +86,7 @@
                                     <div class="pull-right">
                                         <div class="form-group">
                                             <button type="button" class="btn btn-primary select-default">Set Default</button>
+                                            <button type="button" class="btn btn-primary rotate-image">Rotate Image</button>
                                             <button type="button" class="btn btn-primary add-new-image-2">Add Image</button>
                                             <button type="button" class="btn btn-primary pull-right delete-images">Delete Selected Images</button>
                                         </div>
