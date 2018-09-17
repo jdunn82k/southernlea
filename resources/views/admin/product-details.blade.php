@@ -115,7 +115,6 @@
                                             <thead>
                                             <tr>
                                                 <th>Size</th>
-                                                <th>Product Code</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
                                                 <th></th>
@@ -125,7 +124,6 @@
                                             @foreach($sizes as $size)
                                                 <tr class="existing" id="size_{{$size->id}}">
                                                     <td>{{$size->size}}</td>
-                                                    <td>{{$size->product_code}}</td>
                                                     <td>{{$size->price}}</td>
                                                     <td>{{$size->quantity}}</td>
                                                     <td>
