@@ -102,11 +102,26 @@ function loadProducts(page=1, viewall=false, category=false){
             $.each(products, function(key, val){
                 var url  = "";
                 if (typeof images[val.id] !== 'undefined'){
+                    var dC = 0;
                     $.each(images[val.id], function(key2, val2){
+
                         if (val2.default === 1){
                             url = val2.url;
+                            dC++;
                         }
                     });
+
+                    if (dC === 0){
+
+                        $.each(images[val.id], function(key2, val2){
+                            if(dC === 0){
+                                url = val2.url;
+                                dC++;
+                            }
+
+                        });
+                    }
+
                 } else {
                     var url = "img/No_Image_Available.jpg";
                 }

@@ -194,6 +194,7 @@ class AdminController extends Controller
             }
         }
 
+        return $product;
 
     }
 
@@ -294,7 +295,7 @@ class AdminController extends Controller
             ProductSizes::where('product_id', $id)->delete();
         }
 
-        return true;
+        return "true";
 
     }
 
@@ -363,9 +364,10 @@ class AdminController extends Controller
         //Check Existing Sizes
         $existing_sizes = ProductSizes::where('product_id', $request->product_id)->get();
 
+
         foreach($existing_sizes as $size)
         {
-            if (!in_array($size->id, $request->existing_sizes))
+            if (!isset($request->existing_sizes) || !in_array($size->id, $request->existing_sizes))
             {
                 $size->delete();
             }

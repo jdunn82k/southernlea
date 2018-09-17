@@ -154,6 +154,16 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="messages">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
 
+                <div class="modal-body text-center">
+                    <p id="error-message" class="mb-10"></p>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

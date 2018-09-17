@@ -31,7 +31,6 @@
     <link href="{{URL::to('admin_files/vendor/Select-1.2.6/css/select.dataTables.css')}}" rel="stylesheet">
     <link href="{{URL::to('admin_files/vendor/Select-1.2.6/css/select.bootstrap.css')}}" rel="stylesheet">
 
-    <link href="{{URL::to('admin_files/css/dropzone.css')}}" rel="styleshet">
 
     <link href="{{URL::to('admin_files/css/custom.css')}}" rel="stylesheet">
 
@@ -101,7 +100,6 @@
     <script src="{{URL::to('admin_files/vendor/Select-1.2.6/js/select.bootstrap.js')}}"></script>
 
     <!-- Dropzone -->
-    <script src="{{URL::to('admin_files/js/dropzone.js')}}"></script>
 
     <!-- Custom JS -->
     <script src="{{URL::to('admin_files/js/custom.js')}}"></script>

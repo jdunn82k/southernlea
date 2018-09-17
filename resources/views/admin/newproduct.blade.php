@@ -6,7 +6,7 @@
         <div class="main-page">
             <div class="container font-calibri">
                 <div class="row">
-                    <h3 class="title1">Product Information</h3>
+                    <h3 class="title1">Add A New Product</h3>
                     <div class="form-three widget-shadow">
                         <form class="form-horizontal">
                             <input type="hidden" id="product-id" value="">
@@ -14,13 +14,6 @@
                                 <label for="focusedinput" class="col-sm-2 control-label">Product Name</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control1" id="desc1" name='product-name' value="">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="focusedinput" class="col-sm-2 control-label">Product Code</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control1" id="product-code" name='product-code' value="">
                                 </div>
                             </div>
 
@@ -102,7 +95,6 @@
                                         <thead>
                                         <tr>
                                             <th>Size</th>
-                                            <th>Product Code</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
                                             <th></th>
@@ -131,6 +123,19 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="messages">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                {{--<div class="modal-header">--}}
+                    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>--}}
+                    {{--<h4 class="modal-title" id="mySmallModalLabel">Error<span id="delete-count"></span></h4>--}}
+                {{--</div>--}}
+                <div class="modal-body text-center">
+                    <p id="error-message" class="mb-10"></p>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

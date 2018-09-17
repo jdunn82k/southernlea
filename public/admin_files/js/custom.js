@@ -57,17 +57,40 @@ $(function(){
         var price           = $("#product-price").val();
         var quantityInStock        = $("#product-quantity").val();
 
+        if (description_1 == ""){
+            $("#error-message").text("Product Name Required");
+            $("#messages").modal('toggle');
+            return false;
+        }
 
+        if (category === "blank"){
+            $("#error-message").text("Category Required");
+            $("#messages").modal('toggle');
+            return false;
+
+        }
+
+        if (price === ""){
+            $("#error-message").text("Price Required");
+            $("#messages").modal('toggle');
+            return false;
+
+        }
+
+        if (quantityInStock === ""){
+            $("#error-message").text("Quantity Required");
+            $("#messages").modal('toggle');
+            return false;
+        }
 
         var new_sizes           = [];
         $(".new-size").each(function(){
             $this = $(this);
             var size        = $this.find("#size-select").val();
-            var code        = $this.find(".product-code").val();
             var price       = $this.find(".product-price").val();
             var quantity    = $this.find(".product-quantity").val();
 
-            new_sizes.push( {size: size, code: code, price: price, quantity: quantity} );
+            new_sizes.push( {size: size, price: price, quantity: quantity} );
         });
 
         //Check for images
@@ -96,7 +119,7 @@ $(function(){
                 new_images: new_images,
             }
         }).done(function(cb){
-            console.log(cb);
+            window.location.href="/admin/products/"+cb.id;
         });
     });
 
@@ -111,6 +134,32 @@ $(function(){
         var price           = $("#product-price").val();
         var defaultImage    = $(".photo-select input").data("photo-id");
         var quantityInStock        = $("#product-quantity").val();
+
+        if (description_1 == ""){
+            $("#error-message").text("Product Name Required");
+            $("#messages").modal('toggle');
+            return false;
+        }
+
+        if (category === "blank"){
+            $("#error-message").text("Category Required");
+            $("#messages").modal('toggle');
+            return false;
+
+        }
+
+        if (price === ""){
+            $("#error-message").text("Price Required");
+            $("#messages").modal('toggle');
+            return false;
+
+        }
+
+        if (quantityInStock === ""){
+            $("#error-message").text("Quantity Required");
+            $("#messages").modal('toggle');
+            return false;
+        }
 
         var new_sizes           = [];
         $(".new-size").each(function(){
@@ -149,7 +198,7 @@ $(function(){
                 quantity: quantityInStock
             }
         }).done(function(cb){
-            console.log(cb);
+            window.location.reload();
         });
 
     });
