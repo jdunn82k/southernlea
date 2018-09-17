@@ -271,7 +271,7 @@ $(function(){
            $(".image-blocks").append('<div class="photo-block m-3">\n' +
                '                <div class="photo-block-image">\n' +
                '                   <div>\n' +
-               '                     <input type="checkbox" class="form-control" data-photo-id="'+cb.id+'">\n' +
+               '                     <input type="checkbox" class="form-control" data-photo-url="'+cb.file+'" data-photo-id="'+cb.id+'">\n' +
                '                     <img src="../../img/'+cb.file+'" class="img-responsive" alt="">\n' +
                '                   </div>\n' +
                '                 </div>\n' +

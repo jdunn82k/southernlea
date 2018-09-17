@@ -82,14 +82,14 @@
                                             @if ($image->default === 1)
                                                 <div class="photo-block m-3">
                                                     <div class="photo-block-image photo-select">
-                                                        <input type="checkbox" class="form-control" data-photo-id="{{$image->id}}">
+                                                        <input type="checkbox" class="form-control" data-photo-url="{{str_replace('img/', '', $image->url)}}" data-photo-id="{{$image->id}}">
                                                         <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
                                                     </div>
                                                 </div>
                                             @else
                                             <div class="photo-block m-3">
                                                 <div class="photo-block-image">
-                                                    <input type="checkbox" class="form-control" data-photo-id="{{$image->id}}">
+                                                    <input type="checkbox" class="form-control" data-photo-url="{{str_replace('img/', '', $image->url)}}" data-photo-id="{{$image->id}}">
                                                     <img src="{{URL::to($image->url)}}" class="img-responsive" alt="">
                                                 </div>
                                             </div>
@@ -100,6 +100,7 @@
                                         <div class="pull-right">
                                             <div class="form-group">
                                                 <button type="button" class="btn btn-primary select-default">Set Default</button>
+                                                <button type="button" class="btn btn-primary rotate-image">Rotate Image</button>
                                                 <button type="button" class="btn btn-primary add-new-image">Add Image</button>
                                                 <button type="button" class="btn btn-primary pull-right delete-images">Delete Selected Images</button>
                                             </div>
