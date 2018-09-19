@@ -104,6 +104,121 @@ class AdminController extends Controller
 
     }
 
+    public function updateCategory(Request $request)
+    {
+
+        $category       = SubCategories::findOrFail($request->cat_id);
+        $cat_links      = CategoryLinks::where('subcategory_id', $request->cat_id)->get();
+
+        $category->name = $request->cat_name;
+        $category->save();
+
+
+
+        foreach($request->sub_cats as $sub_cat)
+        {
+            if ($sub_cat[0] == "0")
+            {
+                $subcat = new CategoryLinks();
+                $subcat->subcategory_id     = $request->cat_id;
+                $subcat->name               = $sub_cat[1];
+                $subcat->save();
+            }
+            else
+            {
+
+                foreach($cat_links as $subs)
+                {
+                    $count = 0;
+                    foreach($request->sub_cats as $sub_cat2)
+                    {
+                        if ($sub_cat2[0] == $subs->id){
+                            $count++;
+                            $subs->name = $sub_cat2[1];
+                            $subs->save();
+                        }
+                    }
+                    if ($count === 0)
+                    {
+                        $subs->delete();
+                    }
+
+                }
+
+
+            }
+
+        }
+
+        return $count;
+    }
+    public function checkSubCat(Request $request)
+    {
+        return Products::where('categorylink', $request->subcat)->get();
+    }
+
+    public function deleteCat(Request $request)
+    {
+        $cat = Categories::findOrFail($request->cat_id);
+        $subcats = SubCategories::where('category_id', $request->cat_id)->get();
+        foreach($subcats as $subcat)
+        {
+            $categorylinks = CategoryLinks::where('subcategory_id', $subcat->id)->get();
+            foreach($categorylinks as $link)
+            {
+                $link->delete();
+            }
+            $subcat->delete();
+        }
+        $cat->delete();
+    }
+
+    public function deleteCat2(Request $request)
+    {
+
+        $subcat = SubCategories::findOrFail($request->cat_id);
+        $categorylinks = CategoryLinks::where('subcategory_id', $subcat->id)->get();
+        foreach($categorylinks as $link)
+        {
+            $link->delete();
+        }
+
+        $subcat->delete();
+        return "1";
+    }
+
+    public function categories()
+    {
+        return view('admin.categories')
+            ->with('categories', Categories::all())
+            ->with('subcategories', SubCategories::all())
+            ->with('category_links', CategoryLinks::all());
+    }
+
+    public function addSubCat(Request $request)
+    {
+        $subcat = new SubCategories();
+        $subcat->name = $request->cat_name;
+        $subcat->category_id = $request->cat_id;
+        $subcat->save();
+
+        foreach($request->subcats as $catlinks)
+        {
+            $cat = new CategoryLinks();
+            $cat->name = $catlinks;
+            $cat->subcategory_id = $subcat->id;
+            $cat->save();
+        }
+        return "1";
+    }
+    public function addCategory(Request $request)
+    {
+        $cat = new Categories();
+        $cat->name = $request->cat;
+        $cat->save();
+
+        return "1";
+    }
     public function rotateImage1(Request $request)
     {
 
@@ -116,7 +231,7 @@ class AdminController extends Controller
 
         $new_image->save("img/".$image_url);
 
-        return response();
+        return "1";
     }
     public function removeProductImages(Request $request)
     {
@@ -310,6 +425,16 @@ class AdminController extends Controller
         return view('admin.orders')->with('orders', Orders::all());
     }
 
+    public function getCats(Request $request)
+    {
+        return SubCategories::where('category_id', $request->id)->get();
+    }
+
+    public function getLinks(Request $request)
+    {
+        return CategoryLinks::where('subcategory_id', $request->id)->get();
+    }
+
     public function adminAuth(Request $request)
     {
 
@@ -338,6 +463,11 @@ class AdminController extends Controller
         {
             $product->subcategory   = $request->subcategory;
 
+        }
+
+        if (isset($request->categorylink))
+        {
+            $product->categorylink = $request->categorylink;
         }
         $product->description1  = $request->description_1;
         $product->description2  = $request->description_2;
@@ -397,6 +527,7 @@ class AdminController extends Controller
             ->with('product', Products::findOrFail($id))
             ->with('categories', Categories::all())
             ->with('subcategories', SubCategories::all())
+            ->with('categorylinks', CategoryLinks::all())
             ->with('colors', ColorFilters::all())
             ->with('images', ProductImages::where('product_id', $id)->get())
             ->with('sizes', ProductSizes::where('product_id', $id)->get())

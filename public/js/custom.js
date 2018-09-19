@@ -28,8 +28,8 @@ function getFilters(){
 
     filters.sort_by = $("#sort-filter").val();
     filters.category = $("#category").val();
+    filters.subcategory = $("#subcategory").val();
 
-    console.log(filters);
     return filters;
 }
 
@@ -74,10 +74,14 @@ function pagination(current_page, total){
         $(".pagination").html("");
     }
 }
-function loadProducts(page=1, viewall=false, category=false){
+function loadProducts(page=1, viewall=false, category=false, subcategory=false){
 
     if (category){
         $("#category").val(category);
+    }
+
+    if (subcategory){
+        $("#subcategory").val(subcategory);
     }
 
     $("#product-listings").html("");
@@ -165,6 +169,21 @@ $(document).on("click", ".navigation-link", function(e){
 
 });
 
+$(document).on("click", ".navigation-link-2", function(e){
+    e.preventDefault();
+    if ($("#link_page").length > 0)
+    {
+        $(".megamenu .active").removeClass('active');
+        $(this).parent().addClass('active');
+        loadProducts(1,false, false,$(this).data("link-id"));
+    }
+    else
+    {
+        $("#page-nav input[name='subcategory']").val($(this).data("link-id"));
+        $("#page-nav").submit();
+    }
+});
+
 $("#paypal_pay").on("click", function(e){
     e.preventDefault();
 
@@ -225,15 +244,23 @@ $("#add_to_cart").on("click", function(){
     });
 });
 
+$(document).on("click", "#confirm-delete-button", function(){
+    var row_id = $(this).data('row-id');
+
+    $.ajax({
+        url: "/cart/delete",
+        type: "post",
+        data: {rowId: row_id}
+    }).done(function(cb){
+
+       window.location.reload();
+    });
+});
 $(document).on("click", ".remove-cart-item", function(){
    var row_id = $(this).data('row-id');
-   $.ajax({
-       url: "/cart/delete",
-       type: "post",
-       data: {rowId: row_id}
-   }).done(function(cb){
-      window.location.reload();
-   });
+   $("#confirm-delete-button").data('row-id', row_id);
+   $("#confirm-delete").modal('toggle');
+
 });
 
 //Change Main Product Details Photo

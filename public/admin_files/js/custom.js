@@ -42,11 +42,7 @@ $(function() {
 });
 
 
-//Image Controls
-$(function(){
 
-
-});
 $(function(){
 
     $("#add-product-button").on("click", function(){
@@ -123,14 +119,45 @@ $(function(){
         });
     });
 
+    $("#product-category").on("change", function(){
+        var top = $(this).val();
+        $.ajax({
+            url: "/admin/product/getlinks",
+            type: "post",
+            data: {id: top}
+        }).done(function(cb){
+            var html = "<option value='blank'></option>";
+            $.each(cb, function(key, val){
+                html += "<option value='"+val.id+"'>"+val.name+"</option>";
+            });
+            $("#product-categorylink").html(html);
+        });
+    });
+
+    $("#product-topcategory").on("change", function(){
+        var top = $(this).val();
+        $.ajax({
+            url: "/admin/product/getcat",
+            type: "post",
+            data: {id: top}
+        }).done(function(cb){
+            var html = "<option value='blank'></option>";
+            $.each(cb, function(key, val){
+               html += "<option value='"+val.id+"'>"+val.name+"</option>";
+            });
+            $("#product-category").html(html);
+            $("#product-categorylink").html("<option value='blank'></option>");
+        });
+    });
 
     $("#submit-product-changes").on("click", function(){
 
         var product_id      = $("#product-id").val();
         var description_1   = $("#desc1").val();
         var description_2   = $("#txtarea1").val();
-        var category        = $("#product-category").val();
+        var category        = $("#product-topcategory").val();
         var subcategory     = $("#product-subcategory").val();
+        var categorylink    = $("#product-categorylink").val();
         var price           = $("#product-price").val();
         var defaultImage    = $(".photo-select input").data("photo-id");
         var quantityInStock        = $("#product-quantity").val();
@@ -191,6 +218,7 @@ $(function(){
                 description_2: description_2,
                 category: category,
                 subcategory: subcategory,
+                categorylink: categorylink,
                 price: price,
                 new_sizes: new_sizes,
                 existing_sizes: existing_sizes,
@@ -207,6 +235,181 @@ $(function(){
         $(this).parent().parent().remove();
     });
 
+
+    $(document).on("click", ".edit-category", function(){
+       $(this).parent().parent().find('.hide').removeClass('hide');
+       $(this).parent().parent().find('p').addClass('hide');
+    });
+
+    $(document).on("click", ".cancel-update", function(){
+        $(this).parent().parent().parent().find('.form-group').addClass('hide');
+        $(this).parent().parent().parent().find('.button-holder').addClass('hide');
+        $(this).parent().parent().parent().find('input').addClass('hide');
+        $(this).parent().parent().parent().find('p').removeClass('hide');
+
+    });
+
+    $(document).on("click", ".add-new-sub-line", function(){
+       $(this).parent().before("<span><input type='text' class='form-control mb-10 subcat-update-value'><i class='fa fa-trash remove-subcat-line2'></i></span>");
+    });
+
+    $(document).on("click", ".add-new-sub-line2", function(){
+        $(this).parent().before("<input type='text' class='form-control mb-10 subcat-update-value'>");
+    });
+
+    $("#top-level-cat").on("change", function(){
+        $(".hidden-tables").addClass('hide');
+        $("#table_for_"+$(this).val()+" .top-level-name").text($("#top-level-cat option:selected").text())
+        $("#table_for_"+$(this).val()).fadeIn('slow').removeClass('hide');
+    });
+    $(document).on("click", ".update-categories", function(){
+        var cat_id = $(this).data('cat-id');
+        var cat_name = $("#input_cat_"+cat_id).val();
+        var sub_cats = $(this).parent().parent().find(".subcat-update-value");
+        var sub_cats_a = [];
+
+        if ($.trim(cat_name).length === 0){
+            $("#error-message").text("Category Name Required");
+            $("#messages").modal('toggle');
+            return false;
+        }
+
+        $.each(sub_cats, function(key,val){
+            if ($.trim($(val).val()).length !== 0)
+            {
+                if (typeof $(val).data('subcat-id') === 'undefined'){
+                    var subcat_id = 0;
+                } else {
+                    var subcat_id = $(val).data('subcat-id');
+                }
+
+                sub_cats_a.push( [subcat_id, $.trim($(val).val())] );
+            }
+        });
+
+        $.ajax({
+            url: "/admin/categories/update",
+            type: "post",
+            data: {
+                cat_name: cat_name,
+                cat_id: cat_id,
+                sub_cats: sub_cats_a
+            }
+        }).done(function(cb){
+            window.location.reload();
+        });
+
+    });
+    $(document).on("click", "#yes-delete-subcat", function(){
+        $(".subcat_"+$("#selected-subcat-id").val()).remove();
+        $("#confirm-subcat-delete").modal('toggle');
+        $("#count").text("");
+        $("#selected-subcat-id").val("");
+    });
+
+    $(document).on("click", ".delete-top-level", function(){
+       $("#selected-cat-id").val($(this).data('cat-id'));
+       $("#confirm-cat-delete").modal('toggle');
+    });
+
+    $(document).on("click", ".yes-delete-cat", function(){
+       $.ajax({
+           url: "/admin/categories/delete",
+           type: "post",
+           data: {cat_id: $("#selected-cat-id").val()}
+       }).done(function(cb){
+           window.location.reload();
+       })
+    });
+
+    $(document).on("click", ".delete-category", function(){
+        $("#selected-cat-id2").val($(this).data('cat-id'));
+        $("#confirm-cat-delete2").modal('toggle');
+    });
+
+    $(document).on("click", "#yes-delete-cat2", function(){
+        $.ajax({
+            url: "/admin/categories/delete2",
+            type: "post",
+            data: {cat_id: $("#selected-cat-id2").val()}
+        }).done(function(cb){
+            window.location.reload();
+        })
+    });
+
+
+
+
+
+
+    $(document).on("click", ".remove-subcat-line2", function(){
+        $(this).parent().remove();
+    });
+    $(document).on("click", ".remove-subcat-line", function(){
+        var subcat_id = parseInt($(this).prop('id').replace("subcat_", ""));
+        $.ajax({
+            url: "/admin/categories/check",
+            type: "post",
+            data: {subcat: subcat_id}
+        }).done(function(cb){
+            var count = cb.length;
+            console.log(count);
+            $("#count").text(count);
+            $("#selected-subcat-id").val(subcat_id);
+            $("#confirm-subcat-delete").modal('toggle');
+        });
+    });
+
+    $(document).on("click", ".show-hidden-form", function(){
+        $(this).parent().parent().parent().find('tr.hide').removeClass('hide');
+
+        $(this).parent().parent().remove();
+    });
+
+    $(document).on("click", ".add-category", function(){
+        var cat_id = $(this).data('cat-id');
+        var cat_name = $("#new-cat-name").val();
+        var sub_cats = $(this).parent().parent().find(".subcat-update-value");
+        var sub_cats_a = [];
+
+        if ($.trim(cat_name).length === 0){
+            $("#error-message").text("Category Name Required");
+            $("#messages").modal('toggle');
+            return false;
+        }
+
+        $.each(sub_cats, function(key,val){
+            if ($.trim($(val).val()).length !== 0)
+            {
+                sub_cats_a.push($.trim($(val).val()));
+            }
+        });
+
+        $.ajax({
+            url: "/admin/categories/addcat",
+            type: "post",
+            data: {cat_id: cat_id, cat_name: cat_name, subcats: sub_cats_a}
+        }).done(function(cb){
+            window.location.reload();
+        })
+    });
+
+
+    $("#add-new-cat").on("click", function(){
+       var cat_name = $("#new-top-cat").val();
+
+       $.ajax({
+           url: "/admin/categories/add",
+           type: "post",
+           data: {cat: cat_name}
+       }).done(function(cb){
+
+          window.location.reload();
+       });
+
+
+
+    });
 
     $("#add-size").on("click", function(){
         var html = "<tr class=\"new-size\">\n" +

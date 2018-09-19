@@ -36,6 +36,13 @@
                             {{--<i class="fa fa-shopping-cart"></i> <span>Categories</span>--}}
                         {{--</a>--}}
                     {{--</li>--}}
+
+                    <li class="treeview">
+                        <a href="{{URL::to('admin/categories')}}">
+                            <i class="fa fa-table"></i> <span>Categories</span>
+                        </a>
+                    </li>
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-shopping-bag"></i>

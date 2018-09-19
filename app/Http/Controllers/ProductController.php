@@ -71,6 +71,11 @@ class ProductController extends Controller
             $category = $filters['category'];
         }
 
+        if ($filters['subcategory'] !== 0)
+        {
+            $subcategory = $filters['subcategory'];
+        }
+
         //Get total count of results
         $products_count = DB::table('products')
             ->when($color, function ($query, $color) {
@@ -81,6 +86,9 @@ class ProductController extends Controller
             })
             ->when($category, function ($query, $category){
                 return $query->where('category', $category);
+            })
+            ->when($subcategory, function ($query, $subcategory){
+                return $query->where('categorylink', $subcategory);
             })
             ->when($price_range, function ($query, $price_range) {
                 switch ($price_range){
@@ -117,6 +125,9 @@ class ProductController extends Controller
                 return $query->orderBy('price', $sort_by);
             })->when($category, function ($query, $category){
                 return $query->where('category', $category);
+
+            })->when($subcategory, function ($query, $subcategory){
+                return $query->where('categorylink', $subcategory);
             })->when($price_range, function ($query, $price_range) {
                 switch ($price_range){
                     case "10":

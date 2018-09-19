@@ -70,4 +70,16 @@
         @endif
     </div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm-delete">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-body text-center">
+                <p id="error-message" class="mb-10">Remove this cart item?</p>
+                <button type="button" class="btn btn-primary" id="confirm-delete-button" data-row-id="">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
