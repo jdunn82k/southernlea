@@ -18,9 +18,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="focusedinput" class="col-sm-2 control-label">Category</label>
+                                <label for="focusedinput" class="col-sm-2 control-label">Top Level Category</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="product-category" name="product-category">
+                                    <select class="form-control" id="product-topcategory" name="product-category">
                                         <option value="blank"></option>
 
                                         @foreach($categories as $cat)
@@ -30,22 +30,23 @@
                                 </div>
                             </div>
 
-                            {{--<div class="form-group">--}}
-                            {{--<label for="focusedinput" class="col-sm-2 control-label">Subcategory</label>--}}
-                            {{--<div class="col-sm-8">--}}
-                            {{--<select class="form-control" id="product-subcatagory" name="product-subcategory">--}}
-                            {{--<option value="blank"></option>--}}
-                            {{--@foreach($subcategories as $subcat)--}}
-                            {{--@if ($subcat->id === $product->subcategory)--}}
-                            {{--<option value="{{$subcat->id}}" selected>{{$subcat->name}}</option>--}}
-                            {{--@else--}}
-                            {{--<option value="{{$subcat->id}}">{{$subcat->name}}</option>--}}
-                            {{--@endif--}}
-                            {{--@endforeach--}}
-                            {{--</select>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Category</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="product-category" name="product-category">
+                                        <option value="blank"></option>
+                                    </select>
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Subcategory</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="product-categorylink" name="product-categorylink">
+                                        <option value="blank"></option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="focusedinput" class="col-sm-2 control-label">Price</label>
                                 <div class="col-sm-8">

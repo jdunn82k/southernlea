@@ -48,8 +48,9 @@ $(function(){
     $("#add-product-button").on("click", function(){
         var description_1   = $("#desc1").val();
         var description_2   = $("#txtarea1").val();
-        var category        = $("#product-category").val();
+        var category        = $("#product-topcategory").val();
         var subcategory     = $("#product-subcategory").val();
+        var categorylinks   = $("#product-categorylink").val();
         var price           = $("#product-price").val();
         var quantityInStock        = $("#product-quantity").val();
 
@@ -63,7 +64,18 @@ $(function(){
             $("#error-message").text("Category Required");
             $("#messages").modal('toggle');
             return false;
+        }
 
+        if (subcategory === "blank"){
+            $("#error-message").text("Top Level Category Required");
+            $("#messages").modal('toggle');
+            return false;
+        }
+
+        if (categorylinks === "blank"){
+            $("#error-message").text("SubCategory Required");
+            $("#messages").modal('toggle');
+            return false;
         }
 
         if (price === ""){
@@ -108,6 +120,7 @@ $(function(){
                 description_2: description_2,
                 category: category,
                 subcategory: subcategory,
+                categorylink: categorylinks,
                 price: price,
                 new_sizes: new_sizes,
                 defaultImage: defaultImage,
