@@ -14,14 +14,30 @@
                 <h1>My Shopping Cart ({{$cartCount}})</h1>
                 @foreach($cartContent as $cartItem)
                     @php
-
-                        $productImage = \App\ProductImages::where('product_id', $cartItem->id)->where('default', 1)->get();
-                        if (count($productImage) > 0)
+                        if (strpos($cartItem->id, "special") === false)
                         {
-                            $url = $productImage[0]->url;
-                        } else {
-                            $url = 'img/No_Image_Available.jpg';
+                            $productImage = \App\ProductImages::where('product_id', $cartItem->id)->where('default', 1)->get();
+                            if (count($productImage) > 0)
+                            {
+                                $url = $productImage[0]->url;
+                            } else {
+                                $url = 'img/No_Image_Available.jpg';
+                            }
                         }
+                        else
+                        {
+                            $id = str_replace("special_", "", $cartItem->id);
+                            $special = \App\Specials::find($id);
+                            if ($special->image)
+                            {
+                                $url = $special->image;
+                            }
+                            else
+                            {
+                                $url = 'img/No_Image_Available.jpg';
+                            }
+                        }
+
                     @endphp
                     <div class="cart-header">
                         <div class="close1 remove-cart-item" data-row-id="{{$cartItem->rowId}}"> </div>
@@ -32,7 +48,9 @@
                             <div class="cart-item-info">
                                 <h3><a href="{{URL::to("/product/".$cartItem->id)}}">{{$cartItem->name}} - {{$cartItem->options->desc}}</a></h3>
                                 <ul class="qty">
-                                    <li><p>Size : {{ucwords($cartItem->options->size)}}</p></li>
+                                    @if ($cartItem->options->size)
+                                        <li><p>Size : {{ucwords($cartItem->options->size)}}</p></li>
+                                    @endif
                                     <li><p>Qty : {{$cartItem->qty}}</p></li>
                                 </ul>
                             </div>
@@ -70,6 +88,7 @@
         @endif
     </div>
 </div>
+
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm-delete">
     <div class="modal-dialog modal-sm">

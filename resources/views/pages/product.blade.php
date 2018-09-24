@@ -109,4 +109,16 @@
 
 
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="added-to-cart-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h3>Product Added</h3>
+                    <a href="{{URL::to('/cart')}}"><button type="button" class="btn btn-info text-white">Proceed To Checkout</button></a>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

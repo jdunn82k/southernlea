@@ -10,11 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use Illuminate\Http\Request;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@home');
 Route::post('/', 'HomeController@catIndex');
 
 Route::get('/product/{id}', 'ProductController@showProduct');
@@ -24,6 +25,7 @@ Route::post('/product_table', 'ProductController@getProducts');
 Route::put('/cart/add', 'CartController@addToCart');
 Route::get('/cart/stats', 'CartController@getStats');
 Route::delete('/cart/', 'CartController@emptyCart');
+Route::post('/cart/addspecial', 'CartController@addToCartSpecial');
 
 Route::get('/cart', 'CartController@showCart');
 Route::post('/cart/delete', 'CartController@removeCartItem');
@@ -40,7 +42,10 @@ Route::post('/admin', 'AdminController@adminAuth');
 Route::get('/product/size/{sid}', 'ProductController@getProductSizes');
 
 
+Route::get('/user', function(Request $request) {
 
+
+})->middleware('client');
 
 
 Route::group(['middleware' => 'auth.admin'], function()

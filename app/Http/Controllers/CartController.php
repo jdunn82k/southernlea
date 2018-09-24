@@ -6,6 +6,7 @@ use App\Mail\OrderPlaced;
 use App\Products;
 use App\Orders;
 use App\ProductSizes;
+use App\Specials;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -135,6 +136,26 @@ class CartController extends Controller
             ->with('cartTax', self::getCartTax())
             ->with('taxRate', \Config::get('cart.tax'))
             ->with('shippingRate', \Config::get('cart.shipping'));
+    }
+
+    public function addToCartSpecial(Request $request)
+    {
+        $special = Specials::findOrFail($request->id);
+        $size    = false;
+
+        if (isset($request->size))
+        {
+            $size = $request->size;
+        }
+
+        $data = ['id' => 'special_'.$request->id, 'name' => $special->name, 'qty' => 1, 'price' => $special->price];
+
+        if ($size)
+        {
+            $data['options'] = ['size' => $size];
+        }
+
+        return Cart::add($data);
     }
 
     public function addToCart(Request $request)

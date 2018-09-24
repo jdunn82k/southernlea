@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ColorFilters;
+use App\Specials;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
+    {
+        return view('pages.index')
+            ->with('specials', Specials::all());
+    }
+
+    public function home()
     {
         return view('pages.home')
             ->with('colors', ColorFilters::all())

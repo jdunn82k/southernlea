@@ -16,7 +16,7 @@
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet'>
-    <link href="httpss://fonts.googleapis.com/css?family=Cormorant+Garamond:400,400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,400i" rel="stylesheet">
     <!-- start menu -->
     <link href="{{ URL::to('css/megamenu.css') }}" rel="stylesheet" media="all">
 
@@ -38,15 +38,12 @@
                         </div>
                     </li>
                     <li>
-                        <div class="social-ic">
-                            <ul>
-                                <li><a href="#"><i class="facebok"> </i></a></li>
-                                <li><a href="#"><i class="twiter"> </i></a></li>
-                                <li><a href="#"><i class="goog"> </i></a></li>
-                                <li><a href="#"><i class="be"> </i></a></li>
-                                <li><a href="#"><i class="pp"> </i></a></li>
-                                <div class="clearfix"></div>
-                            </ul>
+                        <ul>
+                            <li><a href="https://www.facebook.com/groups/469608456707538/"><i class="facebok"> </i></a></li>
+                            <li><a href="https://www.instagram.com/southernleaboutique/"><i class="be"> </i></a></li>
+                            <li><a href="https://www.pinterest.com/Jamie73964"><i class="pp"> </i></a></li>
+                            <div class="clearfix"></div>
+                        </ul>
                         </div>
                     </li>
                     <div class="clearfix"> </div>
