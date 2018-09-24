@@ -76,9 +76,10 @@ class ProductController extends Controller
         {
             $subcategory = $filters['subcategory'];
             $find = CategoryLinks::where('id', $subcategory)->get();
+
             if (count($find) > 0)
             {
-                if (ucwords($find[0]->name) == "all")
+                if (strtolower($find[0]->name) == "all")
                 {
                     $subcategory = false;
                 }
