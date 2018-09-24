@@ -67,6 +67,7 @@
                 <input type="hidden" id="page" value="1">
                 <input type="hidden" id="category" value="{{ $category }}">
                 <input type="hidden" id="subcategory" value="{{ $subcategory }}">
+                <input type="hidden" id="subcat2" value="{{$subcat2}}">
                 <div class="d-flex flex-row flex-wrap justify-content-start mb-3 p-2" id="product-listings"></div>
             </div>
          </div>

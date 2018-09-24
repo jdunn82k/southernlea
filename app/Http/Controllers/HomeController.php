@@ -34,6 +34,7 @@ class HomeController extends Controller
         return view('pages.home')
             ->with('colors', ColorFilters::all())
             ->with('category', $request->category)
-            ->with('subcategory', $request->subcategory);
+            ->with('subcategory', $request->subcategory)
+            ->with('subcat2', $request->subcat2);
     }
 }

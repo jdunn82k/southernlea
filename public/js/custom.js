@@ -29,6 +29,7 @@ function getFilters(){
     filters.sort_by = $("#sort-filter").val();
     filters.category = $("#category").val();
     filters.subcategory = $("#subcategory").val();
+    filters.subcat2     = $("#subcat2").val();
 
     return filters;
 }
