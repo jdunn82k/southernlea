@@ -169,7 +169,7 @@ $(document).on("click", ".navigation-link-2", function(e){
         $("#page-nav input[name='subcategory']").val($(this).data("link-id"));
         $("#page-nav input[name='subcat2']").val($(this).data('subcat-id'));
 
-    $("#page-nav").submit();
+        $("#page-nav").submit();
 
 });
 
