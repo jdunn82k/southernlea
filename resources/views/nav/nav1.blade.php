@@ -100,7 +100,7 @@
                                                 <ul>
                                                     @foreach($categorylinks as $catlink)
                                                         @if($catlink->subcategory_id === $subcat->id)
-                                                            <li><a class="navigation-link-2" data-link-id="{{$catlink->id}}" href="#">{{$catlink->name}}</a></li>
+                                                            <li><a class="navigation-link-2" data-category-id="{{$category->id}}" data-link-id="{{$catlink->id}}" href="#">{{$catlink->name}}</a></li>
                                                         @endif
                                                     @endforeach
                                                 </ul>
