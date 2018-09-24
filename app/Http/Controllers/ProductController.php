@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Products;
 use App\ProductImages;
 use App\ProductSizes;
+use App\CategoryLinks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -74,6 +75,14 @@ class ProductController extends Controller
         if ($filters['subcategory'] !== 0)
         {
             $subcategory = $filters['subcategory'];
+            $find = CategoryLinks::where('id', $subcategory)->get();
+            if (count($find) > 0)
+            {
+                if (ucwords($find[0]->name) == "all")
+                {
+                    $subcategory = false;
+                }
+            }
         }
 
         //Get total count of results
