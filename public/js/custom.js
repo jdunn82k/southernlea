@@ -157,6 +157,7 @@ $(document).on("click", ".navigation-link", function(e){
         e.preventDefault();
         $("#page-nav input[name='category']").val($(this).data("link-id"));
         $("#page-nav input[name='subcategory']").val("0");
+        $("#page-nav input[name='subcat2']").val("0");
         $("#page-nav").submit();
 
 
@@ -166,7 +167,9 @@ $(document).on("click", ".navigation-link-2", function(e){
     e.preventDefault();
         $("#page-nav input[name='category']").val($(this).data("category-id"));
         $("#page-nav input[name='subcategory']").val($(this).data("link-id"));
-        $("#page-nav").submit();
+        $("#page-nav input[name='subcat2']").val($(this).data('subcat-id'));
+
+    $("#page-nav").submit();
 
 });
 

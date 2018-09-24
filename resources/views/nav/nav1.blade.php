@@ -100,7 +100,7 @@
                                                 <ul>
                                                     @foreach($categorylinks as $catlink)
                                                         @if($catlink->subcategory_id === $subcat->id)
-                                                            <li><a class="navigation-link-2" data-category-id="{{$category->id}}" data-link-id="{{$catlink->id}}" href="#">{{$catlink->name}}</a></li>
+                                                            <li><a class="navigation-link-2" data-subcat-id="{{$subcat->id}}" data-category-id="{{$category->id}}" data-link-id="{{$catlink->id}}" href="#">{{$catlink->name}}</a></li>
                                                         @endif
                                                     @endforeach
                                                 </ul>
@@ -119,4 +119,5 @@
 <form id="page-nav" method="POST" action="/">
     <input type="hidden" name="category" value="0">
     <input type="hidden" name="subcategory" value="0">
+    <input type="hidden" name="subcat2" value="0">
 </form>

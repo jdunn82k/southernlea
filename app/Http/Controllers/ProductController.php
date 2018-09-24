@@ -72,6 +72,11 @@ class ProductController extends Controller
             $category = $filters['category'];
         }
 
+        if ($filters['subcat2'] !== 0)
+        {
+            $subcat2 = $filters['subcat2'];
+        }
+
         if ($filters['subcategory'] !== 0)
         {
             $subcategory = $filters['subcategory'];
@@ -96,6 +101,9 @@ class ProductController extends Controller
             })
             ->when($category, function ($query, $category){
                 return $query->where('category', $category);
+            })
+            ->when($subcat2, function($query, $subcat2){
+                return $query->where('subcategory', $subcat2);
             })
             ->when($subcategory, function ($query, $subcategory){
                 return $query->where('categorylink', $subcategory);
@@ -136,7 +144,10 @@ class ProductController extends Controller
             })->when($category, function ($query, $category){
                 return $query->where('category', $category);
 
-            })->when($subcategory, function ($query, $subcategory){
+            })->when($subcat2, function($query, $subcat2){
+                return $query->where('subcategory', $subcat2);
+            })
+            ->when($subcategory, function ($query, $subcategory){
                 return $query->where('categorylink', $subcategory);
             })->when($price_range, function ($query, $price_range) {
                 switch ($price_range){
