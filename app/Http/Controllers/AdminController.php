@@ -10,6 +10,7 @@ use App\ProductImages;
 use App\ProductSizes;
 use App\Orders;
 use App\OrderNotes;
+use App\Specials;
 use App\SubCategories;
 use App\User;
 use Illuminate\Http\Request;
@@ -219,6 +220,12 @@ class AdminController extends Controller
 
         return "1";
     }
+
+    public function getImages($product_id)
+    {
+        return ProductImages::where('product_id', $product_id)->get();
+    }
+
     public function rotateImage1(Request $request)
     {
 
@@ -237,6 +244,13 @@ class AdminController extends Controller
     {
         ProductImages::destroy($request->ids);
         return "1";
+    }
+
+    public function specials()
+    {
+        return view('admin.specials')
+            ->with('products', Products::all())
+            ->with('specials', Specials::all());
     }
 
     public function newProduct(Request $request)

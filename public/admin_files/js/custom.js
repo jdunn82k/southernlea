@@ -132,6 +132,53 @@ $(function(){
         });
     });
 
+    $(document).on("click", ".product-radio",function(){
+
+        $.ajax({
+            url: "/admin/image/"+$(this).data('id'),
+            type: "get"
+        }).done(function(cb){
+
+            $(".photo-block").remove();
+            $.each(cb, function(key,val){
+                $("#image-pane").append('<div class="photo-block m-3">\n' +
+                    '                <div class="photo-block-image">\n' +
+                    '                   <div>\n' +
+                    '                     <input type="checkbox" class="form-control" data-photo-url="'+val.url+'" data-photo-id="'+val.id+'">\n' +
+                    '                     <img src="../../'+val.url+'" class="img-responsive" alt="">\n' +
+                    '                   </div>\n' +
+                    '                 </div>\n' +
+                    '              </div>')
+            });
+
+
+
+        })
+    });
+
+
+    $("#add-new-offer").on("click", function(){
+       $(".edit-offer").addClass('hide');
+       $(".add-offer").removeClass('hide');
+        setTimeout(function(){
+            $("#special-offers-dt").dataTable({
+                columnDefs:[
+                    {
+                        orderable:false,
+                        searchable:false,
+                        targets:0
+
+                    }
+                ],
+                paging:false,
+                info:false,
+                "scrollY":        "200px",
+                "scrollCollapse": true,
+            });
+        }, 100);
+
+    });
+
     $("#product-category").on("change", function(){
         var top = $(this).val();
         $.ajax({
@@ -630,6 +677,8 @@ $(function(){
             }
         ]
     });
+
+
     $("#past-orders-table").dataTable();
 
 

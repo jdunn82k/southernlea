@@ -104,6 +104,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     cursor:pointer;
 }
 
+#special-offers-dt{
+    height:400px;
+}
+
 .sub-table-heading{
     font-weight:bold;
 }

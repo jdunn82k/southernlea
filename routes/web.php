@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth.admin'], function()
     Route::post("/admin/product/getlinks", 'AdminController@getLinks');
 
     Route::post('/admin/image/rotate1', 'AdminController@rotateImage1');
+    Route::get('/admin/image/{product}', 'AdminController@getImages');
 
     Route::get('/admin/categories', 'AdminController@categories');
     Route::post('/admin/categories/add', 'AdminController@addCategory');
@@ -82,4 +83,6 @@ Route::group(['middleware' => 'auth.admin'], function()
     Route::post('/admin/categories/delete', 'AdminController@deleteCat');
     Route::post('/admin/categories/delete2', 'AdminController@deleteCat2');
     Route::post('/admin/categories/addcat', 'AdminController@addSubCat');
+
+    Route::get('/admin/specials', 'AdminController@specials');
 });

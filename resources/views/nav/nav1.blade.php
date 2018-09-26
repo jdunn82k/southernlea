@@ -87,29 +87,37 @@
                 @endphp
                 @foreach($categories as $category)
                     <li class="grid">
-                        <a class="color2 navigation-link" data-link-id="{{$category->id}}" id="{{strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $category->name))}}" href="#">
-                            {{$category->name}}
-                        </a>
-                        <div class="megapanel">
-                            <div class="row">
-                                @foreach($subcategories as $subcat)
-                                    @if ($subcat->category_id === $category->id)
-                                        <div class="col1">
-                                            <div class="h_nav">
-                                                <h4>{{$subcat->name}}</h4>
-                                                <ul>
-                                                    @foreach($categorylinks as $catlink)
-                                                        @if($catlink->subcategory_id === $subcat->id)
-                                                            <li><a class="navigation-link-2" data-subcat-id="{{$subcat->id}}" data-category-id="{{$category->id}}" data-link-id="{{$catlink->id}}" href="#">{{$catlink->name}}</a></li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
+                        @if ($category->name == "Makeup")
+                            <a class="color2" href="https://senesite.senegence.com/southernleas/shopproducts" target="_blank">
+                                {{$category->name}}
+                            </a>
+                        @else
+                            <a class="color2 navigation-link" data-link-id="{{$category->id}}" id="{{strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $category->name))}}" href="#">
+                                {{$category->name}}
+                            </a>
+                            <div class="megapanel">
+                                <div class="row">
+                                    @foreach($subcategories as $subcat)
+                                        @if ($subcat->category_id === $category->id)
+                                            <div class="col1">
+                                                <div class="h_nav">
+                                                    <h4>{{$subcat->name}}</h4>
+                                                    <ul>
+                                                        @foreach($categorylinks as $catlink)
+                                                            @if($catlink->subcategory_id === $subcat->id)
+                                                                <li><a class="navigation-link-2" data-subcat-id="{{$subcat->id}}" data-category-id="{{$category->id}}" data-link-id="{{$catlink->id}}" href="#">{{$catlink->name}}</a></li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
+                        @endif
+
+
                     </li>
                 @endforeach
             </ul>
