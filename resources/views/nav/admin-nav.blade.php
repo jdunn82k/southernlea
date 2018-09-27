@@ -31,6 +31,11 @@
                             <i class="fa fa-shopping-cart"></i> <span>Orders</span>
                         </a>
                     </li>
+                    <li class="treeview">
+                        <a href="{{URL::to('admin/specials')}}">
+                            <i class="fa fa-dollar"></i> <span>Special Offers</span>
+                        </a>
+                    </li>
                     {{--<li class="treeview">--}}
                         {{--<a href="{{URL::to('admin/categories')}}">--}}
                             {{--<i class="fa fa-shopping-cart"></i> <span>Categories</span>--}}

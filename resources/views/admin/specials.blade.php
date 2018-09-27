@@ -223,7 +223,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12 clearfix ">
-                                    <button type="button" class="btn btn-primary mt-10 mb-10" id="add-special">Add Special</button>
+                                    <button type="button" class="btn btn-primary mt-10 mb-10" id="add-special">Add Special Offer</button>
                                 </div>
                             </div>
                         </div>

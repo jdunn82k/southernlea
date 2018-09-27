@@ -192,6 +192,40 @@ $(function(){
 
         if (option === "2"){
 
+            var price     = $("#special-price").val();
+
+            if (price === ""){
+                $("#error-message").text("Price Is Required");
+                $("#messages").modal("toggle");
+                return false;
+            }
+
+            var image = $(".photo-radios:checked").data('photo-url');
+
+            if (typeof image === 'undefined'){
+                $("#error-message").text("Select An Image");
+                $("#messages").modal('toggle');
+                return false;
+            }
+
+            var size = $("input[name='show-size']:checked").val();
+
+            var desc = $("#product-name").val();
+
+            if (desc === ""){
+                $("#error-message").text("Product Name is required");
+                $("#messages").modal('toggle');
+                return false;
+            }
+
+
+            $.ajax({
+                url: "/admin/special/add",
+                type: "post",
+                data: {price: price, image: image, desc: desc, size:size}
+            }).done(function(cb){
+                window.location.reload();
+            });
         }
     });
     $("#select-option").on("change", function(){
@@ -752,7 +786,7 @@ $(function(){
            $(".image-blocks").append('<div class="photo-block m-3">\n' +
                '                <div class="photo-block-image">\n' +
                '                   <div>\n' +
-               '                     <input type="checkbox" class="form-control" data-photo-url="'+cb.file+'">\n' +
+               '                     <input type="radio" name="photo-boxes" class="photo-radios" data-photo-url="'+cb.file+'">\n' +
                '                     <img src="../../img/'+cb.file+'" id="'+cb.file+'" class="img-responsive" alt="">\n' +
                '                   </div>\n' +
                '                 </div>\n' +

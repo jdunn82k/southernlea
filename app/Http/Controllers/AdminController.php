@@ -347,7 +347,7 @@ class AdminController extends Controller
     {
         $special = new Specials();
         $special->price = $request->price;
-        $special->image = $request->image;
+        $special->image = "img/".$request->image;
         $special->name = $request->desc;
         if (isset($request->product_id))
         {
