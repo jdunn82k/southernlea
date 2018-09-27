@@ -137,7 +137,7 @@ function loadProducts(page=1, viewall=false, category=false, subcategory=false){
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
                     "              <h5 class=\"product-description\">"+val.name+"</h5>\n" +
                     "              <h5 class=\"product-description\">"+val.desc+"</h5>\n" +
-                    "               <div class=\"item_add\"><span class=\"item_price\"><h6>ONLY $"+val.price+"</h6></span></div>\n" +
+                    "               <div class=\"item_add\"><span class=\"item_price\"><h6>$"+val.price+"</h6></span></div>\n" +
                     "            </div>\n" +
                     "        </div>";
 
