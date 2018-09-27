@@ -26,7 +26,7 @@
 
                         </tbody>
                     </table>
-                    <div class="button-group">
+                    <div class="button-group clearfix mb-10">
                         <div class="pull-right">
                             <button type="button" class="btn btn-warning" id="add-new-offer">Add New Offer</button>
                             <button type="button" class="btn btn-info" id="edit-offer">Edit Offer</button>
@@ -36,8 +36,66 @@
                 </div>
             </div>
             <div class="row edit-offer hide">
-                <div class="col-md-8">
+                <div class="col-md-10 col-lg-12">
+                    <input type="hidden" id="update-special-id" value="">
+                    <h3 class="title1 mt-10">Edit Special Offer</h3>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label mb-10">2. Product Name</label>
+                        </div>
+                    </div>
 
+                    <div class="form-group mb-10">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="product-name-2" value="">
+                        </div>
+                    </div>
+                    <div class="form-group mt-25">
+                        <div class="col-md-12">
+                            <label class="control-label mt-10 mb-10">3. Price</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-10">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="special-price-2" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-250">
+                        <div class="col-md-12">
+                            <label class="control-label mt-10 mb-10">4. Show T-Shirt Sizes? </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-10">
+                        <div class="col-md-3">
+                            <span><label for="show-size-3">Yes</label> <input type="radio" class="mr-10" name="show-size-2" id="show-size-3" value="1" ></span>
+                            <span><label for="show-size-4">No</label> <input type="radio" name="show-size-2" value="0" id="show-size-4" checked></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label mt-25">5. Select One Image</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8 flex image-blocks" id="image-pane-4">
+                            <input type="file" class="hide" id="new-image-input-4" name="image">
+                        </div>
+                    </div>
+                    <div class=" col-md-8">
+                        <div class="form-group mt-10">
+                            <button type="button" class="btn btn-primary rotate-image">Rotate Selected Image</button>
+                            <button type="button" class="btn btn-primary add-new-image-4">Add Image</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 clearfix ">
+                            <button type="button" class="btn btn-primary mt-25 mb-10" id="update-special">Update Special</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="add-offer hide">
@@ -47,29 +105,36 @@
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label class="control-label">1. Select An Option</label>
-                                <select class="form-control">
+                                <select class="form-control mb-10" id="select-option">
                                     <option value=""></option>
                                     <option value="1">Use an existing product</option>
                                     <option value="2">Custom options</option>
                                 </select>
                             </div>
                         </div>
-                        {{--<div class="form-group">--}}
-                            {{--<div class="col-md-4">--}}
-                                {{--<label class="control-label">Product Name</label>--}}
-                                {{--<input type="text" class="form-control" id="product-name-input">--}}
-                                {{--<p class="text-center">-OR-</p>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                     </div>
-                    <div class="col-md-8 mt-10">
-                        <br>
-                        <div class="form-group">
-                            <div class="col-md-5">
-                                <label class="control-label">2. Select An Existing Product</label>
+                    <div class="col-md-8">
+                        <div class="new-product">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="control-label mb-10">2. Product Name</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-10 mb-10">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="product-name" value="">
+                                </div>
                             </div>
                         </div>
-                        <table class="table table-sm display" id="special-offers-dt" width="100%">
+
+                        <div class="form-group existing-product">
+                            <div class="col-md-5">
+                                <label class="control-label mt-10 mb-10">2. Select An Existing Product</label>
+                            </div>
+                        </div>
+
+                        <table class="table existing-product" id="special-offers-dt" width="100%">
                             <thead>
                             <tr>
                                 <th></th>
@@ -81,7 +146,7 @@
                             <tbody>
                             @foreach($products as $product)
                                 <tr>
-                                    <td><input type="radio" class="product-radio" data-id="{{$product->id}}"></td>
+                                    <td><input type="radio" class="product-radio" name="product-radio" data-id="{{$product->id}}"></td>
                                     <td>{{$product->description1}} / {{$product->description2}}</td>
                                     <td>@php
                                             $category_id = $product->category;
@@ -105,7 +170,7 @@
                                                 $cats[] = $catlink->name;
                                             }
 
-                                            echo implode(" - ", $cats);
+                                            echo implode(" / ", $cats);
                                         @endphp
                                     </td>
                                     <td>${{$product->price}}</td>
@@ -113,49 +178,80 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <div class="after-product-select">
 
-                        <div class="form-group">
-                            <div class="col-md-5">
-                                <label class="control-label">3. Select One Image</label>
+                            <div class="form-group mt-10">
+                                <div class="col-md-12">
+                                    <label class="control-label mt-10 mb-10">3. Price</label>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            {{--<label class="col-sm-2 control-label">Images</label>--}}
-                            <div class="col-sm-8 flex image-blocks" id="image-pane">
-                                <input type="file" class="hide" id="new-image-input" name="image">
-                                {{--@foreach($images as $image)--}}
-                                    {{--@if ($image->default === 1)--}}
-                                        {{--<div class="photo-block m-3">--}}
-                                            {{--<div class="photo-block-image photo-select">--}}
-                                                {{--<input type="checkbox" class="form-control" data-photo-url="{{str_replace('img/', '', $image->url)}}" data-photo-id="{{$image->id}}">--}}
-                                                {{--<img src="{{URL::to($image->url)}}" class="img-responsive" alt="">--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--@else--}}
-                                        {{--<div class="photo-block m-3">--}}
-                                            {{--<div class="photo-block-image">--}}
-                                                {{--<input type="checkbox" class="form-control" data-photo-url="{{str_replace('img/', '', $image->url)}}" data-photo-id="{{$image->id}}">--}}
-                                                {{--<img src="{{URL::to($image->url)}}" class="img-responsive" alt="">--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--@endif--}}
-                                {{--@endforeach--}}
+                            <div class="form-group mt-10">
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" id="special-price" value="">
+                                </div>
                             </div>
-                            <div class="col-sm-10">
-                                <div class="pull-right">
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-primary select-default">Use Image</button>
-                                        <button type="button" class="btn btn-primary rotate-image">Rotate Image</button>
-                                        <button type="button" class="btn btn-primary add-new-image-2">Add Image</button>
+
+                            <div class="form-group mt-10">
+                                <div class="col-md-12">
+                                    <label class="control-label mt-10 mb-10">4. Show T-Shirt Sizes? </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-10">
+                                <div class="col-md-3">
+                                    <span><label for="show-size-1">Yes</label> <input type="radio" class="mr-10" name="show-size" id="show-size-1" value="1" ></span>
+                                    <span><label for="show-size-2">No</label> <input type="radio" name="show-size" value="0" id="show-size-2" checked></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="control-label mt-10">4. Select One Image</label>
+                                    <div class="pull-right">
+                                        <div class="form-group mt-10">
+                                            <button type="button" class="btn btn-primary rotate-image">Rotate Selected Image</button>
+                                            <button type="button" class="btn btn-primary add-new-image-3">Add Image</button>
+                                        </div>
                                     </div>
-
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 flex image-blocks" id="image-pane">
+                                    <input type="file" class="hide" id="new-image-input-3" name="image">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 clearfix ">
+                                    <button type="button" class="btn btn-primary mt-10 mb-10" id="add-special">Add Special</button>
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm-delete">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <pclass="mb-10">Deleted Selected Offers?</p>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+                <button type="button" class="btn btn-primary" id="remove-offers">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="messages">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <p id="error-message" class="mb-10"></p>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Ok</button>
             </div>
         </div>
     </div>

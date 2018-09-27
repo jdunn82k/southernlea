@@ -134,6 +134,8 @@ $(function(){
 
     $(document).on("click", ".product-radio",function(){
 
+        $(".after-product-select").fadeIn('fast');
+
         $.ajax({
             url: "/admin/image/"+$(this).data('id'),
             type: "get"
@@ -144,7 +146,7 @@ $(function(){
                 $("#image-pane").append('<div class="photo-block m-3">\n' +
                     '                <div class="photo-block-image">\n' +
                     '                   <div>\n' +
-                    '                     <input type="checkbox" class="form-control" data-photo-url="'+val.url+'" data-photo-id="'+val.id+'">\n' +
+                    '                     <input type="radio" class="photo-radios" data-photo-url="'+val.url+'" data-photo-id="'+val.id+'">\n' +
                     '                     <img src="../../'+val.url+'" class="img-responsive" alt="">\n' +
                     '                   </div>\n' +
                     '                 </div>\n' +
@@ -156,26 +158,160 @@ $(function(){
         })
     });
 
+    $("#add-special").on("click", function(){
+        var option = $("#select-option").val();
+        if (option === "1"){
+            var selected = $(".product-radio:checked").data('id');
+            var price     = $("#special-price").val();
+            if (price === ""){
+                $("#error-message").text("Price Is Required");
+                $("#messages").modal("toggle");
+                return false;
+            }
+
+            var image = $(".photo-radios:checked").data('photo-url');
+            if (typeof image === 'undefined'){
+                $("#error-message").text("Select An Image");
+                $("#messages").modal('toggle');
+                return false;
+            }
+
+            var size = $("input[name='show-size']:checked").val();
+
+            var desc = $(".product-radio:checked").parent().next()[0].innerText;
+
+
+            $.ajax({
+               url: "/admin/special/add",
+               type: "post",
+               data: {product_id: selected, price: price, image: image, desc: desc, size:size}
+            }).done(function(cb){
+                window.location.reload();
+            });
+        }
+
+        if (option === "2"){
+
+        }
+    });
+    $("#select-option").on("change", function(){
+
+       if ($(this).val() === "1"){
+           $(".new-product").hide();
+           $(".existing-product").fadeIn('fast');
+           setTimeout(function(){
+               $("#special-offers-dt").dataTable({
+                   columnDefs:[
+                       {
+                           orderable:false,
+                           searchable:false,
+                           targets:0
+
+                       }
+                   ],
+                   paging:false,
+                   info:false,
+                   "scrollY":        "200px",
+                   "scrollCollapse": true,
+               });
+           }, 100);
+       } else if ($(this).val() === "2"){
+           $(".existing-product").hide();
+            $(".new-product").fadeIn('fast');
+            $(".after-product-select").fadeIn('fast');
+       }
+    });
 
     $("#add-new-offer").on("click", function(){
        $(".edit-offer").addClass('hide');
-       $(".add-offer").removeClass('hide');
-        setTimeout(function(){
-            $("#special-offers-dt").dataTable({
-                columnDefs:[
-                    {
-                        orderable:false,
-                        searchable:false,
-                        targets:0
+       $(".add-offer").fadeIn('fast').removeClass('hide');
+    });
 
-                    }
-                ],
-                paging:false,
-                info:false,
-                "scrollY":        "200px",
-                "scrollCollapse": true,
-            });
-        }, 100);
+    $("#update-special").on("click", function(){
+        var special_id = $("#update-special-id").val();
+        var name        = $("#product-name-2").val();
+        var price       = $("#special-price-2").val();
+        var size        = $("input[name='show-size-2']:checked").val();
+        var image       = "img/"+$(".photo-radios:checked").data('photo-url');
+
+        $.ajax({
+            url: "/admin/special/update",
+            type: "post",
+            data: {special_id: special_id, name: name, price: price, size: size, image: image}
+        }).done(function(cb){
+           window.location.reload();
+        });
+
+    });
+    $("#edit-offer").on("click", function(){
+        var checked = $(".special-check:checked").data('id');
+        if (typeof checked === "undefined"){
+            return false;
+        }
+
+        $.ajax({
+            url: "/admin/special/get/"+checked,
+            type: "get",
+        }).done(function(cb){
+
+            $("#update-special-id").val(cb.id);
+            $("#product-name-2").val(cb.name);
+            $("#special-price-2").val(cb.price);
+            if (cb.size === 1){
+                $("#show-size-3").prop("checked", true);
+            }
+
+            $(".photo-block").remove();
+            if (cb.image !== null){
+
+                $("#image-pane-4").append('<div class="photo-block m-3">\n' +
+                    '                <div class="photo-block-image">\n' +
+                    '                   <div>\n' +
+                    '                     <input type="radio" name="photos-radio" class="photo-radios" data-photo-url="'+cb.image+'">\n' +
+                    '                     <img src="../../'+cb.image+'" class="img-responsive" alt="">\n' +
+                    '                   </div>\n' +
+                    '                 </div>\n' +
+                    '              </div>');
+            }
+
+            if (cb.product_id !== null){
+                $.ajax({
+                    url: "/admin/image/"+cb.product_id,
+                    type: "get"
+                }).done(function(cb1){
+
+
+                    $.each(cb1, function(key,val){
+                        $("#image-pane-4").append('<div class="photo-block m-3">\n' +
+                            '                <div class="photo-block-image">\n' +
+                            '                   <div>\n' +
+                            '                     <input type="radio" name="photos-radio" class="photo-radios" data-photo-url="'+val.url+'" data-photo-id="'+val.id+'">\n' +
+                            '                     <img src="../../'+val.url+'" class="img-responsive" alt="">\n' +
+                            '                   </div>\n' +
+                            '                 </div>\n' +
+                            '              </div>');
+
+                            if (val.url !== null){
+
+                                $(".photo-radios").each(function(){
+                                    if ($(this).data('photo-url') === cb.image){
+                                        $(this).prop("checked", true);
+                                    }
+                                });
+                            }
+                    });
+
+
+
+                });
+            }
+
+
+
+            $(".add-offer").addClass('hide');
+            $(".edit-offer").fadeIn('fast').removeClass('hide');
+        })
+
 
     });
 
@@ -503,6 +639,13 @@ $(function(){
        $("#new-image-input").click();
    });
 
+    $(".add-new-image-3").on("click", function(){
+        $("#new-image-input-3").click();
+    });
+
+    $(".add-new-image-4").on("click", function(){
+        $("#new-image-input-4").click();
+    });
 
     $(".rotate-image").on("click", function(){
         var inputs = $(".photo-block-image input[type='checkbox']:checked");
@@ -530,6 +673,34 @@ $(function(){
        }
     });
 
+
+   $("#remove-selected-offers").on("click", function(){
+
+       $(".special-check").each(function(){
+           if ($(this).is(":checked")){
+               $("#confirm-delete").modal("toggle");
+               return false;
+           }
+       });
+
+   });
+
+   $("#remove-offers").on("click", function(){
+       var a = [];
+       $(".special-check").each(function(){
+           if ($(this).is(":checked")){
+               a.push($(this).data('id'));
+           }
+       });
+
+       $.ajax({
+           url: "/admin/special/remove",
+           type: "post",
+           data: {ids: a}
+       }).done(function(cb){
+           window.location.reload();
+       });
+   });
    $(".delete-images").on("click", function(){
        var ids = [];
       $(".photo-block-image input[type='checkbox']:checked").each(function(){
@@ -544,12 +715,33 @@ $(function(){
           })
       }
    });
-
-   $("#new-image-input").on("change", function(){
+    $("#new-image-input-4").on("change", function(){
+        var formData = new FormData();
+        formData.append('file', $("#new-image-input-4")[0].files[0]);
+        $.ajax({
+            url: "/admin/product/image_3",
+            type: "post",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function(cb){
+            var new_block = $(".add-new-image").parent();
+            $("#image-pane-4").append('<div class="photo-block m-3">\n' +
+                '                <div class="photo-block-image">\n' +
+                '                   <div>\n' +
+                '                     <input type="radio" name="photos-radio" class="photo-radios" data-photo-url="'+cb.file+'">\n' +
+                '                     <img src="../../img/'+cb.file+'" class="img-responsive" alt="">\n' +
+                '                   </div>\n' +
+                '                 </div>\n' +
+                '              </div>');
+        });
+    });
+   $("#new-image-input-3").on("change", function(){
        var formData = new FormData();
-       formData.append('file', $("#new-image-input")[0].files[0]);
+       formData.append('file', $("#new-image-input-3")[0].files[0]);
        $.ajax({
-           url: "/admin/product/image_2",
+           url: "/admin/product/image_3",
            type: "post",
            data: formData,
            cache: false,

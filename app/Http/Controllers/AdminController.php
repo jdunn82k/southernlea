@@ -327,6 +327,67 @@ class AdminController extends Controller
 
     }
 
+    public function updateSpecial(Request $request)
+    {
+        $special = Specials::findOrFail($request->special_id);
+        $special->name = $request->name;
+        $special->price = $request->price;
+        $special->size = $request->size;
+        $special->image = $request->image;
+        $special->save();
+
+        return $special;
+    }
+    public function getSpecial($id)
+    {
+        return Specials::findOrFail($id);
+    }
+
+    public function addSpecial(Request $request)
+    {
+        $special = new Specials();
+        $special->price = $request->price;
+        $special->image = $request->image;
+        $special->name = $request->desc;
+        if (isset($request->product_id))
+        {
+            $special->product_id = $request->product_id;
+        }
+        $special->size = $request->size;
+        $special->save();
+
+        return $special;
+    }
+
+    public function removeSpecials(Request $request){
+        foreach($request->ids as $id)
+        {
+            Specials::destroy($id);
+        }
+    }
+    public function addSpecialImage(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+        $file = $request->file('file');
+        $image = Image::make($file);
+
+        $image_width = $image->width();
+        $watermark_width = $image_width * 0.30;
+
+        $filename = date('Ymdhis').'.jpg';
+
+        $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize($watermark_width, null, function($constraint){
+            $constraint->aspectRatio();
+        });
+
+        $image->insert($watermark, 'top-right');
+        $image->save('img/'.$filename);
+
+        return response()->json(["file" => $filename, 'size' => $watermark_width, 'image-size' => $image_width]);
+    }
+
     public function addProductImageNewProduct(Request $request)
     {
         $this->validate($request, [
@@ -337,10 +398,12 @@ class AdminController extends Controller
 
         $file = $request->file('file');
         $image = Image::make($file);
+        $image_width = $image->width();
+        $watermark_width = $image_width * 0.10;
 
         $filename = date('Ymdhis').'.jpg';
 
-        $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize(400, null, function($constraint){
+        $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize($watermark_width, null, function($constraint){
             $constraint->aspectRatio();
         });
 
@@ -360,9 +423,12 @@ class AdminController extends Controller
         $file = $request->file('file');
         $image = Image::make($file);
 
+        $image_width = $image->width();
+        $watermark_width = $image_width * 0.10;
+
         $filename = date('Ymdhis').'.jpg';
 
-        $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize(400, null, function($constraint){
+        $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize($watermark_width, null, function($constraint){
             $constraint->aspectRatio();
         });
 

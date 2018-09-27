@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth.admin'], function()
 
     Route::post('/admin/product/image', 'AdminController@addProductImage');
     Route::post('/admin/product/image_2', 'AdminController@addProductImageNewProduct');
+    Route::post('/admin/product/image_3', 'AdminController@addSpecialImage');
 
     Route::delete('/admin/product/image', 'AdminController@removeProductImages');
 
@@ -85,4 +86,8 @@ Route::group(['middleware' => 'auth.admin'], function()
     Route::post('/admin/categories/addcat', 'AdminController@addSubCat');
 
     Route::get('/admin/specials', 'AdminController@specials');
+    Route::post('/admin/special/add', 'AdminController@addSpecial');
+    Route::get('/admin/special/get/{id}', 'AdminController@getSpecial');
+    Route::post('/admin/special/update', 'AdminController@updateSpecial');
+    Route::post('/admin/special/remove', 'AdminController@removeSpecials');
 });
