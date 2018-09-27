@@ -399,8 +399,7 @@ class AdminController extends Controller
         $file = $request->file('file');
         $image = Image::make($file);
         $image_width = $image->width();
-        $watermark_width = $image_width * 0.10;
-
+        $watermark_width = $image_width * 0.30;
         $filename = date('Ymdhis').'.jpg';
 
         $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize($watermark_width, null, function($constraint){
@@ -424,8 +423,7 @@ class AdminController extends Controller
         $image = Image::make($file);
 
         $image_width = $image->width();
-        $watermark_width = $image_width * 0.10;
-
+        $watermark_width = $image_width * 0.30;
         $filename = date('Ymdhis').'.jpg';
 
         $watermark = Image::make(Storage::disk('image-upload')->get('submark-01.png'))->resize($watermark_width, null, function($constraint){
