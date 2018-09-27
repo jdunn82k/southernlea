@@ -1,6 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="arriv">
+        <div class="container">
+            <div class="arriv-top" style="margin-left: 40px"	 >
+                <div class="row">
+                    <div class="col-md-6  pull-left">
+                        <img src="{{URL::to('img/fall.jpg')}}" class="img-responsive" alt="">
+                        <div class="arriv-info">
+                            <h3>Apparel</h3>
+                            <p></p>
+                            <div class="crt-btn">
+                                <a href="#" class="navigation-link" data-link-id="1">SHOP NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5  pull-right" style="margin-left: 50px">
+                        <img src="{{URL::to('img/flowers.jpg')}}" class="img-responsive" alt="">
+                        <div class="arriv-info-custom">
+                            <h3>Custom</h3>
+                            <p>T-Shirts, Decals and More...</p>
+                            <div class="crt-btn">
+                                <a href="#" class="navigation-link" data-link-id="2">SHOP NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="arriv-las">
+                <div class="row">
+                    <div class="col-md-4 pull-left" style="margin-left: 40px" >
+                        <img src="{{URL::to('img/senegence.jpg')}}" width="400px"  class="img-responsive" alt="">
+                        <div class="arriv-info3">
+                            <h3>MAKEUP</h3>
+                            <div class="crt-btn">
+                                <a href="https://senesite.senegence.com/southernleas/shopproducts">SHOP NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 arriv-middle" style="margin-left: -25px" >
+                        <img src="{{URL::to('img/display.jpg')}}" width="300px"  class="img-responsive" alt="">
+                        <div class="arriv-info3">
+                            <h3>Accessories</h3>
+                            <div class="crt-btn">
+                                <a href="#" class="navigation-link" data-link-id="4">SHOP NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 pull-right" style="margin-left: -75px" >
+                        <img src="{{URL::to('img/SIC.jpg')}}" width="340px" class="img-responsive" alt="">
+                        <div class="arriv-info3">
+                            <h3>SIC CUPS</h3>
+                            <div class="crt-btn">
+                                <a href="#" class="navigation-link" data-link-id="8">SHOP NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="special">
         <div class="container">
             <h3>Special Offers</h3>
