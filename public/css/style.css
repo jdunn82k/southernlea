@@ -303,7 +303,9 @@
 }
 
 .product-image, .main-photo > img{
-	width:100%;
+	width:auto;
+	max-height:560px;
+
 }
 .product-listing{
 	margin-top:30px !important;

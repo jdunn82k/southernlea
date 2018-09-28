@@ -13,7 +13,7 @@
             <div class="col-md-6 col-lg-6 col-sm-4">
                 @foreach($images as $image)
                     @if ($image->default)
-                        <div class="main-photo">
+                        <div class="main-photo text-center">
                             <img src="{{URL::to($image->url)}}" alt="">
                         </div>
                     @endif
