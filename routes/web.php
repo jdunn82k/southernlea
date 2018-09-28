@@ -90,4 +90,6 @@ Route::group(['middleware' => 'auth.admin'], function()
     Route::get('/admin/special/get/{id}', 'AdminController@getSpecial');
     Route::post('/admin/special/update', 'AdminController@updateSpecial');
     Route::post('/admin/special/remove', 'AdminController@removeSpecials');
+
+    Route::post('/admin/removeimage', 'AdminController@removeImage');
 });

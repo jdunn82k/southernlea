@@ -89,6 +89,7 @@
                         <div class="form-group mt-10">
                             <button type="button" class="btn btn-primary rotate-image">Rotate Selected Image</button>
                             <button type="button" class="btn btn-primary add-new-image-4">Add Image</button>
+                            <button type="button" class="btn btn-danger delete-image-edit">Delete Image</button>
                         </div>
                     </div>
                     <div class="form-group">

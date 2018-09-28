@@ -253,6 +253,13 @@ class AdminController extends Controller
             ->with('specials', Specials::all());
     }
 
+    public function removeImage(Request $request)
+    {
+        $url = str_replace("img/", "", $request->url);
+        Storage::disk('image-upload')->delete($url);
+        return "1";
+    }
+
     public function newProduct(Request $request)
     {
         $product = new Products();

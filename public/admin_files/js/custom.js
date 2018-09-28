@@ -301,7 +301,7 @@ $(function(){
                 $("#image-pane-4").append('<div class="photo-block m-3">\n' +
                     '                <div class="photo-block-image">\n' +
                     '                   <div>\n' +
-                    '                     <input type="radio" name="photos-radio" class="photo-radios" data-photo-url="'+cb.image+'">\n' +
+                    '                     <input type="radio" name="photos-radio" class="photo-radios" data-photo-url="'+cb.image+'" checked>\n' +
                     '                     <img src="../../'+cb.image+'" class="img-responsive" alt="">\n' +
                     '                   </div>\n' +
                     '                 </div>\n' +
@@ -349,6 +349,18 @@ $(function(){
 
     });
 
+    $(".delete-image-edit").on("click", function(){
+        var checked = $("input[name='photos-radio']:checked").data('photo-url');
+        $.ajax({
+            url: "/admin/removeimage",
+            type: "post",
+            data: {url: checked}
+        }).done(function(cb){
+            $("input[name='photos-radio']:checked").parent().parent().parent().remove();
+            $("input[name='photos-radio']").prop("checked", true);
+        });
+
+    });
     $("#product-category").on("change", function(){
         var top = $(this).val();
         $.ajax({
