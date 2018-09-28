@@ -119,7 +119,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 }
 
 #special-offers-dt{
-    height:400px;
+    max-height:400px;
 }
 
 .sub-table-heading{

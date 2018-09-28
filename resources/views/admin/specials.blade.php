@@ -206,15 +206,10 @@
                                 </div>
                             </div>
 
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label class="control-label mt-10">4. Select One Image</label>
-                                    <div class="pull-right">
-                                        <div class="form-group mt-10">
-                                            <button type="button" class="btn btn-primary rotate-image">Rotate Selected Image</button>
-                                            <button type="button" class="btn btn-primary add-new-image-3">Add Image</button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -222,6 +217,17 @@
                                     <input type="file" class="hide" id="new-image-input-3" name="image">
                                 </div>
                             </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <div class="form-group mt-10">
+                                        <button type="button" class="btn btn-primary rotate-image">Rotate Selected Image</button>
+                                        <button type="button" class="btn btn-primary add-new-image-3">Add Image</button>
+                                        <button type="button" class="btn btn-danger delete-new-image">Delete Image</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="form-group">
                                 <div class="col-md-12 clearfix ">
                                     <button type="button" class="btn btn-primary mt-10 mb-10" id="add-special">Add Special Offer</button>

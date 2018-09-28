@@ -146,13 +146,13 @@ $(function(){
                 $("#image-pane").append('<div class="photo-block m-3">\n' +
                     '                <div class="photo-block-image">\n' +
                     '                   <div>\n' +
-                    '                     <input type="radio" class="photo-radios" data-photo-url="'+val.url+'" data-photo-id="'+val.id+'">\n' +
+                    '                     <input type="radio" name="photo-boxes" class="photo-radios" data-photo-url="'+val.url+'" data-photo-id="'+val.id+'">\n' +
                     '                     <img src="../../'+val.url+'" class="img-responsive" alt="">\n' +
                     '                   </div>\n' +
                     '                 </div>\n' +
                     '              </div>')
             });
-
+            $("input[name='photo-boxes']").prop("checked", true);
 
 
         })
@@ -250,7 +250,9 @@ $(function(){
                });
            }, 100);
        } else if ($(this).val() === "2"){
+           $("#special-offers-dt").DataTable().destroy();
            $(".existing-product").hide();
+
             $(".new-product").fadeIn('fast');
             $(".after-product-select").fadeIn('fast');
        }
@@ -360,6 +362,18 @@ $(function(){
             $("input[name='photos-radio']").prop("checked", true);
         });
 
+    });
+
+    $(".delete-new-image").on("click", function(){
+        var checked = $("input[name='photo-boxes']:checked").data('photo-url');
+        $.ajax({
+            url: "/admin/removeimage",
+            type: "post",
+            data: {url: checked}
+        }).done(function(cb){
+            $("input[name='photo-boxes']:checked").parent().parent().parent().remove();
+            $("input[name='photo-boxes']").prop("checked", true);
+        });
     });
     $("#product-category").on("change", function(){
         var top = $(this).val();
@@ -821,7 +835,7 @@ $(function(){
            $(".image-blocks").append('<div class="photo-block m-3">\n' +
                '                <div class="photo-block-image">\n' +
                '                   <div>\n' +
-               '                     <input type="radio" name="photo-boxes" class="photo-radios" data-photo-url="'+cb.file+'">\n' +
+               '                     <input type="radio" name="photo-boxes" class="photo-radios" data-photo-url="img/'+cb.file+'" checked>\n' +
                '                     <img src="../../img/'+cb.file+'" id="'+cb.file+'" class="img-responsive" alt="">\n' +
                '                   </div>\n' +
                '                 </div>\n' +
