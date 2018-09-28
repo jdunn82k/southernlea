@@ -15,6 +15,15 @@
 .full-width{
 	width:100%;
 }
+.skyblue li a.color1:hover,
+.skyblue li a.color2:hover{
+	background: #cef4f0 !important;
+	color:black !important;
+}
+.skyblue .color1:hover,
+.skyblue .color2:hover{
+    background-color:#cef4f0;
+}
 /* Admin Nav Bar */
 #wrapper {
 	padding-left: 0;
