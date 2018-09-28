@@ -398,7 +398,7 @@ $(function(){
             return false;
         }
 
-        if (category === "blank"){
+        if (category === "0"){
             $("#error-message").text("Category Required");
             $("#messages").modal('toggle');
             return false;
