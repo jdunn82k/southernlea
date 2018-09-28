@@ -263,6 +263,13 @@ class AdminController extends Controller
             $product->subcategory   = $request->subcategory;
 
         }
+
+        if (isset($request->categorylink))
+        {
+            $product->categorylink = $request->categorylink;
+        }
+
+
         $product->description1  = $request->description_1;
         $product->description2  = $request->description_2;
         $product->quantityInStock = $request->quantity;

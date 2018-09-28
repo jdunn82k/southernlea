@@ -1,5 +1,20 @@
 /* Custom CSS */
 
+.text-black{
+	color:black !important;
+}
+
+.arriv-info-custom-2 {
+	margin-top:-42px;
+}
+
+.crt-color{
+	border-color: #d2caca !important;
+}
+
+.full-width{
+	width:100%;
+}
 /* Admin Nav Bar */
 #wrapper {
 	padding-left: 0;
@@ -1359,6 +1374,7 @@ ul.megamenu.skyblue {
 	left: 119px;
 	text-align: center;
 }
+
 .arriv-info-custom {
 	position: absolute;
 	top: 72px;

@@ -5,7 +5,7 @@
         <div class="container">
             <div class="arriv-top" style="margin-left: 40px"	 >
                 <div class="row">
-                    <div class="col-md-6  pull-left">
+                    <div class="col-md-5 pull-left">
                         <img src="{{URL::to('img/fall.jpg')}}" class="img-responsive" alt="">
                         <div class="arriv-info">
                             <h3>Apparel</h3>
@@ -15,13 +15,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5  pull-right" style="margin-left: 50px">
-                        <img src="{{URL::to('img/flowers.jpg')}}" class="img-responsive" alt="">
-                        <div class="arriv-info-custom">
-                            <h3>Custom</h3>
-                            <p>T-Shirts, Decals and More...</p>
+                    <div class="col-md-6  pull-right" style="margin-left: 50px">
+                        <img src="{{URL::to('img/slcustom.JPG')}}" class="img-responsive" alt="">
+                        <div class="arriv-info-custom-2 text-center  full-width">
+                            <p class="text-black">T-Shirts, Decals and More...</p>
                             <div class="crt-btn">
-                                <a href="#" class="navigation-link" data-link-id="2">SHOP NOW</a>
+                                <a href="#" class="navigation-link text-black crt-color" data-link-id="2">SHOP NOW</a>
                             </div>
                         </div>
                     </div>

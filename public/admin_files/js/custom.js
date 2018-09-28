@@ -49,7 +49,7 @@ $(function(){
         var description_1   = $("#desc1").val();
         var description_2   = $("#txtarea1").val();
         var category        = $("#product-topcategory").val();
-        var subcategory     = $("#product-subcategory").val();
+        var subcategory     = $("#product-category").val();
         var categorylinks   = $("#product-categorylink").val();
         var price           = $("#product-price").val();
         var quantityInStock        = $("#product-quantity").val();
@@ -128,7 +128,7 @@ $(function(){
                 new_images: new_images,
             }
         }).done(function(cb){
-            window.location.href="/admin/products/"+cb.id;
+            $("#added-modal").modal('toggle');
         });
     });
 
@@ -749,6 +749,29 @@ $(function(){
           })
       }
    });
+
+    $("#new-image-input").on("change", function(){
+        var formData = new FormData();
+        formData.append('file', $("#new-image-input")[0].files[0]);
+        $.ajax({
+            url: "/admin/product/image_2",
+            type: "post",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function(cb){
+            var new_block = $(".add-new-image").parent();
+            $(".image-blocks").append('<div class="photo-block m-3">\n' +
+                '                <div class="photo-block-image">\n' +
+                '                   <div>\n' +
+                '                     <input type="checkbox" class="form-control" data-photo-url="'+cb.file+'" data-photo-id="'+cb.id+'">\n' +
+                '                     <img src="../../img/'+cb.file+'" class="img-responsive" alt="">\n' +
+                '                   </div>\n' +
+                '                 </div>\n' +
+                '              </div>');
+        });
+    });
     $("#new-image-input-4").on("change", function(){
         var formData = new FormData();
         formData.append('file', $("#new-image-input-4")[0].files[0]);

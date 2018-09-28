@@ -124,6 +124,17 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="added-modal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <p class="mb-10">Product Added</p>
+                    <a href="{{URL::to("/admin/products")}}" type="button" class="btn btn-primary">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="messages">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
