@@ -110,7 +110,7 @@
             </div>
 
             <div class="clearfix"> </div>
-            <p>Copyrights © 2018 Southern Lea | All rights reserved</p>
+            <p class="text-center">Copyrights © 2018 Southern Lea | All rights reserved</p>
         </div>
     </div>
     <script src="{{URL::to('js/jquery.min.js')}}"></script>
