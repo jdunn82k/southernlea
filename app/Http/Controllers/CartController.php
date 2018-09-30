@@ -20,26 +20,43 @@ class CartController extends Controller
         $product_info = [];
         foreach(Cart::content() as $item)
         {
-            $product = Products::findOrFail($item->id);
-
-            $product_code = $product->code;
-            $product_price = $item->price;
-            if (isset($item->options->size))
+            $product = Products::find($item->id);
+            if ($product)
             {
-                $productSize = ProductSizes::find($item->options->size_id);
-                $product_price = $productSize->price;
-                $product_code = $productSize->product_code;
+                $product_size = $product->size;
+                $product_price = $item->price;
+                if (isset($item->options->size))
+                {
+                    $productSize = ProductSizes::find($item->options->size_id);
+                    $product_price = $productSize->price;
+                    $product_size = $productSize->size;
+                }
+
+
+                $product_info[] = [
+                    'id' => $item->id,
+                    'product_name' => $product->description1." - ".$product->description2,
+                    'product_size' => $product_size,
+                    'product_price' => $product_price,
+                    'quantity' => $item->qty,
+                ];
             }
-
-
-            $product_info[] = [
-                'id' => $item->id,
-                'product_name' => $product->description1." - ".$product->description2,
-                'product_code' => $product_code,
-                'product_price' => $product_price,
-                'quantity' => $item->qty,
-            ];
-
+            else
+            {
+                $product_size = "";
+                $product_price = $item->price;
+                if (isset($item->options->size))
+                {
+                    $product_size = $item->options->size;
+                }
+                $product_info[] = [
+                    'id' => $item->id,
+                    'product_name' => $item->name,
+                    'product_size' => $product_size,
+                    'product_price' => $product_price,
+                    'quantity' => $item->qty,
+                ];
+            }
         }
 
         $order = new Orders();
@@ -84,8 +101,8 @@ class CartController extends Controller
 
             $request->session()->forget('order_id');
 
-            Mail::to(env('ORDERS_TO', 'jamie@southernlea.com'))->send(new OrderPlaced($order));
-
+//            Mail::to(env('ORDERS_TO', 'jamie@southernlea.com'))->send(new OrderPlaced($order));
+              Mail::to('jdunn82k@gmail.com')->send(new OrderPlaced($order));
             self::emptyCart();
         }
 

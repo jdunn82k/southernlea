@@ -38,14 +38,28 @@ class OrderPlaced extends Mailable
         $products = [];
         foreach(Cart::content() as $cart_item)
         {
-            $product = Products::findOrFail($cart_item->id);
-            $products[$cart_item->id] = [
-                'name' => $cart_item->name." - ".$product->description2,
-                'qty' => $cart_item->qty,
-                'unit_price' => $product->price,
-                'total_price' => ($product->price * $cart_item->qty),
-                'product_code' => $product->code
+            $product = Products::where('id',$cart_item->id)->get();
+            if (count($product) > 0)
+            {
+                $products[$cart_item->id] = [
+                    'name' => $cart_item->name." - ".$product->description2,
+                    'qty' => $cart_item->qty,
+                    'unit_price' => $product->price,
+                    'total_price' => ($product->price * $cart_item->qty),
+                    'product_size' => $cart_item->options->size
                 ];
+            }
+            else
+            {
+                $products[$cart_item->id] = [
+                    'name' => $cart_item->name,
+                    'qty' => $cart_item->qty,
+                    'unit_price' => $cart_item->price,
+                    'total_price' => ($cart_item->price * $cart_item->qty),
+                    'product_size' => $cart_item->options->size
+                ];
+            }
+
         }
         return $this->view('email.orderplace')
             ->with('name', $this->order->name)

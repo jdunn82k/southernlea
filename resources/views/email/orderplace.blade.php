@@ -1,14 +1,15 @@
+
 <html>
 <body style="font-family:Arial;">
-<div style="text-align:center;"><img src="{{ $message->embed("img/main-01.png") }}" width='300' height='auto'></div>
-{{--<div style="text-align:center;"><img src="{{URL::to('img/main-01.jpg')}}" width='300' height='auto'></div>--}}
+
+<div style="text-align:center;"><img src="{{URL::to('img/main-01.jpg')}}" width='300' height='auto'></div>
 <div style="margin-top:10px;">
     <h2 style="text-align:center;">New Order Placed!</h2>
 </div>
 
 <div style="margin-top:10px;margin-left:20px;">
     <h4>Customer Details</h4>
-    <p style="margin-bottom:1;">{{$name}}</p>
+    <p style="margin-bottom:1px;">{{$name}}</p>
     <p style="margin-bottom:0;margin-top:0;">{{$add1}}</p>
     @if ($add2 != 'false' && $add2 !== false)
         <p style="margin-bottom:0;margin-top:0;">{{$add2}}</p>
@@ -27,7 +28,7 @@
             <thead>
                 <tr style="font-size:18px;">
                     <th>Product Name</th>
-                    <th>Product Code</th>
+                    <th>Size</th>
                     <th>Quantity</th>
                     <th>Unit Cost</th>
                     <th style="text-align:right;">Total</th>
@@ -37,7 +38,7 @@
                 @foreach($products as $product)
                     <tr>
                         <td>{{$product['name']}}</td>
-                        <td>{{$product['product_code']}}</td>
+                        <td>{{$product['product_size']}}</td>
                         <td>{{$product['qty']}}</td>
                         <td>${{number_format($product['unit_price'],2)}}</td>
                         <td style="text-align:right;">${{number_format($product['total_price'],2)}}</td>
