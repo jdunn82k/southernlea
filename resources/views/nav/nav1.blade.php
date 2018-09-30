@@ -87,10 +87,25 @@
                 @endphp
                 @foreach($categories as $category)
                     <li class="grid">
-                        @if ($category->name == "Makeup")
+                        @if ($category->name == "Hempworx")
                             <a class="color2" href="https://senesite.senegence.com/southernleas/shopproducts" target="_blank">
                                 {{$category->name}}
                             </a>
+                            <div class="megapanel">
+                                <div class="row">
+
+                                            <div class="col1">
+                                                <div class="h_nav">
+                                                    Hempworx</h4>
+                                                    <ul>
+                                                        <li><a href="https://www.hempworx.com/southernlea" target="_blank">View Full Site</a></li>
+                                                        <li><a href="https://affiliate.southernlea.com" target="_blank">Join Our Team!</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                </div>
+                            </div>
                         @else
                             <a class="color2 navigation-link" data-link-id="{{$category->id}}" id="{{strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $category->name))}}" href="#">
                                 {{$category->name}}
