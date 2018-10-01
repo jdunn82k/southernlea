@@ -101,7 +101,7 @@ class CartController extends Controller
 
             $request->session()->forget('order_id');
 
-            Mail::to( 'jdunn82k@gmail.com')->send(new OrderPlaced($order));
+            Mail::to( 'jamie@southernlea.com')->send(new OrderPlaced($order));
             self::emptyCart();
         }
 
