@@ -41,8 +41,17 @@ class OrderPlaced extends Mailable
             $product = Products::where('id',$cart_item->id)->get();
             if (count($product) > 0)
             {
+                if (isset($product->description2))
+                {
+                    $name = $cart_item->name." - ".$product->description2;
+                }
+                else
+                {
+                    $name = $cart_item->name;
+                }
+
                 $products[$cart_item->id] = [
-                    'name' => $cart_item->name." - ".$product->description2,
+                    'name' => $name,
                     'qty' => $cart_item->qty,
                     'unit_price' => $product->price,
                     'total_price' => ($product->price * $cart_item->qty),
