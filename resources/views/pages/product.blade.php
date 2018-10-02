@@ -68,15 +68,17 @@
                     </div>
                     <div class="col-md-7 col-lg-7 col-sm-7 clearfix text-center">
                         <div class="float-right">
+
+
                             @if (count($sizes) > 0)
-                                @foreach($sizes as $size)
-                                    @if($size->default === 1)
-                                        <button class="add_to_cart" id="add_to_cart" data-product-id="{{$product->id}}" data-product-size="{{$size->id}}">add to cart</button><br>
-                                    @endif
-                                @endforeach
+
+                                <button class="add_to_cart" id="add_to_cart" data-product-id="{{$product->id}}" data-product-size="{{$sizes[0]->id}}">add to cart</button><br>
+
                             @else
                                 <button class="add_to_cart" id="add_to_cart" data-product-id="{{$product->id}}" data-product-size="0">add to cart</button><br>
                             @endif
+
+
                         </div>
 
                     </div>
