@@ -301,10 +301,12 @@
 	margin-bottom: 4px;
 	width:85%;
 	cursor:pointer;
+	text-align:center;
 }
 
 .preview-photo > img{
-	width:100%;
+	width: auto;
+	max-height: 120px;
 }
 
 .price-color{
