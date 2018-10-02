@@ -296,7 +296,7 @@
 }
 
 .preview-photo{
-	background-color: #ddd;
+	border:8px solid #ddd;
 	padding: 8px;
 	margin-bottom: 4px;
 	width:85%;
