@@ -10,6 +10,7 @@
                     <div class="form-three widget-shadow">
                         <form class="form-horizontal">
                             <input type="hidden" id="product-id" value="">
+
                             <div class="form-group">
                                 <label for="focusedinput" class="col-sm-2 control-label">Product Name</label>
                                 <div class="col-sm-8">
@@ -47,6 +48,7 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="focusedinput" class="col-sm-2 control-label">Price</label>
                                 <div class="col-sm-8">
@@ -68,13 +70,10 @@
                                 </div>
                             </div>
 
-
-
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Images</label>
                                 <div class="col-sm-8 flex image-blocks">
                                     <input type="file" class="hide" id="new-image-input" name="image">
-
                                 </div>
                                 <div class="col-sm-10">
                                     <div class="pull-right">
@@ -84,7 +83,6 @@
                                             <button type="button" class="btn btn-primary add-new-image-2">Add Image</button>
                                             <button type="button" class="btn btn-primary pull-right delete-images">Delete Selected Images</button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -116,11 +114,9 @@
                                 </div>
                             </div>
 
-
                         </form>
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     </div>

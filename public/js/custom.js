@@ -131,15 +131,20 @@ function loadProducts(page=1, viewall=false, category=false, subcategory=false){
                     var url = "img/No_Image_Available.jpg";
                 }
 
+
+                if (val.desc === "null" || val.desc === null){
+                    var desc = "";
+                } else {
+                    var desc = val.desc;
+                }
                 var html = "<div class=\"product-block\">\n" +
                     "          <a href=\"/product/"+val.id+"\">" +
                     "<div style='height:200px;text-align:center;'>\n"+
-                    // "<div style='background: url(\""+(url)+"\");background-size:contain;background-repeat:no-repeat;height:201px;width:201px;'>" +
                     "<img class='full-height' src='"+url+"' alt=''>\n"+
                     "</div>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
                     "              <h5 class=\"product-description\">"+val.name+"</h5>\n" +
-                    "              <h5 class=\"product-description\">"+val.desc+"</h5>\n" +
+                    "              <h5 class=\"product-description\">"+desc+"</h5>\n" +
                     "               <div class=\"item_add\"><span class=\"item_price\"><h6>$"+val.price+"</h6></span></div>\n" +
                     "            </div>\n" +
                     "        </div>";
