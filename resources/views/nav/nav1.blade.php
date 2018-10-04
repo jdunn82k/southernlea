@@ -88,7 +88,7 @@
                 @foreach($categories as $category)
                     <li class="grid">
                         @if ($category->name == "Hempworx")
-                            <a class="color2" href="https://senesite.senegence.com/southernleas/shopproducts" target="_blank">
+                            <a class="color2" href="javascript:void()">
                                 {{$category->name}}
                             </a>
                             <div class="megapanel">
