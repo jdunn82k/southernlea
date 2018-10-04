@@ -83,7 +83,7 @@
                 @php
                     $categories = \App\Categories::all();
                     $subcategories = \App\SubCategories::all();
-                    $categorylinks = \App\CategoryLinks::all();
+                    $categorylinks = \App\CategoryLinks::orderBy('order')->get();
                 @endphp
                 @foreach($categories as $category)
                     <li class="grid">
