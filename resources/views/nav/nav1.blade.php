@@ -94,15 +94,15 @@
                             <div class="megapanel">
                                 <div class="row">
 
-                                            <div class="col1">
-                                                <div class="h_nav">
-                                                    Hempworx</h4>
-                                                    <ul>
-                                                        <li><a href="https://www.hempworx.com/southernlea" target="_blank">View Full Site</a></li>
-                                                        <li><a href="https://affiliate.southernlea.com" target="_blank">Join Our Team!</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            Hempworx</h4>
+                                            <ul>
+                                                <li><a href="https://www.hempworx.com/southernlea" target="_blank">View Full Site</a></li>
+                                                <li><a href="https://affiliate.southernlea.com" target="_blank">Join Our Team!</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
