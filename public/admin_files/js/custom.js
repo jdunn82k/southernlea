@@ -43,6 +43,7 @@ $(function() {
 
 
 
+
 $(function(){
 
     $("#add-product-button").on("click", function(){

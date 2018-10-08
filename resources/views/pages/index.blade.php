@@ -160,5 +160,8 @@
             </div>
         </div>
     </div>
-
+    <script>
+        var navHome = document.getElementById('nav-home');
+        navHome.classList.add('active');
+    </script>
 @endsection

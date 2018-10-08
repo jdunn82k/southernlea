@@ -78,7 +78,7 @@
             </div>
             <!-- start header menu -->
             <ul class="megamenu skyblue">
-                <li class="active grid"><a class="color1" href="{{URL::to('/')}}">Home</a></li>
+                <li class="nav-home grid" id="nav-home"><a class="color1" href="{{URL::to('/')}}">Home</a></li>
 
                 @php
                     $categories = \App\Categories::all();

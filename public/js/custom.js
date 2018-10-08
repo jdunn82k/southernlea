@@ -34,6 +34,25 @@ function getFilters(){
     return filters;
 }
 
+function setNavBarActive(){
+    var category = $("#category").val();
+    if (typeof category !== undefined){
+        if (category !== 0){
+            $(".megamenu .active").removeClass("active");
+            $(".navigation-link").each(function(){
+               if ($(this).data('link-id') == category){
+                   $(this).parent().addClass('active');
+               }
+            });
+        } else {
+            $(".nav-home").addClass('active');
+        }
+    } else {
+        $(".nav-home").addClass('active');
+
+    }
+}
+
 function pagination(current_page, total){
 
 
@@ -155,6 +174,7 @@ function loadProducts(page=1, viewall=false, category=false, subcategory=false){
             });
         }
         $("#product-listings").fadeIn('slow');
+        setNavBarActive();
 
     });
 
