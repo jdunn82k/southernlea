@@ -276,7 +276,7 @@ class AdminController extends Controller
             $product->categorylink = $request->categorylink;
         }
 
-
+        $product->additional    = $request->additional;
         $product->description1  = $request->description_1;
         $product->description2  = $request->description_2;
         $product->quantityInStock = $request->quantity;
@@ -563,6 +563,7 @@ class AdminController extends Controller
         }
         $product->description1  = $request->description_1;
         $product->description2  = $request->description_2;
+        $product->additional    = $request->additional;
         $product->quantityInStock = $request->quantity;
         $product->price         = $request->price;
         $product->save();

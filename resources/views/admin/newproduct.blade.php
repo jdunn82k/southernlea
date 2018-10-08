@@ -71,6 +71,13 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="txtarea2" class="col-sm-2 control-label">Additional Information</label>
+                                <div class="col-sm-8">
+                                    <textarea name="txtarea2" id="txtarea2" cols="50" rows="4" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Images</label>
                                 <div class="col-sm-8 flex image-blocks">
                                     <input type="file" class="hide" id="new-image-input" name="image">

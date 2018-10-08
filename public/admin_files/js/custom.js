@@ -48,6 +48,7 @@ $(function(){
     $("#add-product-button").on("click", function(){
         var description_1   = $("#desc1").val();
         var description_2   = $("#txtarea1").val();
+        var additional      = $("#txtarea2").val();
         var category        = $("#product-topcategory").val();
         var subcategory     = $("#product-category").val();
         var categorylinks   = $("#product-categorylink").val();
@@ -118,6 +119,7 @@ $(function(){
             data: {
                 description_1: description_1,
                 description_2: description_2,
+                additional: additional,
                 category: category,
                 subcategory: subcategory,
                 categorylink: categorylinks,
@@ -411,6 +413,7 @@ $(function(){
         var product_id      = $("#product-id").val();
         var description_1   = $("#desc1").val();
         var description_2   = $("#txtarea1").val();
+        var additional      = $("#txtarea2").val();
         var category        = $("#product-topcategory").val();
         var subcategory     = $("#product-subcategory").val();
         var categorylink    = $("#product-categorylink").val();
@@ -475,6 +478,7 @@ $(function(){
                 category: category,
                 subcategory: subcategory,
                 categorylink: categorylink,
+                additional: additional,
                 price: price,
                 new_sizes: new_sizes,
                 existing_sizes: existing_sizes,

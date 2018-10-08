@@ -84,11 +84,16 @@
                                 <div class="form-group">
                                     <label for="txtarea1" class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-8">
-                                        <textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control">{{$product->description2}}</textarea>
+                                        <textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control">@if ($product->description2){{$product->description2}}@endif</textarea>
                                     </div>
                                 </div>
 
-
+                                <div class="form-group">
+                                    <label for="txtarea2" class="col-sm-2 control-label">Additional Information</label>
+                                    <div class="col-sm-8">
+                                        <textarea name="txtarea2" id="txtarea2" cols="50" rows="4" class="form-control">@if ($product->additional){{$product->additional}}@endif</textarea>
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Images</label>

@@ -31,7 +31,7 @@
                     <p class="float-right font-size-13">Only <span class="font-weight-bold" id="quantity-in-stock">{{$product->quantityInStock}}</span> Left</p>
                 </div>
                 <h3 class="mt-5 font-weight-bold">{{$product->description1}}</h3>
-                <h4 class="font-weight-bold">{{$product->description2}}</h4>
+                <h4 class="font-weight-bold">@if ($product->description2){{$product->description2}}@endif</h4>
 
                 <p class="mt-2 mb-4 price-color clearfix">
                     <span class="your-price">Your Price</span>
@@ -92,15 +92,15 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="list-group" id="list-tab" role="tablist">
-                            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
-                            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Additional Information</a>
+                            <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
+                            <a class="list-group-item list-group-item-action  active" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Additional Information</a>
                             <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Reviews</a>
                         </div>
                     </div>
                     <div class="col-8 tab-div">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">{{$product->description2}}</div>
-                            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+                            <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">{{$product->description2}}</div>
+                            <div class="tab-pane fade  show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">@if($product->additional){{$product->additional}}@endif</div>
                             <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
                         </div>
                     </div>
