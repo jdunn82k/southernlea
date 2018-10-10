@@ -6,7 +6,18 @@
             <div class="tables">
                 {{--<h2 class="title1">Products</h2>--}}
                 <div class="table-responsive bs-example widget-shadow">
-                    <h4>Products</h4>
+                    <h4 class="pull-left">Products</h4>
+                    <div class="button-group">
+                        <div class="flex pull-right">
+                            <a class="btn btn-primary mr-10" href="{{URL::to('/admin/product/new')}}">Add Product</a>
+                            <form action="{{URL::to('/admin/product/export')}}" method="POST">
+                                {{csrf_field()}}
+                                <button class="btn btn-primary " type="submit">Export Excel</button>
+                            </form>
+                        </div>
+
+
+                    </div>
                     <table class="table table-bordered display" id="products-table">
                         <thead>
                         <tr>

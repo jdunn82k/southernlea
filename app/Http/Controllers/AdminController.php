@@ -17,6 +17,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer as Writer;
+
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
 
 class AdminController extends Controller
 {
@@ -103,6 +109,129 @@ class AdminController extends Controller
             "complete" => $orders_complete_number,
             "pending" => $orders_pending_number];
 
+    }
+
+    public function exportProducts()
+    {
+        $products   = Products::all();
+        $sheet_obj  = new Spreadsheet();
+        $sheet      = $sheet_obj->getActiveSheet();
+        $cell_count = 1;
+
+        $sheet->setCellValue('A1', 'Description')
+              ->setCellValue('B1', 'Additional Information')
+              ->setCellValue('C1', 'Price')
+              ->setCellValue('D1', 'Category Information')
+              ->setCellValue('E1', 'Sizes Available')
+              ->setCellValue('F1', 'Quantity In Stock');
+
+
+        foreach($products as $product)
+        {
+            $cell_count++;
+            $product_id = $product->id;
+            $cat_id     = $product->category;
+            $subcat_id  = $product->subcategory;
+            $link_id    = $product->categorylink;
+            $desc1      = $product->description1;
+            $desc2      = $product->description2;
+            $additional = $product->additional;
+            $sizes_avail= ProductSizes::where('product_id', $product_id)->get();
+
+            if ($desc2)
+            {
+                $description = $desc1." / ".$desc2;
+            }
+            else
+            {
+                $description = $desc1;
+            }
+
+            if ($additional)
+            {
+                $add = $additional;
+            }
+            else
+            {
+                $add = "";
+            }
+
+            $category_info = [];
+            if ($cat_id !== 0)
+            {
+                $category = Categories::find($cat_id);
+                if ($category)
+                {
+                    $category_info[] = $category->name;
+                }
+            }
+
+            if ($subcat_id !== 0)
+            {
+                $subcategory = SubCategories::find($subcat_id);
+                if ($subcategory)
+                {
+                    $category_info[] = $subcategory->name;
+                }
+            }
+
+            if ($link_id !== 0)
+            {
+                $categorylink = CategoryLinks::find($link_id);
+                if ($categorylink)
+                {
+                    $category_info[] = $categorylink->name;
+                }
+            }
+
+            $size_info = [];
+            if ($sizes_avail)
+            {
+
+                foreach($sizes_avail as $size)
+                {
+                    $size_info[] = $size->size." - ".$size->price;
+                }
+            }
+
+            $sheet->setCellValue('A'.$cell_count, $description)
+                  ->setCellValue('B'.$cell_count, $add)
+                  ->setCellValue('C'.$cell_count, number_format($product->price, 2))
+                  ->setCellValue('D'.$cell_count, implode(" / ", $category_info))
+                  ->setCellValue('E'.$cell_count, implode("\n", $size_info))
+                  ->setCellValue('F'.$cell_count, $product->quantityInStock);
+
+            $sheet_obj->getActiveSheet()->getStyle('E'.$cell_count)->getAlignment()->setWrapText(true);
+
+            $sheet_obj->getActiveSheet()->getStyle('A'.$cell_count)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+            $sheet_obj->getActiveSheet()->getStyle('B'.$cell_count)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+            $sheet_obj->getActiveSheet()->getStyle('C'.$cell_count)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+            $sheet_obj->getActiveSheet()->getStyle('D'.$cell_count)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+            $sheet_obj->getActiveSheet()->getStyle('E'.$cell_count)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+            $sheet_obj->getActiveSheet()->getStyle('F'.$cell_count)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+
+        }
+
+        $sheet_obj->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+        $sheet_obj->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+        $sheet_obj->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        $sheet_obj->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+        $sheet_obj->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+        $sheet_obj->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+
+
+        $filename = "ProductExport-".date("Y-m-d").".xls";
+        $writer = new Writer\Xls($sheet_obj);
+
+        $response =  new StreamedResponse(
+            function () use ($writer) {
+                $writer->save('php://output');
+            }
+        );
+        $response->headers->set('Content-Type', 'application/vnd.ms-excel');
+        $response->headers->set('Content-Disposition', 'attachment;filename="'.$filename.'"');
+        $response->headers->set('Cache-Control','max-age=0');
+        return $response;
     }
 
     public function updateCategory(Request $request)

@@ -12,7 +12,8 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",
-        "paragonie/random_compat": "2.*"
+        "paragonie/random_compat": "2.*",
+        "phpoffice/phpspreadsheet": "^1.4"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

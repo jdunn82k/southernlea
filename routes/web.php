@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth.admin'], function()
 
     Route::post('/admin/product/update', 'AdminController@updateProduct');
     Route::post('/admin/product/new', 'AdminController@newProduct');
+    Route::post('/admin/product/export', 'AdminController@exportProducts');
 
     Route::post('/admin/product/getcat', 'AdminController@getCats');
     Route::post("/admin/product/getlinks", 'AdminController@getLinks');
