@@ -95,7 +95,30 @@ class CartController extends Controller
     {
         if ($request->session()->has('order_id'))
         {
-            $order = Orders::findOrFail($request->session()->get('order_id'));
+            $order      = Orders::findOrFail($request->session()->get('order_id'));
+            $products   = json_decode($order->product_info, true);
+
+            foreach($products as $product)
+            {
+                $id     = $product['id'];
+                $qty    = $product['quantity'];
+                $prod   = Products::find($id);
+                if ($prod)
+                {
+
+                    if ($prod->quantityInStock > $qty)
+                    {
+                        $prod->quantityInStock = ($prod->quantityInStock - $qty);
+                    }
+                    else
+                    {
+                        $prod->quantityInStock = 0;
+                    }
+                    $prod->save();
+                }
+
+            }
+            
             $order->payment_successful = true;
             $order->save();
 

@@ -4,7 +4,6 @@
     <div id="page-wrapper">
         <div class="main-page">
             <div class="tables">
-                {{--<h2 class="title1">Products</h2>--}}
                 <div class="table-responsive bs-example widget-shadow">
                     <h4 class="pull-left">Products</h4>
                     <div class="button-group">
@@ -40,17 +39,6 @@
                                         @endif
                                     @endforeach
                                 </td>
-                                {{--<td>--}}
-                                    {{--@foreach($categories as $cat)--}}
-                                        {{--@if($cat->id === $product->category)--}}
-                                            {{--@foreach($subcategories as $sub)--}}
-                                                {{--@if($cat->id === $product->category && $sub->category_id === $product->subcategory)--}}
-                                                    {{--{{$sub->name}}--}}
-                                                {{--@endif--}}
-                                            {{--@endforeach--}}
-                                        {{--@endif--}}
-                                    {{--@endforeach--}}
-                                {{--</td>--}}
                                 <td>${{$product->price}}</td>
                                 <td>{{$product->quantityInStock}}</td>
                             </tr>
