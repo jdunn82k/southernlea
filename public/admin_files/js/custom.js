@@ -781,6 +781,21 @@ $(function(){
       }
    });
 
+    $(".delete-images-2").on("click", function(){
+        var ids = [];
+        $(".photo-block-image input[type='checkbox']:checked").each(function(){
+            ids.push($(this).data('photo-id'));
+            $(this).parent().parent().parent().remove();
+        });
+        if (ids.length > 0){
+            $.ajax({
+                url: "/admin/product/image",
+                type: "delete",
+                data: {ids: ids}
+            })
+        }
+    });
+
     $("#new-image-input").on("change", function(){
         var formData = new FormData();
         formData.append('file', $("#new-image-input")[0].files[0]);
