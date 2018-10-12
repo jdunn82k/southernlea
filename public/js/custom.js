@@ -158,8 +158,12 @@ function loadProducts(page=1, viewall=false, category=false, subcategory=false){
                 }
                 var html = "<div class=\"product-block\">\n" +
                     "          <a href=\"/product/"+val.id+"\">" +
-                    "<div style='height:200px;text-align:center;'>\n"+
-                    "<img class='full-height' src='"+url+"' alt=''>\n"+
+                    "<div style='height:200px;text-align:center;'>\n";
+
+                if (val.new){
+                    html += "<img class='new-overlay' src='img/Picture1.png' alt=''>";
+                }
+                html += "<img class='full-height' src='"+url+"' alt=''>\n"+
                     "</div>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
                     "              <h5 class=\"product-description\">"+val.name+"</h5>\n" +
@@ -335,7 +339,7 @@ $(document).on("click", ".remove-cart-item", function(){
 
 //Change Main Product Details Photo
 $(document).on("click", ".preview-photo > img", function(){
-    $(".main-photo > img").attr('src', $(this).attr("src"));
+    $(".main-photo > .profile-image").attr('src', $(this).attr("src"));
 });
 
 // Load Default Product Listings Table

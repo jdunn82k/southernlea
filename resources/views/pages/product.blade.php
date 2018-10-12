@@ -14,7 +14,10 @@
                 @foreach($images as $image)
                     @if ($image->default)
                         <div class="main-photo text-center">
-                            <img src="{{URL::to($image->url)}}" alt="">
+                            @if ($product->category === 4 && $product->subcategory === 26 && $product->categorylink === 19)
+                                <img src="{{URL::to("img/Picture1.png")}}" class="new-overlay-product" alt="">
+                            @endif
+                            <img src="{{URL::to($image->url)}}" class="profile-image" alt="">
                         </div>
                     @endif
 

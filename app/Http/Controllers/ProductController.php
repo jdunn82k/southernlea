@@ -177,11 +177,17 @@ class ProductController extends Controller
         $image_array = [];
         foreach ($products as $product) {
             $data = [];
-            $data['id'] = $product->id;
-            $data['name'] = $product->description1;
-            $data['desc'] = $product->description2;
-            $data['price'] = $product->price;
-            $data['discount'] = $product->discount;
+            $data['id']         = $product->id;
+            $data['name']       = $product->description1;
+            $data['desc']       = $product->description2;
+            $data['price']      = $product->price;
+            $data['discount']   = $product->discount;
+            $data['new']        = false;
+
+            if ($product->category === 4 && $product->subcategory === 26 && $product->categorylink === 19)
+            {
+                $data['new'] = true;
+            }
 
             $response[] = $data;
 
