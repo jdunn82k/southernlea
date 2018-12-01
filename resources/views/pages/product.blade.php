@@ -3,36 +3,39 @@
 @section('content')
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-2 col-lg-2 col-sm-2">
+            <div class="col-md-2 col-lg-2 col-sm-3">
                 @foreach($images as $image)
                     <div class="preview-photo">
                         <img src="{{URL::to($image->url)}}" alt="">
                     </div>
                 @endforeach
             </div>
-            <div class="col-md-6 col-lg-6 col-sm-4">
+            <div class="col-md-6 col-lg-5 col-sm-8">
                 @foreach($images as $image)
                     @if ($image->default)
                         <div class="main-photo text-center">
                             @if ($product->category === 4 && $product->subcategory === 26 && $product->categorylink === 19)
                                 <img src="{{URL::to("img/Picture1.png")}}" class="new-overlay-product" alt="">
                             @endif
-                            <img src="{{URL::to($image->url)}}" class="profile-image" alt="">
+                            {{--<div class="main-product-photo " style="background-image: url('{{URL::to($image->url)}}')"></div>--}}
+                            <img src="{{URL::to($image->url)}}" class="main-product-photo profile-image" alt="">
                         </div>
                     @endif
 
                 @endforeach
             </div>
-            <div class="col-md-4 col-lg-4 col-sm-4">
-                <div class="clearfix">
-                    @if ($product->quantityInStock > 0)
-                        <p class="float-left font-size-13" id="stock">Availability: <span class="text-green">In stock</span></p>
-                    @else
-                        <p class="float-left font-size-13" id="stock">Availability: <span class="text-red">Out Of Stock</span></p>
-                    @endif
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="col-md-12 col-lg-12 col-sm-6 in-stock-div clearfix">
 
-                    <p class="float-right font-size-13">Only <span class="font-weight-bold" id="quantity-in-stock">{{$product->quantityInStock}}</span> Left</p>
-                </div>
+                        @if ($product->quantityInStock > 0)
+                            <p class="float-left font-size-13" id="stock">Availability: <span class="text-green">In stock</span></p>
+                        @else
+                            <p class="float-left font-size-13" id="stock">Availability: <span class="text-red">Out Of Stock</span></p>
+                        @endif
+
+                        <p class="float-right font-size-13">Only <span class="font-weight-bold" id="quantity-in-stock">{{$product->quantityInStock}}</span> Left</p>
+                    </div>
+
                 <h3 class="mt-5 font-weight-bold">{{$product->description1}}</h3>
                 <h4 class="font-weight-bold">@if ($product->description2){{$product->description2}}@endif</h4>
 
@@ -47,7 +50,7 @@
                 <hr>
                 @if (count($sizes) > 0)
                     <div class="row">
-                        <div class="col-md-5 col-lg-5 col-sm-12">
+                        <div class="col-md-12 col-lg-5 col-sm-12">
                             <div class="size-picker">
                                 Size: <select class="ml-1 form-control" id="size-select">
                                     @foreach($sizes as $size)
@@ -64,13 +67,13 @@
                 @endif
 
                 <div class="row mt-4">
-                    <div class="col-md-5 col-lg-5 col-sm-5">
+                    <div class="col-md-12 col-lg-5 col-sm-12">
                         <div class="quantity-picker">
                             Qty: <input type="number" class='form-control' id="quantity" value="1" max="99">
                         </div>
                     </div>
-                    <div class="col-md-7 col-lg-7 col-sm-7 clearfix text-center">
-                        <div class="float-right">
+                    <div class="col-md-12 col-lg-7 col-sm-12 clearfix text-center add-to-cart-div">
+
 
 
                             @if (count($sizes) > 0)
@@ -81,8 +84,6 @@
                                 <button class="add_to_cart" id="add_to_cart" data-product-id="{{$product->id}}" data-product-size="0">add to cart</button><br>
                             @endif
 
-
-                        </div>
 
                     </div>
                 </div>

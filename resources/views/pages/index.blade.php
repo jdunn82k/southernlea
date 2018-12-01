@@ -68,50 +68,15 @@
                     @foreach($specials as $special)
                         <li>
                             <a href="#">
-                                <img src="@if ($special->image){{URL::to($special->image)}}@else{{URL::to("img/No_Image_Available.jpg")}}@endif" class="img-responsive special-image" alt=""></a>
+                                <img src="@if (isset($specials_images[$special->id])){{URL::to($specials_images[$special->id])}}@else{{URL::to("img/No_Image_Available.jpg")}}@endif" class="img-responsive special-image" alt=""></a>
                             <div class="special-info-2 grid_1 simpleCart_shelfItem">
-                                <h5>{{$special->name}}</h5>
+                                <h5>{{$special->description1}}</h5>
                                 <div class="item_add"><span class="item_price"><h6>${{$special->price}}</h6></span></div>
-                                @if ($special->size === 1)
-                                    <div class="item_add"><span class="item_price"><a href="#" class="show-size-modal" data-special-id="{{$special->id}}">add to cart</a></span></div>
-                                @else
-                                    <div class="item_add"><span class="item_price"><a href="#" class="show-confirm-modal" data-special-id="{{$special->id}}">add to cart</a></span></div>
-                                @endif
+                                <div class="item_add"><span class="item_price"><a href="{{URL::to("product/".$special->id)}}">add to cart</a></span></div>
+
                             </div>
                         </li>
                     @endforeach
-                    {{--<li>--}}
-                        {{--<a href="#"><img src="{{URL::to('img/LOVE Firefighter front.PNG')}}" class="img-responsive special-image" alt=""></a>--}}
-                        {{--<div class="special-info-2 grid_1 simpleCart_shelfItem">--}}
-                            {{--<h5>LOVE Firefighter Tank</h5>--}}
-                            {{--<div class="item_add"><span class="item_price"><h6>$18.00</h6></span></div>--}}
-                            {{--<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>--}}
-                        {{--</div>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="#"><img src="{{URL::to('img/Hanging with the Heifers.PNG')}}" class="img-responsive special-image" alt=""></a>--}}
-                        {{--<div class="special-info-2 grid_1 simpleCart_shelfItem">--}}
-                            {{--<h5>Hanging with the Heifers Tank</h5>--}}
-                            {{--<div class="item_add"><span class="item_price"><h6>$18.00</h6></span></div>--}}
-                            {{--<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>--}}
-                        {{--</div>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="#"><img src="{{URL::to('img/No_Image_Available.jpg')}}" class="img-responsive special-image" alt=""></a>--}}
-                        {{--<div class="special-info-2 grid_1 simpleCart_shelfItem">--}}
-                            {{--<h5>Mauve Ice LipSense</h5>--}}
-                            {{--<div class="item_add"><span class="item_price"><h6>$22.00</h6></span></div>--}}
-                            {{--<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>--}}
-                        {{--</div>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="#"><img src="{{URL::to('img/No_Image_Available.jpg')}}" class="img-responsive special-image" alt=""></a>--}}
-                        {{--<div class="special-info-2 grid_1 simpleCart_shelfItem">--}}
-                            {{--<h5>Blu-Red LipSense</h5>--}}
-                            {{--<div class="item_add"><span class="item_price"><h6>$22.00</h6></span></div>--}}
-                            {{--<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>--}}
-                        {{--</div>--}}
-                    {{--</li>--}}
                     <div class="clearfix"> </div>
                 </ul>
             </div>

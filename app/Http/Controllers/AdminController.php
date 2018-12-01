@@ -409,6 +409,15 @@ class AdminController extends Controller
         $product->description2  = $request->description_2;
         $product->quantityInStock = $request->quantity;
         $product->price         = $request->price;
+        $product->shipping      = $request->shipping;
+        if ($request->special == "yes")
+        {
+            $product->special_offer = 1;
+        }
+        else
+        {
+            $request->special_offer = 0;
+        }
         $product->save();
 
         if (isset($request->new_sizes))
@@ -694,6 +703,15 @@ class AdminController extends Controller
         $product->additional    = $request->additional;
         $product->quantityInStock = $request->quantity;
         $product->price         = $request->price;
+        $product->shipping      = $request->shipping;
+        if ($request->special == "yes")
+        {
+            $product->special_offer = 1;
+        }
+        else
+        {
+            $request->special_offer = 0;
+        }
         $product->save();
 
         //Check for default image

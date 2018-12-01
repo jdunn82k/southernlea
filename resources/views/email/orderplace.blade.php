@@ -4,6 +4,7 @@
 
 <div style="text-align:center;"><img src="{{URL::to('img/main-01.jpg')}}" width='300' height='auto'></div>
 <div style="margin-top:10px;">
+
     <h2 style="text-align:center;">New Order Placed!</h2>
 </div>
 
@@ -21,8 +22,11 @@
     <h2 style="text-align:center;">Order Details</h2>
 
     <p style="margin-bottom:1px;"><span style="font-weight:bold;font-size:16px;">Method:</span> Paypal</p>
-    <p style="margin-bottom:1px;margin-top:0;"><span style="font-weight:bold;font-size:16px;">Date:</span><span style="margin-left:21px;"> {{ \Carbon\Carbon::now('America/New_York')->toFormattedDateString() }}</span></p>
-    <p style="margin-top:0;"><span style="font-weight:bold;font-size:16px;">Time:</span> <span style="margin-left:19px;">{{ \Carbon\Carbon::now('America/New_York')->format('g:i A') }}</span></p>
+    <p style="margin-bottom:1px;margin-top:0;"><span style="font-weight:bold;font-size:16px;">Date:</span><span style="margin-left:21px;"> {{ \Carbon\Carbon::now('America/Chicago')->toFormattedDateString() }}</span></p>
+    <p style="margin-top:0;"><span style="font-weight:bold;font-size:16px;">Time:</span> <span style="margin-left:19px;">{{ \Carbon\Carbon::now('America/Chicago')->format('g:i A') }}</span></p>
+    @if ($local_pickup == 1)
+    <h2 style="text-align:center;">Customer Requested Local Pickup</h2>
+    @endif
     <div>
         <table style="width:80%;text-align:left;">
             <thead>

@@ -1,5 +1,34 @@
 /* Custom CSS */
 
+.custom-list{
+	list-style-type:none;
+	margin-left:40px;
+}
+
+.custom-link{
+	margin-left:45px;
+}
+
+.custom-listitem{
+	margin-bottom:30px;
+	padding:10px;
+	cursor:pointer;
+}
+
+.custom-listitem:hover{
+	background-color:#DDD;
+}
+
+.custom-list .link-block{
+	position:absolute;
+	display:inline-block;
+	background-color: #aae0d4;
+	height:30px;
+	width:30px;
+}
+.font-size-36{
+	font-size:36px;
+}
 .text-black{
 	color:black !important;
 }
@@ -12,12 +41,22 @@
 	border-color: #d2caca !important;
 }
 
+.example-photo{
+	min-height:350px;
+}
+
 .full-width{
 	width:100%;
 }
 
+.mate-sc{
+	font-family: "Mate SC", serif;
+}
+
 .new-overlay{
 	position: absolute;
+	left:4px;
+	top:4px;
 	width: 40px;
 	height: auto;
 }
@@ -28,6 +67,35 @@
 	height:auto !important;
 	padding:10px;
 }
+
+.size-swatch{
+	border: 1px solid #aae0d4;
+	background-color: #f5f5f5;
+	height: 26px;
+	width: 28px;
+	text-align: center;
+	margin-right:3px;
+	cursor:pointer;
+}
+
+.size-swatch:hover,
+.size-swatch-large:hover,
+.size-swatch-active{
+	background-color: #aae0d4;
+}
+
+.size-swatch-large{
+	border: 1px solid #aae0d4;
+	background-color: #f5f5f5;
+	height: 40px;
+	text-align: center;
+	margin-right:3px;
+	margin-bottom:5px;
+	cursor:pointer;
+	padding:6px;
+	font-size:15px;
+}
+
 .skyblue li a.color1:hover,
 .skyblue li a.color2:hover{
 	background: #cef4f0 !important;
@@ -36,6 +104,12 @@
 .skyblue .color1:hover,
 .skyblue .color2:hover{
     background-color:#cef4f0;
+}
+
+.upload-placeholder{
+	min-height:220px;
+	width:50%;
+	background-color:#f5f5f5;
 }
 /* Admin Nav Bar */
 #wrapper {
@@ -168,6 +242,25 @@
 	cursor:pointer;
 }
 
+@media(max-width:991px){
+	.add-to-cart-div{
+		margin-top:7px;
+	}
+	.add_to_cart{
+		width:100%;
+	}
+	.size-picker > select, .quantity-picker > input{
+		float:right;
+	}
+}
+
+@media(min-width:992px){
+	.add_to_cart{
+		float:right;
+	}
+}
+
+
 .admin-login{
 	min-height:300px;
 }
@@ -178,6 +271,41 @@
 	cursor:pointer;
 }
 
+.custom-dropdown-wrap{
+	width:80%;
+}
+.custom-dropdown-toggle:after {
+	display: inline-block;
+	position: absolute;
+	right: 9px;
+	top: 42%;
+	width: 0;
+	height: 0;
+	margin-left: .255em;
+	vertical-align: .255em;
+	content: "";
+	border-top: .3em solid;
+	border-right: .3em solid transparent;
+	border-bottom: 0;
+	border-left: .3em solid transparent;
+}
+
+.custom-dropdown-item:hover{
+	cursor:pointer !important;
+}
+.color-dropdown{
+	text-decoration:none !important;
+}
+.color-dropdown:hover{
+	color: inherit !important;
+}
+
+.custom-color-dropdown{
+	overflow-x: hidden;
+	overflow-y: scroll;
+	max-height:350px;
+	width:100%;
+}
 .discount-list{
 	padding:10px 0px 10px 15px !important;
 	font-size:14px !important;
@@ -196,6 +324,12 @@
 	color: green;
 	margin-left: 15px;
 	font-style: italic;
+}
+
+.dropdown-color-block{
+	height:15px;
+	width:15px;
+	margin-top:4px;
 }
 .font-size-13{
 	font-size:13px;
@@ -323,7 +457,7 @@
 }
 
 .preview-photo > img{
-	width: auto;
+	width: 100%;
 	max-height: 100px;
 }
 
@@ -346,11 +480,23 @@
 	margin: 0;
 }
 
-.product-image, .main-photo > img{
+.product-image{
 	width:auto;
 	max-height:560px;
 
 }
+
+.main-photo{
+	width:100%;
+	height:100%;
+}
+@media(min-width:992px){
+
+}
+@media(max-width:991px){
+
+}
+
 .product-listing{
 	margin-top:30px !important;
 }
@@ -779,10 +925,9 @@ ul.total_price li.last_price span{
 	font-size:1.2em;
 	margin-bottom:1em;
 }
-.price-details span{
+.price-details > span{
 	width: 50%;
 	float: left;
-
 	font-size: 0.8125em;
 	color: #000;
 	line-height: 1.8em;
@@ -2584,6 +2729,40 @@ p.product_descr {
 	width:15.3333%;
 	float: left;
 	padding: 0 0px 0px 16px;
+}
+
+.main-product-photo{
+	max-width: 450px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	width:100%;
+}
+
+@media(max-width:786px){
+	.in-stock-div{
+		margin-bottom:-43px;
+		padding:0 !important;
+	}
+	.in-stock-div > p{
+		width:100%;
+	}
+
+}
+
+@media(max-width:767px){
+	.logo{
+		padding:0;
+		margin:0;
+		width:45%;
+	}
+}
+.product-photo{
+	height:200px;
+	width:140px;
+	background-repeat: no-repeat;
+	background-position:center;
+	background-size:cover;
 }
 .price-access {
 	color: #555;

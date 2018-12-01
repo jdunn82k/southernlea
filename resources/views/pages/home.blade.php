@@ -28,33 +28,31 @@
     </div>
     <div class="container">
         <div class="row">
+            <div class="col-md-3 s-d">
+                <div class="w_sidebar">
+                    {{--<section class="sky-form">--}}
+                        {{--<h4>color</h4>--}}
+                        {{--<ul class="w_nav2">--}}
 
+                            {{--@foreach($colors as $color)--}}
+                                {{--<li><div class="color-block" data-id="{{$color->id}}" style="background-color: {{$color->hex}}"></div></li>--}}
+                            {{--@endforeach--}}
 
-        <div class="col-md-3 s-d">
-            <div class="w_sidebar">
-                {{--<section class="sky-form">--}}
-                    {{--<h4>color</h4>--}}
-                    {{--<ul class="w_nav2">--}}
-
-                        {{--@foreach($colors as $color)--}}
-                            {{--<li><div class="color-block" data-id="{{$color->id}}" style="background-color: {{$color->hex}}"></div></li>--}}
-                        {{--@endforeach--}}
-
-                    {{--</ul>--}}
-                {{--</section>--}}
-                <section class="sky-form">
-                    <h4>Price</h4>
-                    <div class="row1 scroll-pane">
-                        <div class="col">
-                            <label class="radio"><input type="radio" name="price_range" value="20+"><i></i>$20+</label>
-                            <label class="radio"><input type="radio" name="price_range" value="20"><i></i>$10 - $19.99</label>
-                            <label class="radio"><input type="radio" name="price_range" value="10"><i></i>Up To $9.99</label>
-                            <label class="radio"><input type="radio" name="price_range" value="0" checked><i></i>Any</label>
+                        {{--</ul>--}}
+                    {{--</section>--}}
+                    <section class="sky-form">
+                        <h4>Price</h4>
+                        <div class="row1 scroll-pane">
+                            <div class="col">
+                                <label class="radio"><input type="radio" name="price_range" value="20+"><i></i>$20+</label>
+                                <label class="radio"><input type="radio" name="price_range" value="20"><i></i>$10 - $19.99</label>
+                                <label class="radio"><input type="radio" name="price_range" value="10"><i></i>Up To $9.99</label>
+                                <label class="radio"><input type="radio" name="price_range" value="0" checked><i></i>Any</label>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
-        </div>
 
             <div class="col w_content">
                 <div class="col-md-12 clearfix">
@@ -70,7 +68,14 @@
                 <input type="hidden" id="subcat2" value="{{$subcat2}}">
                 <div class="d-flex flex-row flex-wrap justify-content-start mb-3 p-2" id="product-listings"></div>
             </div>
-         </div>
+            {{--<div class="col ad-pane">--}}
+                {{--<div class="w_sidebar">--}}
+                    {{--<section class="whatever">--}}
+                        {{--<h4>Advertisement</h4>--}}
+                    {{--</section>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        </div>
     </div>
 
 

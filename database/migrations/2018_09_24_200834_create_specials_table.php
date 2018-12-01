@@ -13,14 +13,14 @@ class CreateSpecialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('specials', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('size')->nullable()->default(null);
-            $table->string('image')->nullable()->default(null);
-            $table->decimal('price', 8,2);
-            $table->timestamps();
-        });
+//        Schema::create('specials', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->string('name');
+//            $table->string('size')->nullable()->default(null);
+//            $table->string('image')->nullable()->default(null);
+//            $table->decimal('price', 8,2);
+//            $table->timestamps();
+//        });
     }
 
     /**

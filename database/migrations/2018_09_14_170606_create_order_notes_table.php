@@ -13,12 +13,12 @@ class CreateOrderNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_notes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('order_id');
-            $table->text('note');
-            $table->timestamps();
-        });
+//        Schema::create('order_notes', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->integer('order_id');
+//            $table->text('note');
+//            $table->timestamps();
+//        });
     }
 
     /**

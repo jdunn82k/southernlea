@@ -14,13 +14,37 @@ use Illuminate\Support\Facades\Mail;
 class CartController extends Controller
 {
 
+    public function getShippingCost(Request $request)
+    {
+        $shipping = 0.00;
+        foreach(Cart::content() as $item)
+        {
+            if ($item->options->shipping > $shipping)
+            {
+                $shipping = $item->options->shipping;
+            }
+        }
+
+        $sub_total = self::getCartSubTotal();
+        $cart_tax  = self::getCartTax();
+        $total = $shipping+$sub_total+$cart_tax;
+        return json_encode([number_format($shipping,2), number_format($sub_total+$cart_tax, 2), number_format($total,2)]);
+    }
     public function createOrder(Request $request)
     {
         //Gather Product Info
         $product_info = [];
+
+        $shipping = 0.00;
         foreach(Cart::content() as $item)
         {
             $product = Products::find($item->id);
+
+            if ($product->shipping > $shipping)
+            {
+                $shipping = $product->shipping;
+            }
+
             if ($product)
             {
                 $product_size = $product->size;
@@ -38,6 +62,7 @@ class CartController extends Controller
                     'product_name' => $product->description1." - ".$product->description2,
                     'product_size' => $product_size,
                     'product_price' => $product_price,
+                    'shipping_cost' => $product->shipping,
                     'quantity' => $item->qty,
                 ];
             }
@@ -54,9 +79,15 @@ class CartController extends Controller
                     'product_name' => $item->name,
                     'product_size' => $product_size,
                     'product_price' => $product_price,
+                    'shipping_cost' => $item->options->shipping,
                     'quantity' => $item->qty,
                 ];
             }
+        }
+
+        if ($request->shipping == 2)
+        {
+            $shipping = 0.00;
         }
 
         $order = new Orders();
@@ -69,11 +100,21 @@ class CartController extends Controller
         $order->zip_code = $request->zip_code;
         $order->phone     = $request->phone;
         $order->product_info = json_encode($product_info);
-        $order->shipping_cost = \Config::get('cart.shipping');
+        $order->shipping_cost = $shipping;
         $order->tax_rate = \Config::get('cart.tax');
         $order->subtotal = Cart::subtotal();
-        $order->grand_total = (Cart::subtotal() + Cart::tax() + \Config::get('cart.shipping'));
+        $order->grand_total = (Cart::subtotal() + Cart::tax() + $shipping);
         $order->total_items_sold = Cart::count();
+
+        if ($request->shipping == 2)
+        {
+            $order->local_pickup = 1;
+        }
+        else
+        {
+            $order->local_pickup = 0;
+        }
+
         $order->save();
         $request->session()->put('order_id', $order->id);
 
@@ -87,8 +128,7 @@ class CartController extends Controller
             ->with('cartCount', self::getCartCount())
             ->with('cartSubTotal', self::getCartSubTotal())
             ->with('cartTax', self::getCartTax())
-            ->with('taxRate', \Config::get('cart.tax'))
-            ->with('shippingRate', \Config::get('cart.shipping'));
+            ->with('taxRate', \Config::get('cart.tax'));
     }
 
     public function thankYou(Request $request)
@@ -173,8 +213,7 @@ class CartController extends Controller
             ->with('cartCount', self::getCartCount())
             ->with('cartSubTotal', self::getCartSubTotal())
             ->with('cartTax', self::getCartTax())
-            ->with('taxRate', \Config::get('cart.tax'))
-            ->with('shippingRate', \Config::get('cart.shipping'));
+            ->with('taxRate', \Config::get('cart.tax'));
     }
 
     public function addToCartSpecial(Request $request)
@@ -221,11 +260,11 @@ class CartController extends Controller
 
         if ($size)
         {
-            $data['options'] = ['size' => $size, 'desc' => $product->description2, 'size_id' => $request->size_id];
+            $data['options'] = ['size' => $size, 'desc' => $product->description2, 'size_id' => $request->size_id, 'shipping' => $product->shipping];
         }
         else
         {
-            $data['options'] = ['desc' => $product->description2];
+            $data['options'] = ['desc' => $product->description2, 'shipping' => $product->shipping];
         }
 
         return Cart::add($data);

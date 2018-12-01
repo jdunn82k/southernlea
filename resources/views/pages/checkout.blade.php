@@ -12,8 +12,16 @@
         <div class="col-md-9 cart-items">
 
                 <h1>My Shopping Cart ({{$cartCount}})</h1>
+                @php
+                    $shipping = 0.00;
+                @endphp
                 @foreach($cartContent as $cartItem)
                     @php
+                        if ($cartItem->options->shipping > $shipping)
+                        {
+                            $shipping = $cartItem->options->shipping;
+                        }
+
                         if (strpos($cartItem->id, "special") === false)
                         {
                             $productImage = \App\ProductImages::where('product_id', $cartItem->id)->where('default', 1)->get();
@@ -67,14 +75,14 @@
                     <span>SubTotal</span>
                     <span class="total1">${{$cartSubTotal}}</span>
                     <span>Sales Tax ({{$taxRate}}%)</span>
-                    <span class="total1">{{$cartTax}}</span>
-                    <span>Shipping</span>
-                    <span class="total1">{{$shippingRate}}</span>
+                    <span class="total1">${{$cartTax}}</span>
+                    <span>Est. Shipping</span>
+                    <span class="total1">${{$shipping}}</span>
                     <div class="clearfix"></div>
                 </div>
                 <ul class="total_price">
                     <li class="last_price"> <h4>TOTAL</h4></li>
-                    <li class="last_price"><span>${{number_format( ($cartSubTotal + $cartTax + $shippingRate), 2)}}</span></li>
+                    <li class="last_price"><span>${{number_format( ($cartSubTotal + $cartTax + $shipping), 2)}}</span></li>
                     <div class="clearfix"> </div>
                 </ul>
 

@@ -88,7 +88,7 @@
                 @foreach($categories as $category)
                     <li class="grid">
                         @if ($category->name == "Hempworx")
-                            <a class="color2" href="javascript:void()">
+                            <a class="color2" href="javascript:void(0)">
                                 {{$category->name}}
                             </a>
                             <div class="megapanel">
@@ -119,7 +119,10 @@
                                                     <h4>{{$subcat->name}}</h4>
                                                     <ul>
                                                         @foreach($categorylinks as $catlink)
-                                                            @if($catlink->subcategory_id === $subcat->id)
+                                                            @if($catlink->subcategory_id === $subcat->id && $catlink->name == "Order Form")
+                                                                {{--<li><a  href="{{URL::to('/custom')}}">{{$catlink->name}}</a></li>--}}
+
+                                                            @elseif($catlink->subcategory_id === $subcat->id)
                                                                 <li><a class="navigation-link-2" data-subcat-id="{{$subcat->id}}" data-category-id="{{$category->id}}" data-link-id="{{$catlink->id}}" href="#">{{$catlink->name}}</a></li>
                                                             @endif
                                                         @endforeach

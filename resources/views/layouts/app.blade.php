@@ -17,6 +17,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mate+SC" rel="stylesheet">
     <!-- start menu -->
     <link href="{{ URL::to('css/megamenu.css') }}" rel="stylesheet" media="all">
 
@@ -72,30 +73,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 cust">
-                    {{--<h4>CUSTOMER CARE</h4>--}}
 
-                        {{--<li><a href="#">Help Center</a></li>--}}
-                        {{--<li><a href="#">FAQ</a></li>--}}
-                        {{--<li><a href="buy.html">How To Buy</a></li>--}}
-                        {{--<li><a href="#">Delivery</a></li>--}}
 
                 </div>
                 <div class="col-md-2 abt">
-                    {{--<h4>ABOUT US</h4>--}}
-
-                        {{--<li><a href="#">Our Stories</a></li>--}}
-                        {{--<li><a href="#">Press</a></li>--}}
-                        {{--<li><a href="#">Career</a></li>--}}
-                        {{--<li><a href="contact.html">Contact</a></li>--}}
 
 
                 </div>
                 <div class="col-md-2 myac">
                     <h4>MY ACCOUNT</h4>
-                    {{--<li><a href="register.html">Register</a></li>--}}
                     <li><a href="{{URL::to('/cart')}}">My Cart</a></li>
-                    {{--<li><a href="#">Order History</a></li>--}}
-                    {{--<li><a href="buy.html">Payment</a></li>--}}
+
                 </div>
                 <div class="col-md-5 our-st">
                     <div class="our-left">
@@ -114,6 +102,7 @@
         </div>
     </div>
     <script src="{{URL::to('js/jquery.min.js')}}"></script>
+    <script src="{{URL::to('js/popper.min.js')}}"></script>
     <script src="{{URL::to('js/app.js')}}"></script>
     <script src="{{URL::to('js/megamenu.js')}}"></script>
     <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>

@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label for="focusedinput" class="col-sm-2 control-label">Category</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="product-category" name="product-category">
+                                        <select class="form-control" id="product-subcategory" name="product-subcategory">
                                             <option value="0"></option>
 
                                             @foreach($subcategories as $subcat)
@@ -75,6 +75,25 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="focusedinput" class="col-sm-2 control-label">Special Offer?</label>
+                                    <div class="col-sm-8 flex">
+
+                                        <label style="margin-right:10px;">No:</label>
+                                        <input type="radio" class="form-controll" id="special-no" name="special-offer" value="no" @if($product->special_offer === 0) checked @endif >
+                                        <label style="margin-right:10px;margin-left:45px;">Yes:</label>
+                                        <input type="radio" class="form-controll" id="special-yes" name="special-offer" value="yes" @if($product->special_offer === 1) checked @endif>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="focusedinput" class="col-sm-2 control-label">Shipping Cost</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control1" id="product-shipping" name='product-shipping' value="{{$product->shipping}}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="focusedinput" class="col-sm-2 control-label">Quantity In Stock</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control1" id="product-quantity" name='product-quantity' value="{{$product->quantityInStock}}">
@@ -92,6 +111,13 @@
                                     <label for="txtarea2" class="col-sm-2 control-label">Additional Information</label>
                                     <div class="col-sm-8">
                                         <textarea name="txtarea2" id="txtarea2" cols="50" rows="4" class="form-control">@if ($product->additional){{$product->additional}}@endif</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="txtarea2" class="col-sm-2 control-label">Reviews</label>
+                                    <div class="col-sm-8">
+                                        <textarea name="txtarea2" id="txtarea2" cols="50" rows="4" class="form-control"></textarea>
                                     </div>
                                 </div>
 

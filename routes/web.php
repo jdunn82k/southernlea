@@ -26,6 +26,7 @@ Route::put('/cart/add', 'CartController@addToCart');
 Route::get('/cart/stats', 'CartController@getStats');
 Route::delete('/cart/', 'CartController@emptyCart');
 Route::post('/cart/addspecial', 'CartController@addToCartSpecial');
+Route::get('/cart/shipping', 'CartController@getShippingCost');
 
 Route::get('/cart', 'CartController@showCart');
 Route::post('/cart/delete', 'CartController@removeCartItem');
@@ -40,6 +41,9 @@ Route::get('/admin', 'AdminController@index');
 Route::post('/admin', 'AdminController@adminAuth');
 
 Route::get('/product/size/{sid}', 'ProductController@getProductSizes');
+
+Route::get('/custom', 'CustomController@index');
+Route::get('/custom/{type}', 'CustomController@getDropdown');
 
 
 Route::get('/user', function(Request $request) {

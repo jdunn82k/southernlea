@@ -54,7 +54,9 @@ $(function(){
         var subcategory     = $("#product-category").val();
         var categorylinks   = $("#product-categorylink").val();
         var price           = $("#product-price").val();
-        var quantityInStock        = $("#product-quantity").val();
+        var quantityInStock = $("#product-quantity").val();
+        var shipping        = $("#product-shipping").val();
+        var special         = $("input[name='special-offer']:checked").val();
 
         if (description_1 == ""){
             $("#error-message").text("Product Name Required");
@@ -82,6 +84,13 @@ $(function(){
 
         if (price === ""){
             $("#error-message").text("Price Required");
+            $("#messages").modal('toggle');
+            return false;
+
+        }
+
+        if (shipping === ""){
+            $("#error-message").text("Shipping Cost Required");
             $("#messages").modal('toggle');
             return false;
 
@@ -125,10 +134,12 @@ $(function(){
                 subcategory: subcategory,
                 categorylink: categorylinks,
                 price: price,
+                shipping:shipping,
                 new_sizes: new_sizes,
                 defaultImage: defaultImage,
                 quantity: quantityInStock,
                 new_images: new_images,
+                special:special
             }
         }).done(function(cb){
             $("#added-modal").modal('toggle');
@@ -419,8 +430,10 @@ $(function(){
         var subcategory     = $("#product-subcategory").val();
         var categorylink    = $("#product-categorylink").val();
         var price           = $("#product-price").val();
+        var shipping        = $("#product-shipping").val();
         var defaultImage    = $(".photo-select input").data("photo-id");
         var quantityInStock        = $("#product-quantity").val();
+        var special         = $("input[name='special-offer']:checked").val();
 
         if (description_1 == ""){
             $("#error-message").text("Product Name Required");
@@ -437,6 +450,13 @@ $(function(){
 
         if (price === ""){
             $("#error-message").text("Price Required");
+            $("#messages").modal('toggle');
+            return false;
+
+        }
+
+        if (shipping === ""){
+            $("#error-message").text("Shipping Cost Required");
             $("#messages").modal('toggle');
             return false;
 
@@ -481,10 +501,12 @@ $(function(){
                 categorylink: categorylink,
                 additional: additional,
                 price: price,
+                shipping:shipping,
                 new_sizes: new_sizes,
                 existing_sizes: existing_sizes,
                 defaultImage: defaultImage,
-                quantity: quantityInStock
+                quantity: quantityInStock,
+                special:special
             }
         }).done(function(cb){
             window.location.reload();
@@ -972,6 +994,7 @@ $(function(){
             }
         ]
     });
+
 
 
     $("#past-orders-table").dataTable();

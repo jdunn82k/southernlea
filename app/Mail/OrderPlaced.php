@@ -78,8 +78,9 @@ class OrderPlaced extends Mailable
             ->with('state', $this->order->state)
             ->with('zip', $this->order->zip_code)
             ->with('tax', Cart::tax())
-            ->with('shipping',number_format(\Config::get('cart.shipping'),2) )
-            ->with('grandTotal', (Cart::subtotal() + Cart::tax() + \Config::get('cart.shipping')))
+            ->with('shipping',number_format($this->order->shipping_cost,2) )
+            ->with('local_pickup', $this->order->local_pickup)
+            ->with('grandTotal', (Cart::subtotal() + Cart::tax() + $this->order->shipping_cost))
             ->with('subTotal', Cart::subtotal())
             ->with('cartTotal', Cart::count())
             ->with('products', $products);

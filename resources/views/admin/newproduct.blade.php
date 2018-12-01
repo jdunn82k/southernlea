@@ -57,6 +57,26 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Special Offer?</label>
+                                <div class="col-sm-8 flex">
+
+                                        <label style="margin-right:10px;">No:</label>
+                                        <input type="radio" class="form-controll" id="special-no" name="special-offer" value="no" checked>
+                                        <label style="margin-right:10px;margin-left:45px;">Yes:</label>
+                                        <input type="radio" class="form-controll" id="special-yes" name="special-offer" value="yes">
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Shipping Cost</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control1" id="product-shipping" name='product-shipping' value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="focusedinput" class="col-sm-2 control-label">Quantity In Stock</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control1" id="product-quantity" name='product-quantity' value="">

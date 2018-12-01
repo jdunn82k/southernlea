@@ -163,7 +163,9 @@ function loadProducts(page=1, viewall=false, category=false, subcategory=false){
                 if (val.new){
                     html += "<img class='new-overlay' src='img/Picture1.png' alt=''>";
                 }
-                html += "<img class='full-height' src='"+url+"' alt=''>\n"+
+
+                html += "<div class='product-photo' style='background-image: url("+url+")'></div>\n"+
+                // html += "<img class='full-height' src='"+url+"' alt=''>\n"+
                     "</div>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
                     "              <h5 class=\"product-description\">"+val.name+"</h5>\n" +
@@ -184,26 +186,107 @@ function loadProducts(page=1, viewall=false, category=false, subcategory=false){
 
 }
 
+$(".custom-dropdown-item").on("click", function(){
+    var thisColor = $(this).find(".dropdown-color-block").css("background-color");
+    console.log(thisColor);
+});
+
+$(".size-swatch").on("click",  function(){
+   $(".size-swatch").removeClass('size-swatch-active');
+   $(this).addClass('size-swatch-active');
+});
+
+$(".size-swatch-large").on("click",  function(){
+    $(".size-swatch-large").removeClass('size-swatch-active');
+    $(this).addClass('size-swatch-active');
+});
+
+$("#style-dropdown").on("change", function(){
+    var img_url = $("#style-dropdown option:selected").data("image-url");
+    $(".example-photo").html("<img src='"+img_url+"' alt='' class='img-responsive'>");
+
+})
+
+$(".custom-second-page-link").on("click", function(){
+
+    var type = $(this).attr("id");
+
+    switch(type){
+        case "custom-tees-womens":
+            var url = "/custom/womens_dropdown";
+            var show = "size-swatches-non-infant";
+        break;
+
+        case "custom-tees-men":
+            var url = "/custom/mens_dropdown";
+            var show = "size-swatches-non-infant";
+        break;
+
+        case "custom-tees-youth":
+            var url = "/custom/youth_dropdown";
+            var show = "size-swatches-non-infant";
+        break;
+
+        case "custom-tees-toddler":
+            var url = "/custom/toddler_dropdown";
+            var show = "size-swatches-non-infant";
+        break;
+
+        case "custom-tees-infant":
+            var url = "/custom/infant_dropdown";
+            var show = "size-swatches-infant";
+        break;
+
+        default:
+            var url = "/custom/womens_dropdown";
+            var show = "size-swatches-non-infant";
+        break;
+    }
+
+    $.ajax({
+        url: url,
+        type: "get"
+    }).done(function(cb){
+        var html = "";
+        $.each(cb, function(key,val){
+            if (key === 0){
+                $(".example-photo").html("<img src='"+val.image+"' alt='' class='img-responsive'>");
+            }
+            html += "<option value='"+val.id+"' data-image-url='"+val.image+"'>"+val.name+"</option>";
+        });
+
+        $("#"+show).removeClass('hide').addClass('d-flex');
+        $("#style-dropdown").html(html);
+        $(".custom-header").text("Southern Lea Custom T-Shirt Order");
+        $(".custom-tees-pane").hide().addClass("hide");
+        $(".custom-tshirt-selection").fadeIn("slow").removeClass('hide');
+
+    });
+
+
+
+
+});
+$("#custom-tees").on("click", function(){
+
+    $(".first-pane").addClass('hide');
+    $(".custom-tees-pane").fadeIn('slow').removeClass('hide');
+
+});
 $(document).on("click", ".navigation-link", function(e){
-
-
-        e.preventDefault();
-        $("#page-nav input[name='category']").val($(this).data("link-id"));
-        $("#page-nav input[name='subcategory']").val("0");
-        $("#page-nav input[name='subcat2']").val("0");
-        $("#page-nav").submit();
-
-
+    e.preventDefault();
+    $("#page-nav input[name='category']").val($(this).data("link-id"));
+    $("#page-nav input[name='subcategory']").val("0");
+    $("#page-nav input[name='subcat2']").val("0");
+    $("#page-nav").submit();
 });
 
 $(document).on("click", ".navigation-link-2", function(e){
     e.preventDefault();
-        $("#page-nav input[name='category']").val($(this).data("category-id"));
-        $("#page-nav input[name='subcategory']").val($(this).data("link-id"));
-        $("#page-nav input[name='subcat2']").val($(this).data('subcat-id'));
-
-        $("#page-nav").submit();
-
+    $("#page-nav input[name='category']").val($(this).data("category-id"));
+    $("#page-nav input[name='subcategory']").val($(this).data("link-id"));
+    $("#page-nav input[name='subcat2']").val($(this).data('subcat-id'));
+    $("#page-nav").submit();
 });
 
 $("#paypal_pay").on("click", function(e){
@@ -217,6 +300,8 @@ $("#paypal_pay").on("click", function(e){
     var state = $("input[name='state']").val();
     var zip   = $("input[name='zipcode']").val();
     var phone = $("input[name='phone']").val();
+    var shipping = $("#shipping-type").val();
+
 
 
     if ( (name.length > 1) && (email.length > 1) && (add1.length > 1) && (city.length > 1) && (state.length > 1) && (zip.length > 2) && (phone.length > 2)){
@@ -229,10 +314,15 @@ $("#paypal_pay").on("click", function(e){
         $.ajax({
             url: "/orders",
             type: "post",
-            data: {name: name, address_1: add1, address_2: add2, city: city, state: state, zip_code: zip, phone: phone, email: email}
+            data: {name: name, address_1: add1, address_2: add2, city: city, state: state, zip_code: zip, phone: phone, email: email, shipping: shipping}
         }).done(function(cb){
             $("#paypal_form").submit();
         });
+    }
+    else
+    {
+        $("#check-fields").modal('toggle');
+        return false;
     }
 });
 
@@ -246,8 +336,36 @@ $(".simpleCart_empty").on("click", function(e){
     }) .done(function(){
         $(".simpleCart_total").text("$0.00");
         $("#simpleCart_quantity").text("0");
+        $(".price-details").remove();
+        $(".cart-total").remove();
+        $(".cart-items").replaceWith("            <div class=\"col-md-12 col-lg-12 col-sm-12\">\n" +
+            "                <h3 class=\"text-center\">Shopping Cart Empty</h3>\n" +
+            "            </div>");
     })
 });
+
+$("#shipping-type").on("change", function(){
+   var option = $(this).val();
+   switch (option){
+       case "1":
+           $("#cart-total").removeClass("hide");
+           $("#total-shipping").removeClass("hide");
+           $("#total-shipping-free").addClass('hide');
+           $("#cart-total-free").addClass("hide");
+           $("#paypal_form  #total_amount").val($("#cart-total").text().replace("$", ""));
+           break;
+
+       case "2":
+           $("#cart-total").addClass("hide");
+           $("#total-shipping").addClass("hide");
+           $("#total-shipping-free").removeClass('hide');
+           $("#cart-total-free").removeClass("hide");
+           $("#paypal_form  #total_amount").val($("#cart-total-free").text().replace("$", ""));
+           break;
+   }
+});
+
+
 
 $("#size-modal").on("hidden.bs.modal", function(e){
     e.preventDefault();
