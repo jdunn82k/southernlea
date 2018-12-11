@@ -88,7 +88,7 @@
                 @foreach($categories as $category)
                     <li class="grid">
                         @if ($category->name == "Hempworx")
-                            <a class="color2" href="javascript:void(0)">
+                            <a class="color2" href="/hempworx">
                                 {{$category->name}}
                             </a>
                             <div class="megapanel">
@@ -106,6 +106,10 @@
 
                                 </div>
                             </div>
+                         @elseif ($category->name == "Location")
+                            <a class="color2" href="/location">
+                                {{$category->name}}
+                            </a>
                         @else
                             <a class="color2 navigation-link" data-link-id="{{$category->id}}" id="{{strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $category->name))}}" href="#">
                                 {{$category->name}}

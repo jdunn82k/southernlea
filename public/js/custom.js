@@ -40,9 +40,9 @@ function setNavBarActive(){
         if (category !== 0){
             $(".megamenu .active").removeClass("active");
             $(".navigation-link").each(function(){
-               if ($(this).data('link-id') == category){
-                   $(this).parent().addClass('active');
-               }
+                if ($(this).data('link-id') == category){
+                    $(this).parent().addClass('active');
+                }
             });
         } else {
             $(".nav-home").addClass('active');
@@ -165,7 +165,7 @@ function loadProducts(page=1, viewall=false, category=false, subcategory=false){
                 }
 
                 html += "<div class='product-photo' style='background-image: url("+url+")'></div>\n"+
-                // html += "<img class='full-height' src='"+url+"' alt=''>\n"+
+                    // html += "<img class='full-height' src='"+url+"' alt=''>\n"+
                     "</div>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
                     "              <h5 class=\"product-description\">"+val.name+"</h5>\n" +
@@ -192,8 +192,8 @@ $(".custom-dropdown-item").on("click", function(){
 });
 
 $(".size-swatch").on("click",  function(){
-   $(".size-swatch").removeClass('size-swatch-active');
-   $(this).addClass('size-swatch-active');
+    $(".size-swatch").removeClass('size-swatch-active');
+    $(this).addClass('size-swatch-active');
 });
 
 $(".size-swatch-large").on("click",  function(){
@@ -215,32 +215,32 @@ $(".custom-second-page-link").on("click", function(){
         case "custom-tees-womens":
             var url = "/custom/womens_dropdown";
             var show = "size-swatches-non-infant";
-        break;
+            break;
 
         case "custom-tees-men":
             var url = "/custom/mens_dropdown";
             var show = "size-swatches-non-infant";
-        break;
+            break;
 
         case "custom-tees-youth":
             var url = "/custom/youth_dropdown";
             var show = "size-swatches-non-infant";
-        break;
+            break;
 
         case "custom-tees-toddler":
             var url = "/custom/toddler_dropdown";
             var show = "size-swatches-non-infant";
-        break;
+            break;
 
         case "custom-tees-infant":
             var url = "/custom/infant_dropdown";
             var show = "size-swatches-infant";
-        break;
+            break;
 
         default:
             var url = "/custom/womens_dropdown";
             var show = "size-swatches-non-infant";
-        break;
+            break;
     }
 
     $.ajax({
@@ -345,24 +345,24 @@ $(".simpleCart_empty").on("click", function(e){
 });
 
 $("#shipping-type").on("change", function(){
-   var option = $(this).val();
-   switch (option){
-       case "1":
-           $("#cart-total").removeClass("hide");
-           $("#total-shipping").removeClass("hide");
-           $("#total-shipping-free").addClass('hide');
-           $("#cart-total-free").addClass("hide");
-           $("#paypal_form  #total_amount").val($("#cart-total").text().replace("$", ""));
-           break;
+    var option = $(this).val();
+    switch (option){
+        case "1":
+            $("#cart-total").removeClass("hide");
+            $("#total-shipping").removeClass("hide");
+            $("#total-shipping-free").addClass('hide');
+            $("#cart-total-free").addClass("hide");
+            $("#paypal_form  #total_amount").val($("#cart-total").text().replace("$", ""));
+            break;
 
-       case "2":
-           $("#cart-total").addClass("hide");
-           $("#total-shipping").addClass("hide");
-           $("#total-shipping-free").removeClass('hide');
-           $("#cart-total-free").removeClass("hide");
-           $("#paypal_form  #total_amount").val($("#cart-total-free").text().replace("$", ""));
-           break;
-   }
+        case "2":
+            $("#cart-total").addClass("hide");
+            $("#total-shipping").addClass("hide");
+            $("#total-shipping-free").removeClass('hide');
+            $("#cart-total-free").removeClass("hide");
+            $("#paypal_form  #total_amount").val($("#cart-total-free").text().replace("$", ""));
+            break;
+    }
 });
 
 
@@ -402,9 +402,9 @@ $(document).on("click", '#add-to-cart-special', function(e){
         type: "post",
         data: {id: special_id, size: $("#select-a-size").val()}
     }).done(function(cb){
-       updateCart();
-       $("#product-size").addClass('hide');
-       $("#product-added").removeClass('hide');
+        updateCart();
+        $("#product-size").addClass('hide');
+        $("#product-added").removeClass('hide');
     });
 });
 
@@ -445,13 +445,13 @@ $(document).on("click", "#confirm-delete-button", function(){
         type: "post",
         data: {rowId: row_id}
     }).done(function(cb){
-       window.location.reload();
+        window.location.reload();
     });
 });
 $(document).on("click", ".remove-cart-item", function(){
-   var row_id = $(this).data('row-id');
-   $("#confirm-delete-button").data('row-id', row_id);
-   $("#confirm-delete").modal('toggle');
+    var row_id = $(this).data('row-id');
+    $("#confirm-delete-button").data('row-id', row_id);
+    $("#confirm-delete").modal('toggle');
 
 });
 
@@ -471,7 +471,7 @@ $(document).on("click", "input[name='price_range']", function(){
 });
 
 $(document).on("click", "#view_all", function(){
-   loadProducts(1, true);
+    loadProducts(1, true);
 });
 
 $(document).on("change", "#sort-filter", function(){
@@ -484,25 +484,25 @@ $('#list-tab a').on('click', function (e) {
 });
 
 $(".size-picker-item").on("click", function(){
-   $(this).find('input')[0].click();
+    $(this).find('input')[0].click();
 });
 
 $("#size-select").on("change", function(){
-   var size_id = $(this).val();
-   $.ajax({
-       url: "/product/size/"+size_id,
-       type: "get"
-   }).done(function(cb){
-       $("#product-code").text(cb.product_code);
-       if (cb.quantity > 0){
-           $("#stock").html("Availability: <span class='text-green'>In Stock</span>");
-       } else {
-           $("#stock").html("Availability: <span class='text-red'>Out Of Stock</span>");
-       }
+    var size_id = $(this).val();
+    $.ajax({
+        url: "/product/size/"+size_id,
+        type: "get"
+    }).done(function(cb){
+        $("#product-code").text(cb.product_code);
+        if (cb.quantity > 0){
+            $("#stock").html("Availability: <span class='text-green'>In Stock</span>");
+        } else {
+            $("#stock").html("Availability: <span class='text-red'>Out Of Stock</span>");
+        }
         $("#quantity-in-stock").text(cb.quantity);
-       $("#your-price").text("$"+cb.price);
-       $("#add_to_cart").data('product-size', cb.id);
-   })
+        $("#your-price").text("$"+cb.price);
+        $("#add_to_cart").data('product-size', cb.id);
+    })
 });
 
 //Color Block Filter

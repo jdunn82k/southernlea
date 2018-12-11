@@ -18,6 +18,9 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@home');
 Route::post('/', 'HomeController@catIndex');
 
+Route::get('/location', function () {return view('pages.location'); } );
+Route::get('/hempworx', function () {return view('pages.hempworx'); } );
+
 Route::get('/product/{id}', 'ProductController@showProduct');
 Route::get('/product_table/{sort}', 'ProductController@getProductTable');
 Route::post('/product_table', 'ProductController@getProducts');
@@ -56,6 +59,8 @@ Route::group(['middleware' => 'auth.admin'], function()
 {
     Route::get('/admin/dashboard', 'AdminController@dashboard');
     Route::get('/admin/logout', 'AdminController@logout');
+
+    Route::get('/admin/expenses', 'AdminController@showExpenses');
 
     Route::get('/admin/products', 'AdminController@products');
     Route::get('/admin/products/{id}', 'AdminController@showProduct');

@@ -32,73 +32,61 @@
     <div class="foot-top">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-6 s-c">
-                    <li>
-                        <div class="fooll">
-                            <h5>follow us on</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <ul>
-                            <li><a href="https://www.facebook.com/groups/469608456707538/"><i class="facebok"> </i></a></li>
-                            <li><a href="https://www.instagram.com/southernleaboutique/"><i class="be"> </i></a></li>
-                            <li><a href="https://www.pinterest.com/Jamie73964"><i class="pp"> </i></a></li>
-                            <div class="clearfix"></div>
-                        </ul>
-                        </div>
-                    </li>
+                <div class="col-md-6 col-md-6 s-c">
+                   
                     <div class="clearfix"> </div>
                 </div>
-                <div class="col-md-6 col-lg-6 s-c">
-                    {{--<div class="stay">--}}
-                        {{--<div class="stay-left">--}}
-                            {{--<form>--}}
-                                {{--<input type="text" placeholder="Enter your email to join our newsletter" required="">--}}
-                            {{--</form>--}}
-                        {{--</div>--}}
-                        {{--<div class="btn-1">--}}
-                            {{--<form>--}}
-                                {{--<input type="submit" value="join">--}}
-                            {{--</form>--}}
-                        {{--</div>--}}
-                        {{--<div class="clearfix"> </div>--}}
-                    {{--</div>--}}
                 </div>
-            </div>
 
-            <div class="clearfix"> </div>
+                            <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://southernlea.us19.list-manage.com/subscribe/post?u=9988f80973051ae7477bb4e96&amp;id=bcca275441" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Join Our Mailing List ! </label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9988f80973051ae7477bb4e96_bcca275441" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+                        
         </div>
     </div>
     <div class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 cust">
-
-
+                <div class="col-md-3">
                 </div>
-                <div class="col-md-2 abt">
-
-
-                </div>
+                <div class="col-md-2 our-st">
+                        <h4>FOLLOW US</h4>
+                     <div class="clearfix"> </div>
+                    <li><a href="https://www.facebook.com/groups/469608456707538/"><i class="facebok"> </i></a></li>
+                            <li><a href="https://www.instagram.com/southernleaboutique/"><i class="be"> </i></a></li>
+                        </div>
                 <div class="col-md-2 myac">
                     <h4>MY ACCOUNT</h4>
                     <li><a href="{{URL::to('/cart')}}">My Cart</a></li>
-
+                        <div class="clearfix"> </div>
                 </div>
-                <div class="col-md-5 our-st">
-                    <div class="our-left">
-                        <h4>OUR STORE</h4>
-                    </div>
-                    <div class="clearfix"> </div>
+                <div class="col-md-3 our-st">
+                      <h4>OUR STORE</h4>
+                     <div class="clearfix"> </div>
                     <li><i class="add"> </i>Royse City, Texas</li>
                     <li><i class="phone"> </i>972-974-7842</li>
                     <li><a href="mailto:jamie@southernlea.com"><i class="mail"> </i>jamie@southernlea.com </a></li>
-
-                </div>
+               </div>
             </div>
+            <div class="col-md-2">
+                </div>
 
             <div class="clearfix"> </div>
-            <p class="text-center">Copyrights © 2018 Southern Lea | All rights reserved</p>
+            <p class="text-center">Copyrights © 2018 Southern Lea | All Rights Reserved</p>
         </div>
     </div>
     <script src="{{URL::to('js/jquery.min.js')}}"></script>

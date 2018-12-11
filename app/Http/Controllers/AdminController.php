@@ -760,6 +760,11 @@ class AdminController extends Controller
 
     }
 
+    public function showExpenses()
+    {
+        return view('admin.expenses');
+    }
+
     public function showProduct($id)
     {
         return view('admin.product-details')

@@ -26,6 +26,13 @@
                             <i class="fa fa-area-chart"></i> <span>Dashboard</span>
                         </a>
                     </li>
+
+                    <li class="treeview">
+                        <a href="{{URL::to('admin/expenses')}}">
+                            <i class="fa fa-area-chart"></i> <span>Expenses</span>
+                        </a>
+                    </li>
+
                     <li class="treeview">
                         <a href="{{URL::to('admin/orders')}}">
                             <i class="fa fa-shopping-cart"></i> <span>Orders</span>
