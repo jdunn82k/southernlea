@@ -9,6 +9,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- jQuery UI CSS -->
+    <link href="{{URL::to('admin_files/css/jquery-ui.theme.min.css')}}" rel="stylesheet">
+    <link href="{{URL::to('admin_files/css/jquery-ui.structure.min.css')}}" rel="stylesheet">
+
     <!-- Bootstrap Core CSS -->
     <link href="{{URL::to('admin_files/css/bootstrap.css')}}" rel='stylesheet'>
 
@@ -99,7 +103,8 @@
     <script src="{{URL::to('admin_files/vendor/Select-1.2.6/js/dataTables.select.js')}}"></script>
     <script src="{{URL::to('admin_files/vendor/Select-1.2.6/js/select.bootstrap.js')}}"></script>
 
-    <!-- Dropzone -->
+    <!-- jQuery UI JS -->
+    <script src="{{URL::to('admin_files/js/jquery-ui.min.js')}}"></script>
 
     <!-- Custom JS -->
     <script src="{{URL::to('admin_files/js/custom.js')}}"></script>

@@ -10,6 +10,10 @@ $(function() {
 
 });
 
+$(function(){
+   $(".datepicker").datepicker();
+});
+
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
@@ -514,6 +518,422 @@ $(function(){
 
     });
 
+    $(".newtransaction").on("click", function(){
+       $("#expense-table-pane").addClass("hide");
+       $("#new-expense-pane").removeClass("hide");
+    });
+
+    $(".backtoexpenses").on("click", function(){
+        $("#new-expense-pane").addClass("hide");
+        $("#edit-expense-pane").addClass("hide");
+        $("#expense-table-pane").removeClass("hide");
+    });
+
+    $("#update_cancel").on("click", function(){
+        $("#expense-table-pane").removeClass("hide");
+        $("#edit-expense-pane").addClass("hide");
+    });
+
+    $("#select-page").on("click", function(){
+        $(".expense-checkbox").each(function(i){
+            $(this).prop("checked", true);
+        });
+    });
+
+    $("#select-all").on("click", function(){
+        var table = $("#expenses_table").DataTable();
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        $('input[type="checkbox"]', rows).prop('checked', true);
+    });
+
+    $("#unselect").on("click", function(){
+        var table = $("#expenses_table").DataTable();
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        $('input[type="checkbox"]', rows).prop('checked', false);
+    });
+
+    $("#delete-selected").on("click", function(e){
+        e.preventDefault();
+        $("#confirm_delete").modal('toggle');
+    });
+
+    $(".delete-selected").on("click", function(){
+        var table = $("#expenses_table").DataTable();
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        var ids = [];
+        $('input[type="checkbox"]', rows).each(function(){
+            if ($(this).is(":checked")){
+                ids.push($(this).data("exp-id"));
+            }
+        });
+
+        $.ajax({
+            url: "/admin/expenses",
+            type: "delete",
+            data: {ids : ids}
+
+        }).done(function(cb){
+            window.location.reload();
+        });
+
+    });
+
+    $(".filter-option").on("click", function(){
+        var filter = $(this).data("filter");
+        var table = $("#expenses_table").DataTable();
+        table.destroy();
+
+        $(".expenses-table").addClass("hide");
+        $(".loading_gif").show();
+
+        $.ajax({
+            url: "/admin/expenses/table",
+            type: "post",
+            data: {filter: filter}
+        }).done(function(cb){
+            var tableHtml = "";
+            $.each(cb, function(i,v){
+                tableHtml += "<tr>\n" +
+                    "<td><input type=\"checkbox\" class=\"expense-checkbox\" data-exp-id=\""+v.id+"\"></td>\n" +
+                    "<td>"+v.date+"</td>\n" +
+                    "<td>"+v.account+"</td>\n" +
+                    "<td>"+v.check_num+"</td>\n" +
+                    "<td>"+v.payee+"</td>\n" +
+                    "<td>"+v.category+"</td>\n" +
+                    "<td>$"+v.amount+"</td>\n" +
+                    "<td><a href='#' class='view_edit_expense' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
+                    "</tr>"
+            });
+            $(".loading_gif").hide();
+            $(".expenses-table").removeClass("hide");
+            $("#expenses_table > tbody").html(tableHtml);
+            $("#expenses_table").dataTable({
+                "columnDefs":[
+                    {"orderable": false, "targets": [0,7]}
+                ],
+                "order" : [[1, "desc"]]
+            });
+        });
+    });
+    $(document).on("click", ".view_edit_expense", function(e){
+        e.preventDefault();
+        $.ajax({
+            url: "/admin/expense/"+$(this).data("exp-id"),
+            type: "get"
+        }).done(function(cb){
+
+            $("#update_exp_id").val(cb.id);
+            $("#update_expense_date").val(cb.date);
+            $("#update_payee").val(cb.payee);
+            $("#update_payee_selected").val(cb.payee_id);
+            $("#update_category").val(cb.category);
+            $("#update_category_selected").val(cb.category_id);
+            $("#update_account").val(cb.account);
+            $("#update_account_selected").val(cb.account_id);
+            $("#update_description").val(cb.description);
+            $("#update_check_num").val(cb.check_num);
+            $("#update_amount").val(cb.amount);
+            $("#update_memo").val(cb.memo);
+            $("#expense-table-pane").addClass("hide");
+            $("#edit-expense-pane").removeClass("hide");
+        });
+    });
+
+
+
+    $(document).on("click", ".account-option", function(){
+        $("#account").val($(this).text());
+        $("#account_selected").val($(this).data("id"));
+    });
+
+    $(document).on("click", ".category-option", function(){
+       $("#category").val($(this).text());
+       $("#category_selected").val($(this).data("id"));
+    });
+
+    $(document).on("click", ".payee-option",  function(){
+        $("#payee").val($(this).text());
+        $("#payee_selected").val($(this).data("id"));
+    });
+
+    $(document).on("click", ".update-payee-option", function(){
+       $("#update_payee").val($(this).text());
+       $("#update_payee_selected").val($(this).data("id"));
+    });
+
+    $(document).on("click", ".update-category-option", function(){
+        $("#update_category").val($(this).text());
+        $("#update_category_selected").val($(this).data("id"));
+    });
+
+    $(document).on("click", ".update-account-option", function(){
+        $("#update_account").val($(this).text());
+        $("#update_account_selected").val($(this).data("id"));
+    });
+
+    $(document).on("keyup", "#account", function(){
+       $("#account_selected").val("");
+    });
+
+    $(document).on("keyup", "#category", function(){
+        $("#category_selected").val("");
+    });
+
+    $(document).on("keyup", "#payee", function(){
+        $("#payee_selected").val("");
+    });
+
+    $(document).on("keyup", "#update_account", function(){
+        $("#update_account_selected").val("");
+    });
+
+    $(document).on("keyup", "#update_payee", function(){
+        $("#update_payee_selected").val("");
+    });
+
+    $(document).on("keyup", "#update_category", function(){
+       $("#update_category_selected").val("");
+    });
+
+
+    $("#update_expense").on("click", function(){
+        var data = {};
+
+        var date = $("#update_expense_date").val();
+        if (date.length === 0){
+            $(".error-message").html("Expense date is required");
+            $("#error_modal").modal("toggle");
+            return false;
+        }
+
+        var payee = $("#update_payee").val();
+        if (payee.length === 0){
+            $(".error-message").html("Payee is required");
+            $("#error_modal").modal("toggle");
+            return false;
+        }
+
+        var amount = $("#update_amount").val();
+        if (amount.length === 0){
+            $(".error-message").html("Amount is required");
+            $("#error_modal").modal("toggle");
+            return false;
+        }
+
+        data.date           = date;
+        data.payee_text     = payee;
+        data.payee_id       = $("#update_payee_selected").val();
+        data.category_text  = $("#update_category").val();
+        data.category_id    = $("#update_category_selected").val();
+        data.account_text   = $("#update_account").val();
+        data.account_id     = $("#update_account_selected").val();
+        data.description    = $("#update_description").val();
+        data.check_num      = $("#update_check_num").val();
+        data.amount         = amount;
+        data.memo           = $("#update_memo").val();
+        data.id             = $("#update_exp_id").val();
+
+        $.ajax({
+            url: "/admin/expenses/",
+            type: "put",
+            data: data
+        }).done(function(cb){
+            window.location.reload();
+        });
+    });
+    $("#add_expense").on("click", function(){
+        var data = {};
+
+        var date = $("#expense_date").val();
+        if (date.length === 0){
+            $(".error-message").html("Expense date is required");
+            $("#error_modal").modal("toggle");
+            return false;
+        }
+
+        var payee = $("#payee").val();
+        if (payee.length === 0){
+            $(".error-message").html("Payee is required");
+            $("#error_modal").modal("toggle");
+            return false;
+        }
+
+        var amount = $("#amount").val();
+        if (amount.length === 0){
+            $(".error-message").html("Amount is required");
+            $("#error_modal").modal("toggle");
+            return false;
+        }
+
+        data.date           = date;
+        data.payee_text     = payee;
+        data.payee_id       = $("#payee_selected").val();
+        data.category_text  = $("#category").val();
+        data.category_id    = $("#category_selected").val();
+        data.account_text   = $("#account").val();
+        data.account_id     = $("#account_selected").val();
+        data.description    = $("#description").val();
+        data.check_num      = $("#check_num").val();
+        data.amount         = amount;
+        data.memo           = $("#memo").val();
+
+        $.ajax({
+            url: "/admin/expenses/",
+            type: "post",
+            data: data
+        }).done(function(cb){
+            window.location.reload();
+        });
+    });
+
+
+
+    // function loadExpensesTable(filters){
+    //     $.ajax({
+    //         url: "/admin/expenses/table",
+    //         type: "post",
+    //         data: {filters: filters}
+    //     }).done(function(cb){
+    //         var tableHtml = "";
+    //         $.each(cb, function(i,v){
+    //             tableHtml += "<tr>\n" +
+    //                 "<td><input type=\"checkbox\" class=\"expense-checkbox\" data-exp-id=\""+v.id+"\"></td>\n" +
+    //                 "<td>"+v.date+"</td>\n" +
+    //                 "<td>"+v.account+"</td>\n" +
+    //                 "<td>"+v.check_num+"</td>\n" +
+    //                 "<td>"+v.payee+"</td>\n" +
+    //                 "<td>"+v.category+"</td>\n" +
+    //                 "<td>$"+v.amount+"</td>\n" +
+    //                 "<td><a href='#' class='view_edit_expense'>View/Edit</a></td>\n" +
+    //                 "</tr>"
+    //         });
+    //         $("#expenses_table > tbody").html(tableHtml);
+    //         $("#expenses_table").dataTable();
+    //     });
+    // }
+
+    //
+    // $("#account").on("keyup", function(){
+    //     $("#account_selected").val("");
+    //     var currentText = $(this).val().toLowerCase();
+    //     var textArray   = currentText.split("");
+    //     var elements    = $(".accounts-dropdown > li");
+    //     var halt        = false;
+    //
+    //     if (textArray.length === 0){
+    //         if ($(".check-for-account").hasClass("open")){
+    //             $(".accounts-dropdown").dropdown('toggle');
+    //         }
+    //         for (var o = 0; o<elements.length;o++){
+    //             $(elements[o]).show();
+    //         }
+    //         return false;
+    //     }
+    //
+    //
+    //     for (var o = 0; o<elements.length;o++){
+    //         var $this   = elements[o];
+    //         var id      = $($this).data("id");
+    //         var name    = $($this).text().toLowerCase().split("");
+    //         for(var i = 0; i<textArray.length;i++){
+    //
+    //             if (textArray[i] === name[i])
+    //             {
+    //
+    //                 if (!$(".check-for-account").hasClass("open")){
+    //                     $(".accounts-dropdown").dropdown('toggle');
+    //                 }
+    //                 $($this).show();
+    //
+    //             } else {
+    //                 if ($(".check-for-account").hasClass("open")){
+    //                     $(".accounts-dropdown").dropdown('toggle');
+    //                 }
+    //                 $($this).hide();
+    //             }
+    //         }
+    //     }
+    // });
+    //
+    //
+    // $("#category").on("keyup", function(){
+    //     $("#category_selected").val("");
+    //     var currentText = $(this).val().toLowerCase();
+    //     var textArray   = currentText.split("");
+    //     var elements    = $(".category-dropdown > li");
+    //     var halt        = false;
+    //
+    //     if (textArray.length === 0){
+    //         if ($(".check-for-category").hasClass("open")){
+    //             $(".category-dropdown").dropdown('toggle');
+    //         }
+    //         for (var o = 0; o<elements.length;o++){
+    //             $(elements[o]).show();
+    //         }
+    //         return false;
+    //     }
+    //     for (var o = 0; o<elements.length;o++){
+    //         var $this   = elements[o];
+    //         var id      = $($this).data("id");
+    //         var name    = $($this).text().toLowerCase().split("");
+    //
+    //         for(var i = 0; i<textArray.length;i++){
+    //             if (textArray[i] === name[i])
+    //             {
+    //                 if (!$(".check-for-category").hasClass("open")){
+    //                     $(".category-dropdown").dropdown('toggle');
+    //                 }
+    //                 $($this).show();
+    //
+    //             } else {
+    //                 if ($(".check-for-category").hasClass("open")){
+    //                     $(".category-dropdown").dropdown('toggle');
+    //                 }
+    //                 $($this).hide();
+    //             }
+    //         }
+    //     }
+    // });
+    //
+    // $("#payee").on("keyup", function(){
+    //     $("#payee_selected").val("");
+    //     var currentText = $(this).val().toLowerCase();
+    //     var textArray   = currentText.split("");
+    //     var elements    = $(".payee-dropdown > li");
+    //     var halt        = false;
+    //
+    //     if (textArray.length === 0){
+    //         if ($(".check-for-payee").hasClass("open")){
+    //             $(".payee-dropdown").dropdown('toggle');
+    //         }
+    //         for (var o = 0; o<elements.length;o++){
+    //             elements[0].show();
+    //         }
+    //         return false;
+    //     }
+    //     for (var o = 0; o<elements.length;o++){
+    //         var $this   = elements[o];
+    //         var id      = $($this).data("id");
+    //         var name    = $($this).text().toLowerCase().split("");
+    //
+    //         for(var i = 0; i<textArray.length;i++){
+    //             if (textArray[i] === name[i])
+    //             {
+    //                 if (!$(".check-for-payee").hasClass("open")){
+    //                     $(".payee-dropdown").dropdown('toggle');
+    //                 }
+    //                 $($this).show();
+    //
+    //             } else {
+    //                 if ($(".check-for-payee").hasClass("open")){
+    //                     $(".payee-dropdown").dropdown('toggle');
+    //                 }
+    //                 $($this).hide();
+    //             }
+    //         }
+    //     }
+    // });
+
     $(document).on("click", "#sizes-available i.fa-trash", function(){
         $(this).parent().parent().remove();
     });
@@ -636,7 +1056,6 @@ $(function(){
             data: {subcat: subcat_id}
         }).done(function(cb){
             var count = cb.length;
-            console.log(count);
             $("#count").text(count);
             $("#selected-subcat-id").val(subcat_id);
             $("#confirm-subcat-delete").modal('toggle');
@@ -738,7 +1157,6 @@ $(function(){
         var inputs = $(".photo-block-image input[type='checkbox']:checked");
         if (inputs.length === 1){
             var image_url = $(".photo-block-image input[type='checkbox']:checked").data('photo-url');
-            console.log(image_url);
             $.ajax({
                 url: "/admin/image/rotate1",
                 type: "post",

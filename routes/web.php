@@ -60,7 +60,12 @@ Route::group(['middleware' => 'auth.admin'], function()
     Route::get('/admin/dashboard', 'AdminController@dashboard');
     Route::get('/admin/logout', 'AdminController@logout');
 
-    Route::get('/admin/expenses', 'AdminController@showExpenses');
+    Route::get('/admin/expenses', 'ExpensesController@showExpenses');
+    Route::delete('/admin/expenses', 'ExpensesController@deleteExpenses');
+    Route::put('/admin/expenses', 'ExpensesController@updateExpense');
+    Route::get('/admin/expense/{id}', 'ExpensesController@getExpenseById');
+    Route::post('/admin/expenses', 'ExpensesController@addExpense');
+    Route::post('/admin/expenses/table', 'ExpensesController@getExpensesTable');
 
     Route::get('/admin/products', 'AdminController@products');
     Route::get('/admin/products/{id}', 'AdminController@showProduct');
@@ -83,6 +88,8 @@ Route::group(['middleware' => 'auth.admin'], function()
 
     Route::post('/admin/product/getcat', 'AdminController@getCats');
     Route::post("/admin/product/getlinks", 'AdminController@getLinks');
+
+    Route::post('/admin/reports/netincome', 'AdminController@showNetIncome');
 
     Route::post('/admin/image/rotate1', 'AdminController@rotateImage1');
     Route::get('/admin/image/{product}', 'AdminController@getImages');

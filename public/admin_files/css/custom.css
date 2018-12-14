@@ -1,3 +1,40 @@
+.account-option,
+.payee-option,
+.category-option {
+    cursor: pointer;
+    margin: 3px !important;
+
+}
+.payee-option:hover,
+.account-option:hover,
+.category-option:hover{
+    background-color:#f5f5f5;
+}
+
+.footer{
+    max-height:100px; !important;
+}
+
+.profit-loss{
+    padding:10px;
+    height:300px;
+}
+
+.accounts-dropdown{
+    min-width:200px !important;
+}
+
+.expenses-table{
+    min-height:400px;
+}
+
+#memo{
+    min-height:180px;
+}
+
+#ui-datepicker-div{
+    z-index:2 !important;
+}
 #wrapper {
     width: 100%;
 }
@@ -7,6 +44,22 @@
 }
 .navbar-top-links {
     margin-right: 0;
+}
+
+.mt-20{
+    margin-top:20px;
+}
+
+.mt-70{
+    margin-top:70px;
+}
+
+.full-width{
+    width:100%;
+}
+
+.text-center{
+    text-align:center;
 }
 
 .navbar-top-links li {

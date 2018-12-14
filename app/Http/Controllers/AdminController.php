@@ -760,9 +760,15 @@ class AdminController extends Controller
 
     }
 
-    public function showExpenses()
+
+    public function showNetIncome(Request $request)
     {
-        return view('admin.expenses');
+        switch ($request->filter)
+        {
+            case "lastmonth":
+
+                break;
+        }
     }
 
     public function showProduct($id)

@@ -46,6 +46,28 @@
             </div>
 
             <div class="row-one widgettable">
+                {{--<div class="col-md-3 card">--}}
+                    {{--<div class="profit-loss clearfix">--}}
+                        {{--<div class="clearfix">--}}
+                            {{--<div class="pull-left clearfix">--}}
+                                {{--<h4>Profit & Loss</h4>--}}
+                            {{--</div>--}}
+                            {{--<div class="pull-right clearfix">--}}
+                                {{--<p>Last month <span class="caret"></span></p>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="mt-20">--}}
+                            {{--<h3 class="netincome">$-119</h3>--}}
+                            {{--<p class="net-income-msg">NET INCOME FOR NOVEMBER</p>--}}
+                        {{--</div>--}}
+
+                        {{--<div class="mt-70">--}}
+                            {{--<p class="income">$0 Income</p>--}}
+                            {{--<p class="expenses">$10 Expenses</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
                 <div class="col-md-9 content-top-2 card">
                     <div class="agileinfo-cdr">
                         <div class="card-header">
@@ -63,6 +85,16 @@
 
         </div>
     </div>
+
+    {{--<script>--}}
+        {{--$.ajax({--}}
+            {{--url: "/admin/reports/netincome",--}}
+            {{--type: "post",--}}
+            {{--data: {filter: "lastmonth"}--}}
+        {{--}).done(function(cb){--}}
+
+        {{--});--}}
+    {{--</script>--}}
 
     <!-- for amcharts js -->
     <script src="{{URL::to('admin_files/js/amcharts.js')}}"></script>
