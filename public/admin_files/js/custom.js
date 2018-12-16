@@ -734,7 +734,7 @@ $(function(){
         data.id             = $("#update_exp_id").val();
 
         $.ajax({
-            url: "/admin/expenses/",
+            url: "/admin/expenses",
             type: "put",
             data: data
         }).done(function(cb){
@@ -778,7 +778,7 @@ $(function(){
         data.memo           = $("#memo").val();
 
         $.ajax({
-            url: "/admin/expenses/",
+            url: "/admin/expenses",
             type: "post",
             data: data
         }).done(function(cb){
