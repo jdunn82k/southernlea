@@ -29,7 +29,7 @@
 
                     <li class="treeview">
                         <a href="{{URL::to('admin/expenses')}}">
-                            <i class="fa fa-area-chart"></i> <span>Expenses</span>
+                            <i class="fa fa-area-chart"></i> <span>Expenses/Income</span>
                         </a>
                     </li>
 

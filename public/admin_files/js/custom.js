@@ -563,14 +563,14 @@ $(function(){
         var ids = [];
         $('input[type="checkbox"]', rows).each(function(){
             if ($(this).is(":checked")){
-                ids.push($(this).data("exp-id"));
+                ids.push([$(this).data("exp-id"), $(this).data("type")]);
             }
         });
 
         $.ajax({
             url: "/admin/expenses",
             type: "delete",
-            data: {ids : ids}
+            data: {ids : JSON.stringify(ids)}
 
         }).done(function(cb){
             window.location.reload();
@@ -616,12 +616,26 @@ $(function(){
         });
     });
     $(document).on("click", ".view_edit_expense", function(e){
+        var url;
         e.preventDefault();
+
+        switch ($(this).data('type')){
+            case "income":
+                url = '/admin/income/';
+                break;
+            case "expense":
+                url = '/admin/expense/';
+                break;
+            default:
+                return false;
+        }
+
         $.ajax({
-            url: "/admin/expense/"+$(this).data("exp-id"),
+            url: url+$(this).data("exp-id"),
             type: "get"
         }).done(function(cb){
 
+            $("#update_type").val(cb.type);
             $("#update_exp_id").val(cb.id);
             $("#update_expense_date").val(cb.date);
             $("#update_payee").val(cb.payee);
@@ -701,14 +715,14 @@ $(function(){
 
         var date = $("#update_expense_date").val();
         if (date.length === 0){
-            $(".error-message").html("Expense date is required");
+            $(".error-message").html("Date is required");
             $("#error_modal").modal("toggle");
             return false;
         }
 
         var payee = $("#update_payee").val();
         if (payee.length === 0){
-            $(".error-message").html("Payee is required");
+            $(".error-message").html("Payee/Payor is required");
             $("#error_modal").modal("toggle");
             return false;
         }
@@ -732,6 +746,7 @@ $(function(){
         data.amount         = amount;
         data.memo           = $("#update_memo").val();
         data.id             = $("#update_exp_id").val();
+        data.type           = $("#update_type").val();
 
         $.ajax({
             url: "/admin/expenses",
@@ -741,19 +756,21 @@ $(function(){
             window.location.reload();
         });
     });
+
+
     $("#add_expense").on("click", function(){
         var data = {};
 
         var date = $("#expense_date").val();
         if (date.length === 0){
-            $(".error-message").html("Expense date is required");
+            $(".error-message").html("Date is required");
             $("#error_modal").modal("toggle");
             return false;
         }
 
         var payee = $("#payee").val();
         if (payee.length === 0){
-            $(".error-message").html("Payee is required");
+            $(".error-message").html("Payee/Payor is required");
             $("#error_modal").modal("toggle");
             return false;
         }
@@ -765,6 +782,7 @@ $(function(){
             return false;
         }
 
+        data.type           = $("#trans-type").val();
         data.date           = date;
         data.payee_text     = payee;
         data.payee_id       = $("#payee_selected").val();

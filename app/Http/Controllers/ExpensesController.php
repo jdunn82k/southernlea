@@ -7,6 +7,7 @@ use App\ExpenseAccounts;
 use App\ExpenseCategory;
 use App\ExpensePayee;
 use App\Expenses;
+use App\Income;
 use DateTime;
 
 class ExpensesController extends Controller
@@ -14,13 +15,49 @@ class ExpensesController extends Controller
 
     public static function deleteExpenses(Request $request)
     {
-        foreach($request->ids as $id)
+        $arr = json_decode($request->ids, true);
+
+        foreach($arr as $ids)
         {
-            $exp = Expenses::find($id)->delete();
+
+            $id   = $ids[0];
+            $type = $ids[1];
+
+            switch ($type)
+            {
+                case "income":
+                    Income::find($id)->delete();
+                    break;
+                case "expense":
+                    Expenses::find($id)->delete();
+                    break;
+            }
 
         }
         return $request;
     }
+
+    public static function getIncomeById($id)
+    {
+        $expense = Income::find($id);
+        $arr = [];
+        $arr["description"] = $expense->description;
+        $arr["memo"]        = $expense->memo;
+        $arr["account"]     = ExpenseAccounts::find($expense->payer_account)->name;
+        $arr["account_id"]  = $expense->payer_account;
+        $arr["payee"]       = ExpensePayee::find($expense->payee)->name;
+        $arr["payee_id"]    = $expense->payee;
+        $arr["category"]    = ExpenseCategory::find($expense->category)->name;
+        $arr["category_id"] = $expense->category;
+        $arr['amount']      = $expense->total;
+        $arr['check_num']   = $expense->check_number;
+        $arr['date']        = date("m/d/Y", strtotime($expense->date));
+        $arr['id']          = $expense->id;
+        $arr['type']        = "income";
+        return $arr;
+    }
+
+
     public static function getExpenseById($id)
     {
         $expense = Expenses::find($id);
@@ -37,6 +74,7 @@ class ExpensesController extends Controller
         $arr['check_num']   = $expense->check_number;
         $arr['date']        = date("m/d/Y", strtotime($expense->date));
         $arr['id']          = $expense->id;
+        $arr['type']        = "expense";
         return $arr;
     }
     public static function getExpensesTable(Request $request)
@@ -50,6 +88,9 @@ class ExpensesController extends Controller
                 $expenses = Expenses::where('date', '>=', $start->format("Y-m-d"))
                                         ->where('date', '<=', $end->format("Y-m-d"))
                                         ->get();
+                $income = Income::where('date', '>=', $start->format("Y-m-d"))
+                    ->where('date', '<=', $end->format("Y-m-d"))
+                    ->get();
                 break;
             case "month":
                 $today = new DateTime();
@@ -57,16 +98,21 @@ class ExpensesController extends Controller
                 $year  = $today->format("Y");
                 $string = $year."-".$month."-01";
                 $expenses = Expenses::where('date', '>=', $string)->where('date', '<=', $today->format("Y-m-d"))->get();
+                $income = Income::where('date', '>=', $string)->where('date', '<=', $today->format("Y-m-d"))->get();
+
                 break;
             case "ytd":
                 $today = new DateTime();
                 $year = $today->format("Y");
                 $string = $year."-01-01";
                 $expenses = Expenses::where('date', '>=', $string)->where('date', '<=', $today->format("Y-m-d"))->get();
+                $income = Income::where('date', '>=', $string)->where('date', '<=', $today->format("Y-m-d"))->get();
+
                 break;
             case "all":
             default:
                 $expenses = Expenses::all();
+                $income = Income::all();
 
         }
 
@@ -83,6 +129,23 @@ class ExpensesController extends Controller
             $arr['check_num']   = $expense->check_number;
             $arr['date']        = date("m/d/Y", strtotime($expense->date));
             $arr['id']          = $expense->id;
+            $arr['type']        = "expense";
+            $cb[] = $arr;
+        }
+
+        foreach($income as $expense)
+        {
+            $arr = [];
+            $arr["description"] = $expense->description;
+            $arr["memo"]        = $expense->memo;
+            $arr["account"]     = ExpenseAccounts::find($expense->payer_account)->name;
+            $arr["payee"]       = ExpensePayee::find($expense->payee)->name;
+            $arr["category"]    = ExpenseCategory::find($expense->category)->name;
+            $arr['amount']      = $expense->total;
+            $arr['check_num']   = $expense->check_number;
+            $arr['date']        = date("m/d/Y", strtotime($expense->date));
+            $arr['id']          = $expense->id;
+            $arr['type']        = "income";
             $cb[] = $arr;
         }
         return $cb;
@@ -134,16 +197,34 @@ class ExpensesController extends Controller
             $acct_id = $request->account_id;
         }
 
-        $newexp = Expenses::find($request->id);
-        $newexp->description    = $request->description;
-        $newexp->memo           = $request->memo;
-        $newexp->payer_account  = $acct_id;
-        $newexp->check_number   = $request->check_num;
-        $newexp->payee          = $payee_id;
-        $newexp->category       = $cat_id;
-        $newexp->total          = $request->amount;
-        $newexp->date           = date("Y-m-d", strtotime($request->date));
-        $newexp->save();
+        switch ($request->type)
+        {
+            case "income":
+                $newexp = Income::find($request->id);
+                $newexp->description    = $request->description;
+                $newexp->memo           = $request->memo;
+                $newexp->payer_account  = $acct_id;
+                $newexp->check_number   = $request->check_num;
+                $newexp->payee          = $payee_id;
+                $newexp->category       = $cat_id;
+                $newexp->total          = $request->amount;
+                $newexp->date           = date("Y-m-d", strtotime($request->date));
+                $newexp->save();
+                break;
+            case "expense":
+                $newexp = Expenses::find($request->id);
+                $newexp->description    = $request->description;
+                $newexp->memo           = $request->memo;
+                $newexp->payer_account  = $acct_id;
+                $newexp->check_number   = $request->check_num;
+                $newexp->payee          = $payee_id;
+                $newexp->category       = $cat_id;
+                $newexp->total          = $request->amount;
+                $newexp->date           = date("Y-m-d", strtotime($request->date));
+                $newexp->save();
+                break;
+
+        }
 
         return $newexp;
     }
@@ -185,16 +266,34 @@ class ExpensesController extends Controller
             $acct_id = $request->account_id;
         }
 
-        $newexp = new Expenses();
-        $newexp->description    = $request->description;
-        $newexp->memo           = $request->memo;
-        $newexp->payer_account  = $acct_id;
-        $newexp->check_number   = $request->check_num;
-        $newexp->payee          = $payee_id;
-        $newexp->category       = $cat_id;
-        $newexp->total          = $request->amount;
-        $newexp->date           = date("Y-m-d", strtotime($request->date));
-        $newexp->save();
+        switch ($request->type)
+        {
+            case "income":
+                $newexp = new Income();
+                $newexp->description    = $request->description;
+                $newexp->memo           = $request->memo;
+                $newexp->payer_account  = $acct_id;
+                $newexp->check_number   = $request->check_num;
+                $newexp->payee          = $payee_id;
+                $newexp->category       = $cat_id;
+                $newexp->total          = $request->amount;
+                $newexp->date           = date("Y-m-d", strtotime($request->date));
+                $newexp->save();
+                break;
+
+            case "expense":
+                $newexp = new Expenses();
+                $newexp->description    = $request->description;
+                $newexp->memo           = $request->memo;
+                $newexp->payer_account  = $acct_id;
+                $newexp->check_number   = $request->check_num;
+                $newexp->payee          = $payee_id;
+                $newexp->category       = $cat_id;
+                $newexp->total          = $request->amount;
+                $newexp->date           = date("Y-m-d", strtotime($request->date));
+                $newexp->save();
+                break;
+        }
 
         return $newexp;
 

@@ -8,7 +8,7 @@
                 <div class="col-md-12">
                     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
                         <div class="form-title clearfix">
-                            <h4 class="pull-left">Expense Transactions</h4>
+                            <h4 class="pull-left">Transactions</h4>
                             <button class="pull-right btn btn-primary newtransaction">New Transaction</button>
                         </div>
                         <div class="form-body">
@@ -68,8 +68,8 @@
                 <div class="col-md-12">
                     <div class="form-grids widget-shadow">
                         <div class="form-title clearfix">
-                            <h4 class="expense-title pull-left">New Expense</h4>
-                            <button class="btn btn-primary pull-right backtoexpenses">Back To Expenses</button>
+                            <h4 class="expense-title pull-left">New Transaction</h4>
+                            <button class="btn btn-primary pull-right backtoexpenses">Back</button>
                         </div>
                         <div class="form-body">
 
@@ -79,10 +79,10 @@
                                     <input type="text" class="form-control datepicker" id="expense_date" value="@php echo date('m/d/Y'); @endphp">
                                 </div>
                                 <div class="col-lg-3 col-md-3">
-                                    <label>Payee</label>
+                                    <label>Payee/Payor</label>
                                     <div class="input-group">
                                         <form autocomplete="off">
-                                            <input class="form-control" id="payee" name="payee" placeholder="Enter Payee" autocomplete="off">
+                                            <input class="form-control" id="payee" name="payee" placeholder="Enter Payee/Payor" autocomplete="off">
                                             <input type="hidden" id="payee_selected" value="">
                                         </form>
 
@@ -127,6 +127,7 @@
                                     <table class="table table-condensed table-bordered" id="new-expense-table">
                                         <thead>
                                         <tr>
+                                            <th style="width:135px;">Type</th>
                                             <th style="width:195px;">Account</th>
                                             <th>Description</th>
                                             <th style="width:75px;">Check #</th>
@@ -135,6 +136,12 @@
                                         </thead>
                                         <tbody>
                                         <tr>
+                                            <td>
+                                                <select class="form-control" id="trans-type">
+                                                    <option value="income">Income</option>
+                                                    <option value="expense">Expense</option>
+                                                </select>
+                                            </td>
                                             <td>
                                                 <div class="input-group">
                                                     <form autocomplete="off">
@@ -155,6 +162,7 @@
 
                                                 </div>
                                             </td>
+
                                             <td><input type="text" class="form-control" id="description" placeholder="Description of Expense"></td>
                                             <td><input type="text" class="form-control" id="check_num"></td>
                                             <td><input type="text" class="form-control" id="amount"></td>
@@ -187,7 +195,7 @@
                 <div class="col-md-12">
                     <div class="form-grids widget-shadow">
                         <div class="form-title clearfix">
-                            <h4 class="expense-title pull-left">Edit Expense</h4>
+                            <h4 class="expense-title pull-left">Edit Transaction</h4>
                         </div>
                         <div class="form-body">
 
@@ -293,6 +301,7 @@
                                 <div class="col-md-3">
                                     <div class="button-group">
                                         <input type="hidden" id="update_exp_id" value="">
+                                        <input type="hidden" id="update_type" value="">
                                         <button type="button" class="btn btn-primary" id="update_expense">Update Expense</button>
                                         <button type="button" class="btn btn-danger" id="update_cancel">Cancel</button>
                                     </div>
@@ -354,15 +363,21 @@
            }).done(function(cb){
                var tableHtml = "";
                $.each(cb, function(i,v){
+                   var amount;
+                   if (v.type === "income"){
+                       amount = "$"+v.amount;
+                   } else if (v.type === "expense"){
+                       amount = "<span style='color:red;'>$"+v.amount+"</span>";
+                   }
                   tableHtml += "<tr>\n" +
-                      "<td><input type=\"checkbox\" class=\"expense-checkbox\" data-exp-id=\""+v.id+"\"></td>\n" +
+                      "<td><input type=\"checkbox\" class=\"expense-checkbox\" data-type='"+v.type+"' data-exp-id=\""+v.id+"\"></td>\n" +
                       "<td>"+v.date+"</td>\n" +
                       "<td>"+v.account+"</td>\n" +
                       "<td>"+v.check_num+"</td>\n" +
                       "<td>"+v.payee+"</td>\n" +
                       "<td>"+v.category+"</td>\n" +
-                      "<td>$"+v.amount+"</td>\n" +
-                      "<td><a href='#' class='view_edit_expense' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
+                      "<td>"+amount+"</td>\n" +
+                      "<td><a href='#' class='view_edit_expense' data-type='\""+v.type+"\"' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
                       "</tr>"
                });
                $(".loading_gif").hide();
