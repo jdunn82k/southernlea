@@ -593,16 +593,22 @@ $(function(){
         }).done(function(cb){
             var tableHtml = "";
             $.each(cb, function(i,v){
+                var amount;
+                if (v.type === "income"){
+                    amount = "$"+v.amount;
+                } else if (v.type === "expense"){
+                    amount = "<span style='color:red;'>$"+v.amount+"</span>";
+                }
                 tableHtml += "<tr>\n" +
-                    "<td><input type=\"checkbox\" class=\"expense-checkbox\" data-exp-id=\""+v.id+"\"></td>\n" +
+                    "<td><input type=\"checkbox\" class=\"expense-checkbox\" data-type='"+v.type+"' data-exp-id=\""+v.id+"\"></td>\n" +
                     "<td>"+v.date+"</td>\n" +
                     "<td>"+v.account+"</td>\n" +
                     "<td>"+v.check_num+"</td>\n" +
                     "<td>"+v.payee+"</td>\n" +
                     "<td>"+v.category+"</td>\n" +
-                    "<td>$"+v.amount+"</td>\n" +
-                    "<td><a href='#' class='view_edit_expense' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
-                    "</tr>"
+                    "<td>"+amount+"</td>\n" +
+                    "<td><a href='#' class='view_edit_expense' data-type='"+v.type+"' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
+                    "</tr>";
             });
             $(".loading_gif").hide();
             $(".expenses-table").removeClass("hide");

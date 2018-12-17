@@ -377,8 +377,8 @@
                       "<td>"+v.payee+"</td>\n" +
                       "<td>"+v.category+"</td>\n" +
                       "<td>"+amount+"</td>\n" +
-                      "<td><a href='#' class='view_edit_expense' data-type='\""+v.type+"\"' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
-                      "</tr>"
+                      "<td><a href='#' class='view_edit_expense' data-type='"+v.type+"' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
+                      "</tr>";
                });
                $(".loading_gif").hide();
                $(".expenses-table").removeClass("hide");
