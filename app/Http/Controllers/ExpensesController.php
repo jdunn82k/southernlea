@@ -126,7 +126,13 @@ class ExpensesController extends Controller
             $arr["payee"]       = ExpensePayee::find($expense->payee)->name;
             $arr["category"]    = ExpenseCategory::find($expense->category)->name;
             $arr['amount']      = $expense->total;
-            $arr['check_num']   = $expense->check_number;
+            if ($expense->check_number == null)
+            {
+                $arr['check_num'] = "";
+            } else {
+                $arr['check_num']   = $expense->check_number;
+
+            }
             $arr['date']        = date("m/d/Y", strtotime($expense->date));
             $arr['id']          = $expense->id;
             $arr['type']        = "expense";
@@ -142,7 +148,13 @@ class ExpensesController extends Controller
             $arr["payee"]       = ExpensePayee::find($expense->payee)->name;
             $arr["category"]    = ExpenseCategory::find($expense->category)->name;
             $arr['amount']      = $expense->total;
-            $arr['check_num']   = $expense->check_number;
+            if ($expense->check_number == null)
+            {
+                $arr['check_num'] = "";
+            } else {
+                $arr['check_num']   = $expense->check_number;
+
+            }
             $arr['date']        = date("m/d/Y", strtotime($expense->date));
             $arr['id']          = $expense->id;
             $arr['type']        = "income";
