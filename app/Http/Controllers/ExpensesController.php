@@ -13,6 +13,68 @@ use DateTime;
 class ExpensesController extends Controller
 {
 
+    public static function showNetIncome(Request $request)
+    {
+        switch ($request->filter)
+        {
+            case "lastmonth":
+                $dt = new DateTime();
+                $dt->modify('last day of previous month');
+                $end = $dt->format('Y-m-d');
+                $start = $dt->format('Y-m')."-01";
+                $expenses = Expenses::where('date', '>=', $start)
+                    ->where('date', '<=', $end)
+                    ->get();
+                $income = Income::where('date', '>=', $start)
+                    ->where('date', '<=', $end)
+                    ->get();
+                $message = "Net Income For ".$dt->format("F");
+                break;
+            case "30days":
+                $start = new DateTime();
+                $start->modify('-30 days');
+                $end    = new DateTime();
+                $expenses = Expenses::where('date', '>=', $start->format("Y-m-d"))
+                    ->where('date', '<=', $end->format("Y-m-d"))
+                    ->get();
+                $income = Income::where('date', '>=', $start->format("Y-m-d"))
+                    ->where('date', '<=', $end->format("Y-m-d"))
+                    ->get();
+                $message = "Net Income ".$start->format("m/d/Y")." - ".$end->format("m/d/Y");
+                break;
+            case "ytd":
+                $today = new DateTime();
+                $year = $today->format("Y");
+                $string = $year."-01-01";
+                $expenses = Expenses::where('date', '>=', $string)->where('date', '<=', $today->format("Y-m-d"))->get();
+                $income = Income::where('date', '>=', $string)->where('date', '<=', $today->format("Y-m-d"))->get();
+                $message = "Net Income Year To Date";
+                break;
+            default:
+                return "blank";
+        }
+
+        $exp = 0.00;
+        foreach($expenses as $expense)
+        {
+            $exp = $exp + $expense->total;
+        }
+
+        $inc_total = 0.00;
+        foreach($income as $inc)
+        {
+            $inc_total = $inc_total + $inc->total;
+        }
+
+//        return [$start, $end];
+        return [
+            "expense" => number_format($exp, 2),
+            "income" => number_format($inc_total, 2),
+            "message" => $message,
+            "net" => number_format( ($inc_total - $exp), 2 )
+        ];
+
+    }
     public static function deleteExpenses(Request $request)
     {
         $arr = json_decode($request->ids, true);

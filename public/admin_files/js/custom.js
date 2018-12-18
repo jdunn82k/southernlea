@@ -50,6 +50,63 @@ $(function() {
 
 $(function(){
 
+
+    $(".netincome-menu-item").on("click", function(){
+
+        var filter;
+        if ($(this).hasClass("lastmonth")){
+            filter = {filter: "lastmonth"};
+            $(".netincome-menu-type").text("Last month");
+        } else if ($(this).hasClass("thirtydays")){
+            filter = {filter: "30days"};
+            $(".netincome-menu-type").text("Last 30 Days");
+        } else if ($(this).hasClass("ytd")){
+            filter = {filter: "ytd"};
+            $(".netincome-menu-type").text("Year To Date");
+        } else {
+            return false;
+        }
+
+        $.ajax({
+            url: "/admin/reports/netincome",
+            type: "post",
+            data: filter
+        }).done(function(cb){
+
+            var net,
+                incomePct,
+                expensePct;
+            var valueMax = ( parseFloat(cb.income)+parseFloat(cb.expense) );
+            if ( parseFloat(cb.income) === 0.00){
+                incomePct = 0;
+            } else {
+                incomePct = ( (parseFloat(cb.income) / valueMax) * 100 );
+            }
+
+            if ( parseFloat(cb.expense) === 0.00){
+                expensePct = 0;
+            } else {
+                expensePct = ( (parseFloat(cb.expense) / valueMax) * 100);
+            }
+
+            if (parseFloat(cb.net) < 0.00){
+                net = "<span style='color:red;'>"+cb.net+"</span>";
+            } else {
+                net = "<span style='color:black;'>"+cb.net+"</span>";
+            }
+            $(".net-income-msg").text(cb.message);
+            $(".netincome").html(net);
+            $(".progress-bar").attr("aria-valuemax", valueMax);
+            $(".income").parent().attr("aria-valuenow", cb.income).css("width", incomePct+"%");
+            $(".expenses").parent().attr("aria-valuenow", cb.expense).css("width", expensePct+"%");
+            $(".income").text("$"+cb.income);
+            $(".income-value").text("$"+Math.ceil(parseFloat(cb.income)));
+            $(".expense-value").text("$"+Math.ceil(parseFloat(cb.expense)));
+            $(".expenses").text("$"+cb.expense);
+        });
+
+    });
+
     $("#add-product-button").on("click", function(){
         var description_1   = $("#desc1").val();
         var description_2   = $("#txtarea1").val();

@@ -90,7 +90,7 @@ Route::group(['middleware' => 'auth.admin'], function()
     Route::post('/admin/product/getcat', 'AdminController@getCats');
     Route::post("/admin/product/getlinks", 'AdminController@getLinks');
 
-    Route::post('/admin/reports/netincome', 'AdminController@showNetIncome');
+    Route::post('/admin/reports/netincome', 'ExpensesController@showNetIncome');
 
     Route::post('/admin/image/rotate1', 'AdminController@rotateImage1');
     Route::get('/admin/image/{product}', 'AdminController@getImages');

@@ -1,9 +1,11 @@
 .account-option,
 .payee-option,
-.category-option {
+.category-option,
+.lastmonth,
+.thirtydays,
+.ytd{
     cursor: pointer;
     margin: 3px !important;
-
 }
 .payee-option:hover,
 .account-option:hover,
@@ -11,13 +13,55 @@
     background-color:#f5f5f5;
 }
 
+.netincome-dropdown{
+    cursor:pointer;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.progress{
+    height:20px !important;
+    position:relative;
+}
+
+.income,
+.expenses{
+    position:absolute;
+    display:block;
+    width:100%;
+    color:#1d0000;
+}
+
+.income-progress{
+    margin-top:15px;
+}
+
+.no-margin-top{
+    margin-top:0 !important;
+}
+
+.no-margin-bottom{
+    margin-bottom:0 !important;
+}
 .footer{
     max-height:100px; !important;
 }
 
 .profit-loss{
     padding:10px;
-    height:300px;
+    min-height:200px;
+}
+
+.income-line,
+.expense-line{
+    margin-left:-15px;
+    margin-right:5px;
+}
+
+.expense-progress{
+    margin-top:30px;
 }
 
 .accounts-dropdown{
@@ -50,8 +94,8 @@
     margin-top:20px;
 }
 
-.mt-70{
-    margin-top:70px;
+.mt-30{
+    margin-top:30px;
 }
 
 .full-width{
