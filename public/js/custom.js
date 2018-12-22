@@ -164,7 +164,7 @@ function loadProducts(page=1, viewall=false, category=false, subcategory=false){
                     html += "<img class='new-overlay' src='img/Picture1.png' alt=''>";
                 }
 
-                html += "<div class='product-photo' style='background-image: url("+url+")'></div>\n"+
+                html += "<div class='product-photo' style='background-image: url("+encodeURIComponent(url)+")'></div>\n"+
                     // html += "<img class='full-height' src='"+url+"' alt=''>\n"+
                     "</div>\n" +
                     "           <div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +

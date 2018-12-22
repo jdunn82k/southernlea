@@ -710,7 +710,7 @@ class AdminController extends Controller
         }
         else
         {
-            $request->special_offer = 0;
+            $product->special_offer = 0;
         }
         $product->save();
 
