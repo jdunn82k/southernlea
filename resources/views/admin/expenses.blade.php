@@ -50,9 +50,11 @@
                                         </th>
                                         <th>Date</th>
                                         <th>Payment Type</th>
-                                        <th>Check No.</th>
                                         <th>Payee</th>
                                         <th>Category</th>
+                                        <th>Subtotal</th>
+                                        <th>Shipping</th>
+                                        <th>Tax</th>
                                         <th>Total</th>
                                         <th>Action</th>
                                     </tr>
@@ -127,11 +129,14 @@
                                     <table class="table table-condensed table-bordered" id="new-expense-table">
                                         <thead>
                                         <tr>
-                                            <th style="width:135px;">Type</th>
-                                            <th style="width:195px;">Account</th>
+                                            <th style="width:125px;">Type</th>
+                                            <th style="width:165px;">Account</th>
                                             <th>Description</th>
                                             <th style="width:75px;">Check #</th>
-                                            <th style="width:155px;">Amount</th>
+                                            <th style="width:90px;">Subtotal</th>
+                                            <th style="width:90px;">Shipping</th>
+                                            <th style="width:90px;">Tax</th>
+                                            <th style="width:155px;">Total Amount</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -165,6 +170,9 @@
 
                                             <td><input type="text" class="form-control" id="description" placeholder="Description of Expense"></td>
                                             <td><input type="text" class="form-control" id="check_num"></td>
+                                            <td><input type="text" class="form-control" id="subtotal" value="0.00"></td>
+                                            <td><input type="text" class="form-control" id="shipping" value="0.00"></td>
+                                            <td><input type="text" class="form-control" id="tax" value="0.00"></td>
                                             <td><input type="text" class="form-control" id="amount"></td>
                                         </tr>
                                         </tbody>
@@ -183,7 +191,7 @@
                                 <div class="col-md-3">
                                     <div class="button-group">
                                         <button type="button" class="btn btn-primary" id="add_expense">Add Expense</button>
-                                        <button type="button" class="btn btn-danger" id="clear_form">Clear</button>
+                                        {{--<button type="button" class="btn btn-danger" id="clear_form">Clear</button>--}}
                                     </div>
                                 </div>
                             </div>
@@ -253,10 +261,13 @@
                                     <table class="table table-condensed table-bordered" id="new-expense-table">
                                         <thead>
                                         <tr>
-                                            <th style="width:195px;">Account</th>
+                                            <th style="width:165px;">Account</th>
                                             <th>Description</th>
                                             <th style="width:75px;">Check #</th>
-                                            <th style="width:155px;">Amount</th>
+                                            <th style="width:90px;">Subtotal</th>
+                                            <th style="width:90px;">Shipping</th>
+                                            <th style="width:90px;">Tax</th>
+                                            <th style="width:155px;">Total Amount</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -283,6 +294,9 @@
                                             </td>
                                             <td><input type="text" class="form-control" id="update_description" placeholder="Description of Expense"></td>
                                             <td><input type="text" class="form-control" id="update_check_num"></td>
+                                            <td><input type="text" class="form-control" id="update_subtotal" value="0.00"></td>
+                                            <td><input type="text" class="form-control" id="update_shipping" value="0.00"></td>
+                                            <td><input type="text" class="form-control" id="update_tax" value="0.00"></td>
                                             <td><input type="text" class="form-control" id="update_amount"></td>
                                         </tr>
                                         </tbody>
@@ -311,8 +325,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
@@ -373,9 +385,12 @@
                       "<td><input type=\"checkbox\" class=\"expense-checkbox\" data-type='"+v.type+"' data-exp-id=\""+v.id+"\"></td>\n" +
                       "<td>"+v.date+"</td>\n" +
                       "<td>"+v.account+"</td>\n" +
-                      "<td>"+v.check_num+"</td>\n" +
+
                       "<td>"+v.payee+"</td>\n" +
                       "<td>"+v.category+"</td>\n" +
+                      "<td>$"+v.subtotal+"</td>\n" +
+                      "<td>$"+v.shipping+"</td>\n" +
+                      "<td>$"+v.tax+"</td>\n" +
                       "<td>"+amount+"</td>\n" +
                       "<td><a href='#' class='view_edit_expense' data-type='"+v.type+"' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
                       "</tr>";

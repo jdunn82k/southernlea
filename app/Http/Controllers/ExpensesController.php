@@ -113,6 +113,9 @@ class ExpensesController extends Controller
         $arr["category_id"] = $expense->category;
         $arr['amount']      = $expense->total;
         $arr['check_num']   = $expense->check_number;
+        $arr['subtotal']    = $expense->subtotal;
+        $arr['shipping']    = $expense->shipping;
+        $arr['tax']         = $expense->tax;
         $arr['date']        = date("m/d/Y", strtotime($expense->date));
         $arr['id']          = $expense->id;
         $arr['type']        = "income";
@@ -134,6 +137,9 @@ class ExpensesController extends Controller
         $arr["category_id"] = $expense->category;
         $arr['amount']      = $expense->total;
         $arr['check_num']   = $expense->check_number;
+        $arr['subtotal']    = $expense->subtotal;
+        $arr['shipping']    = $expense->shipping;
+        $arr['tax']         = $expense->tax;
         $arr['date']        = date("m/d/Y", strtotime($expense->date));
         $arr['id']          = $expense->id;
         $arr['type']        = "expense";
@@ -188,6 +194,9 @@ class ExpensesController extends Controller
             $arr["payee"]       = ExpensePayee::find($expense->payee)->name;
             $arr["category"]    = ExpenseCategory::find($expense->category)->name;
             $arr['amount']      = $expense->total;
+            $arr['subtotal']    = $expense->subtotal;
+            $arr['shipping']    = $expense->shipping;
+            $arr['tax']         = $expense->tax;
             if ($expense->check_number == null)
             {
                 $arr['check_num'] = "";
@@ -210,6 +219,9 @@ class ExpensesController extends Controller
             $arr["payee"]       = ExpensePayee::find($expense->payee)->name;
             $arr["category"]    = ExpenseCategory::find($expense->category)->name;
             $arr['amount']      = $expense->total;
+            $arr['subtotal']    = $expense->subtotal;
+            $arr['shipping']    = $expense->shipping;
+            $arr['tax']         = $expense->tax;
             if ($expense->check_number == null)
             {
                 $arr['check_num'] = "";
@@ -281,6 +293,9 @@ class ExpensesController extends Controller
                 $newexp->check_number   = $request->check_num;
                 $newexp->payee          = $payee_id;
                 $newexp->category       = $cat_id;
+                $newexp->subtotal       = $request->subtotal;
+                $newexp->shipping       = $request->shipping;
+                $newexp->tax            = $request->tax;
                 $newexp->total          = $request->amount;
                 $newexp->date           = date("Y-m-d", strtotime($request->date));
                 $newexp->save();
@@ -294,6 +309,9 @@ class ExpensesController extends Controller
                 $newexp->payee          = $payee_id;
                 $newexp->category       = $cat_id;
                 $newexp->total          = $request->amount;
+                $newexp->subtotal       = $request->subtotal;
+                $newexp->shipping       = $request->shipping;
+                $newexp->tax            = $request->tax;
                 $newexp->date           = date("Y-m-d", strtotime($request->date));
                 $newexp->save();
                 break;
@@ -351,6 +369,9 @@ class ExpensesController extends Controller
                 $newexp->payee          = $payee_id;
                 $newexp->category       = $cat_id;
                 $newexp->total          = $request->amount;
+                $newexp->subtotal       = $request->subtotal;
+                $newexp->shipping       = $request->shipping;
+                $newexp->tax            = $request->tax;
                 $newexp->date           = date("Y-m-d", strtotime($request->date));
                 $newexp->save();
                 break;
@@ -364,6 +385,9 @@ class ExpensesController extends Controller
                 $newexp->payee          = $payee_id;
                 $newexp->category       = $cat_id;
                 $newexp->total          = $request->amount;
+                $newexp->subtotal       = $request->subtotal;
+                $newexp->shipping       = $request->shipping;
+                $newexp->tax            = $request->tax;
                 $newexp->date           = date("Y-m-d", strtotime($request->date));
                 $newexp->save();
                 break;

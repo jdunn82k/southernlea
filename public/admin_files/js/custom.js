@@ -660,9 +660,11 @@ $(function(){
                     "<td><input type=\"checkbox\" class=\"expense-checkbox\" data-type='"+v.type+"' data-exp-id=\""+v.id+"\"></td>\n" +
                     "<td>"+v.date+"</td>\n" +
                     "<td>"+v.account+"</td>\n" +
-                    "<td>"+v.check_num+"</td>\n" +
                     "<td>"+v.payee+"</td>\n" +
                     "<td>"+v.category+"</td>\n" +
+                    "<td>$"+v.subtotal+"</td>\n" +
+                    "<td>$"+v.shipping+"</td>\n" +
+                    "<td>$"+v.tax+"</td>\n" +
                     "<td>"+amount+"</td>\n" +
                     "<td><a href='#' class='view_edit_expense' data-type='"+v.type+"' data-exp-id=\""+v.id+"\">View/Edit</a></td>\n" +
                     "</tr>";
@@ -711,6 +713,9 @@ $(function(){
             $("#update_check_num").val(cb.check_num);
             $("#update_amount").val(cb.amount);
             $("#update_memo").val(cb.memo);
+            $("#update_shipping").val(cb.shipping);
+            $("#update_subtotal").val(cb.subtotal);
+            $("#update_tax").val(cb.tax);
             $("#expense-table-pane").addClass("hide");
             $("#edit-expense-pane").removeClass("hide");
         });
@@ -810,6 +815,9 @@ $(function(){
         data.memo           = $("#update_memo").val();
         data.id             = $("#update_exp_id").val();
         data.type           = $("#update_type").val();
+        data.subtotal       = $("#update_subtotal").val();
+        data.shipping       = $("#update_shipping").val();
+        data.tax            = $("#update_tax").val();
 
         $.ajax({
             url: "/admin/expenses",
@@ -857,6 +865,9 @@ $(function(){
         data.check_num      = $("#check_num").val();
         data.amount         = amount;
         data.memo           = $("#memo").val();
+        data.subtotal       = $("#subtotal").val();
+        data.shipping       = $("#shipping").val();
+        data.tax            = $("#tax").val();
 
         $.ajax({
             url: "/admin/expenses",

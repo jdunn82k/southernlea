@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Mail\OrderPlaced;
 use App\Products;
 use App\Orders;
+use App\Income;
 use App\ProductSizes;
 use App\Specials;
+use DateTime;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -102,6 +104,7 @@ class CartController extends Controller
         $order->product_info = json_encode($product_info);
         $order->shipping_cost = $shipping;
         $order->tax_rate = \Config::get('cart.tax');
+        $order->tax_amount = Cart::tax();
         $order->subtotal = Cart::subtotal();
         $order->grand_total = (Cart::subtotal() + Cart::tax() + $shipping);
         $order->total_items_sold = Cart::count();
@@ -137,6 +140,21 @@ class CartController extends Controller
         {
             $order      = Orders::findOrFail($request->session()->get('order_id'));
             $products   = json_decode($order->product_info, true);
+            $today      = new DateTime();
+
+            $inc        = new Income();
+            $inc->description   = "Online Order #".$order->id;
+            $inc->memo          = "";
+            $inc->payer_account = 1;
+            $inc->check_number  = null;
+            $inc->payee         = 0;
+            $inc->category      = 0;
+            $inc->subtotal      = $order->subtotal;
+            $inc->shipping      = $order->shipping_cost;
+            $inc->tax           = $order->tax_amount;
+            $inc->total         = $order->grand_total;
+            $inc->date          = $today->format("Y-m-d");
+            $inc->save();
 
             foreach($products as $product)
             {
