@@ -50,6 +50,8 @@ class Excel
             foreach($row as $item)
             {
                 $sheet->setCellvalue($cell_letter.$row_num, $item);
+                $sp->getActiveSheet()->getStyle($cell_letter.$row_num)->getAlignment()->setWrapText(true);
+
                 $sp->getActiveSheet()->getStyle($cell_letter.$row_num)
                     ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
                 $cell_letter++;
