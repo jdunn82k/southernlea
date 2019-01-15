@@ -34,7 +34,7 @@ class Excel
             {
                 $sp->getActiveSheet()->getColumnDimension($cell_letter)->setAutoSize(true);
             } else {
-                $sp->getActiveSheet()->getColumnDimension($cell_letter)->setWidth(12);
+                $sp->getActiveSheet()->getColumnDimension($cell_letter)->setWidth(25);
             }
             $sp->getActiveSheet()->getStyle($cell_letter."1", $headers[$i])
                 ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
