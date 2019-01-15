@@ -33,6 +33,8 @@ class Excel
             if ($cell_letter !== "J" && $cell_letter !== "K")
             {
                 $sp->getActiveSheet()->getColumnDimension($cell_letter)->setAutoSize(true);
+            } else {
+                $sp->getActiveSheet()->getColumnDimension($cell_letter)->setWidth(12);
             }
             $sp->getActiveSheet()->getStyle($cell_letter."1", $headers[$i])
                 ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
