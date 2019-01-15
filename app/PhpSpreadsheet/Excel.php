@@ -30,7 +30,10 @@ class Excel
         {
 
             $sheet->setCellValue($cell_letter."1", $headers[$i]);
-            $sp->getActiveSheet()->getColumnDimension($cell_letter)->setAutoSize(true);
+            if ($cell_letter !== "J" && $cell_letter !== "K")
+            {
+                $sp->getActiveSheet()->getColumnDimension($cell_letter)->setAutoSize(true);
+            }
             $sp->getActiveSheet()->getStyle($cell_letter."1", $headers[$i])
                 ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
 
