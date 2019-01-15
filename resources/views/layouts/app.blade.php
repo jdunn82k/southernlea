@@ -3,26 +3,44 @@
 <head>
     <title>Southern Lea</title>
 
+    <!-- G-Suite Verification Snippets -->
+    <meta name="google-site-verification" content="fxl2SxNsihARAoJuR4TZLr4JYqlZYF-9x9l2Ut45elI" />
+
+    <!-- Global site tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131764183-1"></script>
+    
+    <!--  Google Analytics -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-131764183-1');
+    </script>
+
     <!-- Bootstrap CSS -->
-    <link href="{{URL::to('css/app.css')}}" rel='stylesheet'>
+    <link href="{{URL::to('css/app.css')}}" rel='stylesheet'>  
 
-    <!-- CSRF Token -->
+    <!-- Meta Values - These are Very Important for Search Engines for for page properties -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="keywords" content="Southern Lea">
+    <meta name="keywords" content="Southern Lea, Jewelry, Paparazzi Jewelry, CBD Oil, HempWorx, SIC Cups, Tumblers, Custom, T-Shirts, Women, Kids, Infant, Vinyl Print, LipSense, Makeup, Aromies, Air Fresheners, Vinyl Decal, Car Decal, Necklaces, Rings, Earrings, Bracelets, Children Jewelry, ECommerce, Online Boutique, Boutique, Online Commerce,">
 
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,400i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Mate+SC" rel="stylesheet">
+
     <!-- start menu -->
     <link href="{{ URL::to('css/megamenu.css') }}" rel="stylesheet" media="all">
 
     <!-- Custom Theme files -->
     <link href="{{URL::to('css/style.css')}}" rel='stylesheet'>
+
+    <!-- Mailchimp -->
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/9988f80973051ae7477bb4e96/bb07b724c87f9dd29d42069d6.js");</script>
 
 </head>
 @include('nav.nav1')

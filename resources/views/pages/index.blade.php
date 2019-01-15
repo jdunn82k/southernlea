@@ -32,9 +32,9 @@
                     <div class="col-md-4 pull-left" style="margin-left: 40px" >
                         <img src="{{URL::to('img/senegence.jpg')}}" width="400px"  class="img-responsive" alt="">
                         <div class="arriv-info3">
-                            <h3>HempWorx</h3>
+                            <h3></h3>
                             <div class="crt-btn">
-                                <a href="http://www.hempworx.com/southernlea" target="_blank" class="text-black crt-color">SHOP NOW</a>
+                                <a href="http://www.hempworx.com/southernlea" target="_blank" class="crt-color">SHOP NOW</a>
                             </div>
                         </div>
                     </div>

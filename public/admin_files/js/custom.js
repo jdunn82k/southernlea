@@ -50,6 +50,18 @@ $(function() {
 
 $(function(){
 
+    $("#export-transactions").on("click", function(){
+        var table = $("#expenses_table").DataTable();
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        var ids = [];
+        $('input[type="checkbox"]', rows).each(function(){
+            ids.push([$(this).data("exp-id"), $(this).data("type")]);
+        });
+
+        $("#export_form > input[name='ids']").val(JSON.stringify(ids));
+        $("#export_form").submit();
+    });
+
 
     $(".netincome-menu-item").on("click", function(){
 
@@ -635,7 +647,8 @@ $(function(){
 
     });
 
-    $(".filter-option").on("click", function(){
+
+    $(document).on("click", ".filter-option", function(){
         var filter = $(this).data("filter");
         var table = $("#expenses_table").DataTable();
         table.destroy();

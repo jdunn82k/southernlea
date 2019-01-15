@@ -88,7 +88,7 @@
                                 @endphp
                                 @foreach($results as $result)
                                     <tr>
-                                        <td>{{$result->product_name}} [{{$result->product_code}}]</td>
+                                        <td>{{$result->product_name}} [{{$result->id}}]</td>
                                         <td>{{$result->quantity}}</td>
                                         <td align="right">${{number_format($result->product_price,2)}}</td>
                                     </tr>

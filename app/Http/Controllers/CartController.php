@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ExpensePayee;
 use App\Mail\OrderPlaced;
 use App\Products;
 use App\Orders;
@@ -139,6 +140,16 @@ class CartController extends Controller
         if ($request->session()->has('order_id'))
         {
             $order      = Orders::findOrFail($request->session()->get('order_id'));
+            $exp = ExpensePayee::where('name', strtolower($order->name))->get();
+            $count = $exp->count();
+            if ($count == 0)
+            {
+                $exp = new ExpensePayee();
+                $exp->name = $order->name;
+                $exp->save();
+            }
+
+
             $products   = json_decode($order->product_info, true);
             $today      = new DateTime();
 
@@ -147,8 +158,8 @@ class CartController extends Controller
             $inc->memo          = "";
             $inc->payer_account = 1;
             $inc->check_number  = null;
-            $inc->payee         = 0;
-            $inc->category      = 0;
+            $inc->payee         = $exp->id;
+            $inc->category      = 99;
             $inc->subtotal      = $order->subtotal;
             $inc->shipping      = $order->shipping_cost;
             $inc->tax           = $order->tax_amount;
@@ -182,6 +193,7 @@ class CartController extends Controller
 
             $request->session()->forget('order_id');
 
+//            Mail::to( 'jdunn82k@gmail.com')->send(new OrderPlaced($order));
             Mail::to( 'jamie@southernlea.com')->send(new OrderPlaced($order));
             self::emptyCart();
         }

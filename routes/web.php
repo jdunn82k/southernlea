@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth.admin'], function()
     Route::get('/admin/expenses', 'ExpensesController@showExpenses');
     Route::delete('/admin/expenses', 'ExpensesController@deleteExpenses');
     Route::put('/admin/expenses', 'ExpensesController@updateExpense');
+    Route::post('/admin/expenses/export', 'ExpensesController@export');
     Route::get('/admin/expense/{id}', 'ExpensesController@getExpenseById');
     Route::get('/admin/income/{id}', 'ExpensesController@getIncomeById');
     Route::post('/admin/expenses', 'ExpensesController@addExpense');

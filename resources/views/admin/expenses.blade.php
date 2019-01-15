@@ -19,9 +19,14 @@
                                         Filter <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#" class='filter-option' data-filter="30">Last 30 Days</a></li>
                                         <li><a href="#" class='filter-option' data-filter="month">Current Month</a></li>
+                                        <li><a href="#" class='filter-option' data-filter="30">Last 30 Days</a></li>
                                         <li><a href="#" class='filter-option' data-filter="ytd">Year To Date</a></li>
+                                        <li class="divider"></li>
+                                        @foreach($quarters as $key => $quarter)
+                                            <li><a href="#" class="filter-option" data-filter="{{$key}}">{{$quarter}}</a></li>
+                                        @endforeach
+                                        <li class="divider"></li>
                                         <li><a href="#" class='filter-option' data-filter="all">All</a></li>
                                     </ul>
                                 </div>
@@ -32,6 +37,12 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="#" id="delete-selected">Delete Selected</a></li>
                                     </ul>
+                                </div>
+
+                                <div class="btn-group mb-10 pull-right">
+                                    <button type="button" class="btn btn-primary" id="export-transactions">
+                                        Export
+                                    </button>
                                 </div>
                                 <table class="table table-responsive" id="expenses_table">
                                     <thead>
@@ -366,6 +377,10 @@
             </div>
         </div>
     </div>
+    <form id="export_form" action="{{URL::to("/admin/expenses/export")}}" method="POST">
+        {{csrf_field()}}
+        <input type="hidden" name="ids">
+    </form>
     <script>
         $(document).ready(function(){
            $.ajax({
