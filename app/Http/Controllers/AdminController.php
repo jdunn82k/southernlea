@@ -300,6 +300,16 @@ class AdminController extends Controller
             $subcat->delete();
         }
         $cat->delete();
+
+        $products = Products::where('category', $request->cat_id)->get();
+        foreach($products as $product)
+        {
+            $product->category = 0;
+            $product->subcategory = 0;
+            $product->categorylink = 0;
+            $product->save();
+        }
+
     }
 
     public function deleteCat2(Request $request)

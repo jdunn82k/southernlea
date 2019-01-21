@@ -1120,7 +1120,7 @@ $(function(){
        $("#confirm-cat-delete").modal('toggle');
     });
 
-    $(document).on("click", ".yes-delete-cat", function(){
+    $(document).on("click", "#yes-delete-cat", function(){
        $.ajax({
            url: "/admin/categories/delete",
            type: "post",
